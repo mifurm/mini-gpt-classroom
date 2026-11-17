@@ -9,6 +9,7 @@ from torch.nn import functional as F
 from data import clean_story, split_bytes
 from model import Config, GPT, decode, encode, load_model, save_model
 from train import batch, eval_positions, evaluate
+from build_microscope import build_trace
 
 
 class GPTTests(unittest.TestCase):
@@ -150,6 +151,70 @@ class GPTTests(unittest.TestCase):
             restored = load_model(path)
             self.assertEqual(restored.config.dropout, 0.1)
             torch.testing.assert_close(restored(x)[0], model.eval()(x)[0])
+
+
+class MicroscopeTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        torch.set_num_threads(2)
+        cls.trace = build_trace()
+
+    def test_forward_trace_matches_real_model_and_causal_attention(self):
+        from data import ROOT
+        model = load_model(ROOT / "artifacts/final.pt")
+        trace = self.trace["forward"]
+        tokens = torch.tensor([trace["ids"]])
+        with torch.no_grad():
+            logits, _ = model(tokens)
+        torch.testing.assert_close(torch.tensor(trace["logits"]), logits[0], rtol=0, atol=0)
+        probabilities = torch.tensor(trace["probabilities"])
+        torch.testing.assert_close(probabilities, logits[0].softmax(-1), rtol=0, atol=0)
+        self.assertEqual(self.trace["tokenizer"]["ids"], [99, 97, 102, 195, 169])
+        self.assertEqual(trace["causality"]["earlier_max_logit_difference"], 0)
+        for block in trace["blocks"]:
+            attention = torch.tensor(block["attention"])
+            self.assertEqual(int(torch.count_nonzero(torch.triu(attention, diagonal=1))), 0)
+            torch.testing.assert_close(attention.sum(-1), torch.ones_like(attention.sum(-1)))
+        token = torch.tensor(trace["token_embeddings"]["first_four"])[0]
+        position = torch.tensor(trace["position_embeddings"]["first_four"])
+        combined = torch.tensor(trace["combined_embeddings"]["first_four"])[0]
+        torch.testing.assert_close(token + position, combined)
+
+    def test_training_records_shifted_loss_and_real_adamw_update(self):
+        import math
+        trace = self.trace["training"]
+        self.assertEqual(trace["input_ids"][1:], trace["target_ids"][:-1])
+        for phase in ["before", "after"]:
+            losses = [position[f"loss_{phase}"] for position in trace["positions"]]
+            self.assertAlmostEqual(sum(losses) / len(losses), trace[f"loss_{phase}"], places=6)
+            for position in trace["positions"]:
+                self.assertAlmostEqual(-math.log(position[f"probability_{phase}"]),
+                                       position[f"loss_{phase}"], places=5)
+        weight, optimizer = trace["weight"], trace["optimizer"]
+        beta1, beta2 = optimizer["betas"]
+        first = weight["first_moment"] / (1 - beta1)
+        second = weight["second_moment"] / (1 - beta2)
+        expected = weight["before"] * (1 - optimizer["learning_rate"] * optimizer["weight_decay"])
+        expected -= optimizer["learning_rate"] * first / (math.sqrt(second) + optimizer["epsilon"])
+        self.assertAlmostEqual(weight["after"], expected, places=6)
+        self.assertNotEqual(weight["before"], weight["after"])
+        self.assertGreater(trace["gradient_norm"], 0)
+
+    def test_generation_is_actual_sampling_from_unchanged_checkpoint(self):
+        from data import ROOT
+        from build_microscope import GENERATION
+        trace = self.trace["generation"]
+        model = load_model(ROOT / "artifacts/final.pt")
+        original = {name: value.clone() for name, value in model.state_dict().items()}
+        tokens = torch.tensor([encode(trace["prompt"])])
+        self.assertEqual(model.generate(tokens, **GENERATION)[0].tolist(), trace["ids"])
+        self.assertEqual(trace["steps"][-1]["text_after"], trace["text"])
+        for step in trace["steps"]:
+            with torch.no_grad():
+                logits = model(torch.tensor([step["context_ids"]]))[0][0, -1] / trace["temperature"]
+            logits = logits.masked_fill(logits < logits.topk(trace["top_k"]).values[-1], float("-inf"))
+            self.assertEqual(float(logits.softmax(-1)[step["sampled_id"]]), step["sampled_probability"])
+        self.assertTrue(all(torch.equal(value, original[name]) for name, value in model.state_dict().items()))
 
 
 if __name__ == "__main__":

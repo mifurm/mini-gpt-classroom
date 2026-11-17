@@ -1,0 +1,12 @@
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
+.slides-venv/
+.site/
+infra/.terraform/
+infra/*.tfstate*
+infra/*.tfplan
+infra/crash.log
+infra/*.tfvars
+!infra/terraform.tfvars.example

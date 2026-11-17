@@ -1,0 +1,16 @@
+{
+  "globalHeaders": {
+    "Cache-Control": "no-cache",
+    "X-Content-Type-Options": "nosniff"
+  },
+  "mimeTypes": {
+    ".md": "text/plain; charset=utf-8",
+    ".mjs": "application/javascript",
+    ".csv": "text/csv; charset=utf-8"
+  },
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/404.html"
+    }
+  }
+}

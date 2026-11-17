@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A tiny GPT trained from scratch: classroom experiments, measured results, unedited samples, and teaching slides.">
+  <title>Tiny GPT | Classroom lab results</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+  <script src="microscope.js" type="module"></script>
+</head>
+<body>
+  <header>
+    <p class="eyebrow">FROM SCRATCH / MEASURED, NOT MAGIC</p>
+    <h1>A tiny GPT.<br>Real experiments.</h1>
+    <p class="intro">A classroom-sized Transformer learning to predict the next byte. Explore what training, context, capacity, and more books actually changed.</p>
+    <nav aria-label="Lab sections"><a href="#microscope">How GPT works</a><a href="#results">Results</a><a href="#samples">Samples</a><a href="#fivefold">More data</a><a href="#concepts">Decision &amp; reasoning</a><a href="#lessons">Teaching materials</a></nav>
+  </header>
+  <main>
+    <p id="status" role="status">Loading recorded experiment results...</p>
+    <noscript><p>JavaScript is required for the results explorer. The slide decks and report downloads below work without JavaScript.</p></noscript>
+    <section id="microscope" aria-labelledby="microscope-title">
+      <p class="eyebrow">UNDER THE MICROSCOPE / REAL EXECUTION TRACES</p>
+      <h2 id="microscope-title">One prediction. One update. One byte at a time.</h2>
+      <p>Inspect the actual GPT used in this lab. These controls replay recorded CPU calculations, not a simulation or live model service. The learning example uses a disposable copy; the published checkpoint stays unchanged.</p>
+      <p id="microscope-status" role="status">Loading the microscope recording...</p>
+      <div id="microscope-explorer" hidden>
+        <p id="trace-provenance" class="detail"></p>
+        <div role="tablist" aria-label="GPT microscope" class="tabs">
+          <button type="button" role="tab" id="tab-predict" aria-controls="panel-predict" aria-selected="true">1. Predict one byte</button>
+          <button type="button" role="tab" id="tab-learn" aria-controls="panel-learn" aria-selected="false" tabindex="-1">2. Learn from one example</button>
+          <button type="button" role="tab" id="tab-generate" aria-controls="panel-generate" aria-selected="false" tabindex="-1">3. Generate a sentence</button>
+        </div>
+        <div role="tabpanel" id="panel-predict" aria-labelledby="tab-predict" tabindex="0">
+          <h3>Follow the forward pass</h3>
+          <p id="tokenizer-example"></p>
+          <ol id="byte-strip" class="byte-strip" aria-label="Prompt byte tokens"></ol>
+          <label for="prediction-position">Prediction position</label> <select id="prediction-position"></select>
+          <p id="prediction-prefix" aria-live="polite"></p>
+          <article class="trace-stage"><h4>1 / Token embeddings + position embeddings</h4>
+            <p id="embedding-shape"></p><div id="embedding-values"></div>
+            <p class="detail">Only the first four features are displayed; each byte has a full learned vector. Position embeddings are learned, too.</p>
+          </article>
+          <article class="trace-stage"><h4>2 / LayerNorm, then causal self-attention</h4>
+            <div class="controls"><label for="attention-block">Block</label> <select id="attention-block"></select>
+              <label for="attention-head">Head</label> <select id="attention-head"></select></div>
+            <p>For the selected position, which earlier bytes receive attention? Q and K produce scaled scores; the future is masked before softmax. The weights mix V vectors.</p>
+            <div id="attention-values"></div><p id="causality-check" class="detail"></p>
+            <p class="detail">Each row sums to one. Attention weights describe this computation, not a complete explanation of the prediction.</p>
+          </article>
+          <article class="trace-stage"><h4>3 / Residual connections and the MLP</h4>
+            <p>The attention output is added to the incoming state. A second LayerNorm and MLP produce another update, which is added again. The table shows the selected block's actual first four features.</p>
+            <div id="residual-values"></div>
+          </article>
+          <article class="trace-stage"><h4>4 / Final LayerNorm and output projection</h4>
+            <p id="projection-shape"></p><pre id="normalized-values"></pre>
+            <p>The output projection reuses the token embedding weights. Its 256 logits are unnormalized scores, one for each possible next byte.</p>
+          </article>
+          <article class="trace-stage"><h4>5 / Softmax turns logits into probabilities</h4>
+            <div id="prediction-values"></div>
+            <p class="detail">Top five shown, out of 256 possibilities. These are raw model probabilities, before generation temperature or top-k filtering.</p>
+          </article>
+        </div>
+        <div role="tabpanel" id="panel-learn" aria-labelledby="tab-learn" tabindex="0" hidden>
+          <h3>A real optimizer step, without changing the saved model</h3>
+          <p id="training-example"></p>
+          <label for="training-stage">Training stage</label>
+          <select id="training-stage"><option value="0">1. Shift the targets</option><option value="1">2. Measure the error</option><option value="2">3. Backpropagate gradients</option><option value="3">4. Update the weights</option></select>
+          <div id="training-detail" aria-live="polite"></div>
+          <p class="detail">One update on one training window is a demonstration of mechanics, not evidence of improved validation or test performance. Original Archive experiments and checkpoints are unchanged.</p>
+        </div>
+        <div role="tabpanel" id="panel-generate" aria-labelledby="tab-generate" tabindex="0" hidden>
+          <h3>Predict, sample, append, repeat</h3>
+          <p id="generation-settings"></p>
+          <div class="controls"><button type="button" id="generation-prev">Previous byte</button><button type="button" id="generation-next">Next byte</button><button type="button" id="generation-play">Play steps</button><button type="button" id="generation-reset">Reset</button></div>
+          <label for="generation-step">Generation step</label> <input type="range" id="generation-step" min="1" value="1"><output id="generation-counter" for="generation-step"></output>
+          <article class="trace-stage"><h4>Prefix fed to the model</h4><pre id="generation-prefix"></pre><p id="generation-context" class="detail"></p></article>
+          <article class="trace-stage"><h4>Next-byte sampling distribution</h4><div id="generation-values"></div><p id="generation-sampled" aria-live="polite"></p></article>
+          <article class="trace-stage"><h4>Append the sampled byte</h4><pre id="generation-output"></pre></article>
+          <p>Unlike training, generation has no target labels, backward pass, or optimizer update. Weights stay fixed. Sampling can choose a byte that is not the most likely one.</p>
+          <p class="detail">This is a short prose continuation, not a guaranteed grammatical sentence. The recording uses the original checkpoint, not the disposable training copy.</p>
+        </div>
+      </div>
+      <p><a href="microscope.json">Download the actual execution trace (.json)</a></p>
+    </section>
+    <section id="results" aria-labelledby="results-title">
+      <p class="eyebrow">01 / THE ORIGINAL EXPERIMENT</p><h2 id="results-title">Small model, visible progress.</h2>
+      <p>Six training recipes; checkpoint selection uses validation loss. The final model is tested only after selection.</p>
+      <div id="metrics" class="cards"></div>
+      <div class="table-wrap"><table><caption>Original experiments: validation scores (not test scores)</caption><thead><tr><th>Experiment</th><th>Change</th><th>Loss</th><th>Accuracy</th></tr></thead><tbody id="rounds"></tbody></table></div>
+      <h3>Seven model versions</h3>
+      <p>Original-book test and macro-average over five added books. V3-V7 are sequential warm starts with bundled changes, not independent causal ablations.</p>
+      <div class="table-wrap"><table><caption>Common heldout targets, byte-level accuracy</caption><thead><tr><th>Version</th><th>Parameters</th><th>Blocks / context</th><th>Original book</th><th>Five-book average</th></tr></thead><tbody id="versions"></tbody></table></div>
+    </section>
+    <section id="samples" aria-labelledby="samples-title">
+      <p class="eyebrow">02 / READ THE OUTPUT</p><h2 id="samples-title">Unedited, imperfect, reproducible.</h2>
+      <p>These are saved model outputs, not live inference. Prompts are prose prefixes, not instructions. Temperature 0.8, top-k 40; seed shown for each sample.</p>
+      <label for="sample-model">Recorded model</label> <select id="sample-model"></select>
+      <div id="sample-output" aria-live="polite"></div>
+    </section>
+    <section id="fivefold" aria-labelledby="fivefold-title">
+      <p class="eyebrow">03 / FIVE TIMES THE CORPUS</p><h2 id="fivefold-title">More data helps. Not everywhere.</h2>
+      <p>Paired controls have the same architecture, initialization, and completed update budget. Scores below are macro-averaged next-byte accuracy on 14 additional books. Original-book accuracy fell in six of seven larger-data versions.</p>
+      <div class="table-wrap"><table><caption>Matched-budget controls vs. larger corpora</caption><thead><tr><th>Version</th><th>Training bytes</th><th>Growth</th><th>Control</th><th>Larger data</th><th>Difference</th></tr></thead><tbody id="fivefold-rows"></tbody></table></div>
+      <p id="long-run"></p>
+      <p><a href="FIVEFOLD_RESULTS.md">Full report and all samples (.md)</a> &middot; <a href="artifacts/fivefold/metrics.csv">Download metrics (.csv)</a></p>
+    </section>
+    <section id="concepts" aria-labelledby="concepts-title">
+      <p class="eyebrow">04 / DIFFERENT KINDS OF MODELS</p><h2 id="concepts-title">Decisions, answers, and scratchpads.</h2>
+      <div id="concept-cards" class="cards"></div>
+      <p>Each model uses 100 heldout synthetic input triples. These task accuracies are not comparable to next-byte prose accuracy. The answer-only control already solves the task: no accuracy advantage for reasoning is claimed. R1 fails the required format on unseen longer problems. This is supervised learning, not reinforcement learning or general-purpose reasoning.</p>
+      <p><a href="CONCEPT_MODELS.md">Architecture and limitations (.md)</a> &middot; <a href="concepts/RESULTS.md">Concept results and samples (.md)</a></p>
+    </section>
+    <section id="lessons" aria-labelledby="lessons-title">
+      <p class="eyebrow">05 / TAKE IT TO CLASS</p><h2 id="lessons-title">Open the lessons. Inspect the evidence.</h2>
+      <div class="cards lessons">
+        <article><h3>The first lesson</h3><p>17 slides covering the tiny GPT and its six initial experiments.</p><a href="slides.html">Open browser slides</a><a href="slides.pdf">Download PDF</a></article>
+        <article><h3>The deep dive</h3><p>85 slides: architecture, attention, training, V1-V7, and all 59 recorded samples. Predates the fivefold experiment.</p><a href="deep-dive.html">Open browser slides</a><a href="deep-dive.pdf">Download PDF</a><a href="deep-dive.pptx">Editable PowerPoint</a></article>
+        <article><h3>Decisions &amp; reasoning</h3><p>16 slides on supervised policies, answer-only controls, and scratchpad supervision.</p><a href="concepts/lesson.html">Open browser slides</a><a href="concepts/lesson.pdf">Download PDF</a><a href="concepts/lesson.pptx">Editable PowerPoint</a></article>
+      </div>
+      <p>Browser slides: arrow keys or space to advance; <kbd>N</kbd> for speaker notes.</p>
+      <p><a href="RESULTS.md">Original results (.md)</a> &middot; <a href="VERSIONS.md">V1-V2 (.md)</a> &middot; <a href="EXPANDED_RESULTS.md">V3-V7 (.md)</a> &middot; <a href="results.json">Website data (.json)</a></p>
+    </section>
+    <aside class="limits"><h2>What this lab does not prove</h2><p>Single seeds, short byte contexts, repeated validation, OCR errors, and unequal compute limit generalization. Byte perplexity is not GPT-2 BPE perplexity. Better byte prediction is not coherent writing. Recorded experiments are preserved; this site neither retrains models nor serves a chatbot.</p><p>Archive scans are marked public domain in the US. Check local rights before reuse, including Peter Pan-related UK provisions. Raw corpora and model checkpoints are not hosted here.</p></aside>
+  </main>
+  <footer><p>Built from the lab's recorded JSON results. No external analytics or live model calls.</p><a href="https://github.com/mifurm/mini-gpt-classroom">Source code &amp; reproducible lab</a></footer>
+</body>
+</html>

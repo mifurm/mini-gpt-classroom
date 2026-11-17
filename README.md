@@ -4,6 +4,57 @@ A real decoder-only Transformer, trained from scratch and then extended through
 continued training on public-domain Internet Archive OCR.
 **Not a pretrained GPT-2 or a chatbot.**
 
+## Published results website
+
+**Live site:** https://red-smoke-04a79c703.4.azurestaticapps.net/
+
+The lab now includes a static results explorer with the six original experiments,
+V1-V7 comparisons, fivefold-corpus results, unedited saved samples, and all three
+teaching decks. It displays recorded outcomes, not a live inference API.
+
+See [infrastructure and deployment instructions](infra/README.md) to provision
+Azure hosting and publish it reproducibly with Terraform and Azure CLI:
+
+```bash
+export AZURE_SUBSCRIPTION_ID="<your-subscription-id>"
+bash scripts/deploy.sh
+```
+
+Only allowlisted website assets and lesson/report outputs are uploaded.
+Checkpoints, raw corpora, source files, credentials, and Terraform state are not.
+
+### GPT under the microscope
+
+The website's **How GPT works** section has three interactive, keyboard-accessible tabs:
+
+1. **Predict one byte:** inspect byte IDs, actual embedding features, each block
+   and attention head, causal masking, residual additions, logits and probabilities.
+2. **Learn from one example:** follow shifted targets, per-position cross-entropy,
+   backpropagated gradients and one actual AdamW update on a disposable model copy.
+3. **Generate a sentence:** step through or play 12 recorded next-byte samples,
+   showing the prefix, sampling distribution, chosen byte and appended output.
+
+All values come from CPU execution of the original `artifacts/final.pt`, not
+illustrative numbers or live browser inference. The training window is explicitly
+synthetic (`"Alice s"`, from `"Alice sees a cat."`); the model copy starts with the
+Archive-trained weights. It demonstrates an update, not a heldout quality gain.
+The existing checkpoint, experiments and decks are never overwritten.
+Only the first four hidden features are displayed; full attention weights and
+next-byte logits/probabilities are included in the downloadable recording.
+
+Regenerate the trace after changing its producer or the original model:
+
+```bash
+python3 build_microscope.py
+python3 -m unittest -v test_model.MicroscopeTests
+node --test scripts/site.test.mjs
+node scripts/build-site.mjs
+```
+
+The builder rejects recordings whose checkpoint or Python source hashes no
+longer match. The deployment remains static; PyTorch is needed to regenerate
+traces, not to host the site.
+
 Start with [PLAN.md](PLAN.md). Open [slides.html](slides.html) in a browser for the
 17-slide teaching deck (arrow keys / space to advance, `N` for speaker notes).
 [slides.pdf](slides.pdf) is the rendered, printable version. Read
