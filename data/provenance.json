@@ -1,0 +1,44 @@
+{
+  "item": "throughlookinggl00carruoft",
+  "metadata_url": "https://archive.org/metadata/throughlookinggl00carruoft",
+  "text_url": "https://archive.org/download/throughlookinggl00carruoft/throughlookinggl00carruoft_djvu.txt",
+  "title": "Through the looking-glass, and what Alice found there",
+  "publication_date": "[1899?]",
+  "copyright_status": "NOT_IN_COPYRIGHT",
+  "copyright_region": "US",
+  "raw_sha256": "c81e28b894726008af690db05cc81bbc5247cc401ec4eddba97f20fdecaf0c61",
+  "clean_sha256": "f7928c0cf3588e0c5721ffb8f98529a651e5d585f9e7154c175cd8a3e2551e7f",
+  "clean_bytes": 165551,
+  "split_spans": {
+    "train": [
+      0,
+      132440
+    ],
+    "validation": [
+      132568,
+      148995
+    ],
+    "test": [
+      149123,
+      165551
+    ]
+  },
+  "split_bytes": {
+    "train": 132440,
+    "validation": 16427,
+    "test": 16428
+  },
+  "split_sha256": {
+    "train": "00e68f14ea7cd62d34bd8da9bf8773d9c54f4f89d10835c2aff21accb8073548",
+    "validation": "2ef8f5cf3253037cd03a426928e1afdae6f91c57db638b4ccc338a228e13f2f3",
+    "test": "074b96687cadbd8e0d1d93a56b2731d1abf7d1aac99f8a8b0a834dbbdef874e7"
+  },
+  "boundary_gap_bytes": 128,
+  "cleaning": [
+    "Extract CHAPTER I through THE END; exclude library labels/front matter.",
+    "Normalize NFC and horizontal spaces; remove standalone page numbers.",
+    "Remove uppercase running headings ending in page numbers.",
+    "Join lowercase words hyphenated at a line break; unwrap adjacent lines.",
+    "Retain paragraph boundaries and uncorrected OCR spelling errors."
+  ]
+}

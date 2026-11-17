@@ -1,0 +1,69 @@
+{
+  "identifier": "windinwillows00grah",
+  "title": "The wind in the willows",
+  "creator": [
+    "Grahame, Kenneth, 1859-1932",
+    "Bransom, Paul, 1885- ill"
+  ],
+  "mediatype": "texts",
+  "description": [
+    "The escapades of four animal friends who live along a river in the English countryside--Toad, Mole, Rat, and Badger",
+    "The escapades of four animal friends who live along a river in the English countryside--Toad, Mole, Rat, and Badger"
+  ],
+  "date": "c1913",
+  "year": "1913",
+  "subject": "Animals",
+  "publicdate": "2007-08-03 13:49:31",
+  "addeddate": "2007-08-03 13:49:22",
+  "uploader": "scanner-nicole-deyo@archive.org",
+  "updater": [
+    "scanner-nicole-deyo",
+    "ARossi"
+  ],
+  "updatedate": [
+    "2007-08-03 09:51:22",
+    "2008-09-26 22:27:42"
+  ],
+  "contributor": "New York Public Library",
+  "publisher": "New York : Scribner",
+  "language": "eng",
+  "copyright-evidence-operator": "scanner-nicole-deyo",
+  "possible-copyright-status": "NOT_IN_COPYRIGHT",
+  "copyright-region": "US",
+  "copyright-evidence": "Evidence reported by scanner-nicole-deyo for item windinwillows00grah on August 3, 2007: visible notice of copyright; stated date is 1913.",
+  "copyright-evidence-date": "20070803135039",
+  "sponsor": "MSN",
+  "scanningcenter": "nyc",
+  "call_number": "394332",
+  "identifier-access": "http://www.archive.org/details/windinwillows00grah",
+  "imagecount": "396",
+  "ppi": "400",
+  "camera": "Canon 5D",
+  "operator": "scanner-kiersten-newman@archive.org",
+  "scanner": "nycs9",
+  "scandate": "20070807062410",
+  "identifier-ark": "ark:/13960/t03x85t97",
+  "bookplateleaf": "0006",
+  "curation": "[curator]melissa@archive.org[/curator][date]20070808185120[/date][state]approved[/state][comment]199[/comment]",
+  "sponsordate": "20070831",
+  "filesxml": [
+    "Wed Aug 19 4:23:52 UTC 2009",
+    "Sat Dec 26 18:42:33 UTC 2020"
+  ],
+  "collection": [
+    "newyorkpubliclibrary",
+    "bannedbooks",
+    "americana"
+  ],
+  "foldoutcount": "0",
+  "repub_state": "4",
+  "backup_location": "ia903601_5",
+  "openlibrary_edition": "OL7153762M",
+  "openlibrary_work": "OL16312108W",
+  "external-identifier": "urn:oclc:record:1158352969",
+  "associated-names": "Bransom, Paul, 1885- ill",
+  "ocr_module_version": "0.0.21",
+  "ocr_converted": "abbyy-to-hocr 1.1.37",
+  "page_number_confidence": "95",
+  "page_number_module_version": "1.0.3"
+}

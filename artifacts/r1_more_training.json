@@ -1,0 +1,118 @@
+{
+  "name": "r1_more_training",
+  "steps": 600,
+  "context": 32,
+  "width": 64,
+  "layers": 1,
+  "schedule": false,
+  "change": "Increase updates from 200 to 600",
+  "config": {
+    "context": 32,
+    "width": 64,
+    "heads": 4,
+    "layers": 1
+  },
+  "seed": 42,
+  "batch_size": 32,
+  "learning_rate": 0.001,
+  "weight_decay": 0.01,
+  "parameters": 68544,
+  "training_tokens": 614400,
+  "training_seconds": 1.8205466250001336,
+  "best_step": 600,
+  "initial_validation": {
+    "loss": 5.536990635562688,
+    "bits_per_byte": 7.98818893137492,
+    "perplexity": 253.91273260498423,
+    "accuracy": 0.0205078125,
+    "targets": 1024
+  },
+  "validation": {
+    "loss": 2.1393411363351333,
+    "bits_per_byte": 3.086416848160457,
+    "perplexity": 8.493839502664143,
+    "accuracy": 0.4033203125,
+    "targets": 1024
+  },
+  "train": {
+    "loss": 1.9888499209737347,
+    "bits_per_byte": 2.869303918061214,
+    "perplexity": 7.307125156570974,
+    "accuracy": 0.43359375,
+    "targets": 512
+  },
+  "curve": [
+    {
+      "step": 200,
+      "batch_loss": 2.46787166595459,
+      "validation": {
+        "loss": 2.557994694056106,
+        "bits_per_byte": 3.6904062597350253,
+        "perplexity": 12.90990303590457,
+        "accuracy": 0.2919921875,
+        "targets": 1024
+      },
+      "lr": 0.001,
+      "elapsed_seconds": 0.595750500000122
+    },
+    {
+      "step": 400,
+      "batch_loss": 2.1434011459350586,
+      "validation": {
+        "loss": 2.3005382113915402,
+        "bits_per_byte": 3.318975068950141,
+        "perplexity": 9.979552118310615,
+        "accuracy": 0.3681640625,
+        "targets": 1024
+      },
+      "lr": 0.001,
+      "elapsed_seconds": 1.2058128749999923
+    },
+    {
+      "step": 600,
+      "batch_loss": 1.9773917198181152,
+      "validation": {
+        "loss": 2.1393411363351333,
+        "bits_per_byte": 3.086416848160457,
+        "perplexity": 8.493839502664143,
+        "accuracy": 0.4033203125,
+        "targets": 1024
+      },
+      "lr": 0.001,
+      "elapsed_seconds": 1.8129362920003587
+    }
+  ],
+  "samples": [
+    {
+      "prompt": "Alice said, \"",
+      "continuation": " she I gring ate br she hand a they sto he \" I was oned. \" and it and wy mas to ought lhe hegrmme tham and do knoting itse puple it his, you forr ones ear it hand and edree sim to thisue ble she saidd was eand herspe shebed to wer hemppst l",
+      "seed": 123,
+      "temperature": 0.8,
+      "top_k": 40,
+      "lexicon_hit_rate": 0.5471698113207547,
+      "repeated_word_trigram_fraction": 0.0,
+      "utf8_replacements": 0
+    },
+    {
+      "prompt": "The Queen ",
+      "continuation": "tro wer : une sat thelly u to ther,\" and thy kothe wing too if said at aste boucte sar toe lddo ea wnas to to could, it oulver the wishe of has and if the her the lot very uump anke it anay und it awnd ould ousid she iupte thand eet the lit",
+      "seed": 124,
+      "temperature": 0.8,
+      "top_k": 40,
+      "lexicon_hit_rate": 0.48148148148148145,
+      "repeated_word_trigram_fraction": 0.0,
+      "utf8_replacements": 0
+    },
+    {
+      "prompt": "The little ",
+      "continuation": "for a cull way,\" wen the cor ourd on oof  cherte thing, \" hen in it : \"\n\n\" It thelly kne tone it wecnt.\n\n\n\" It if iu to nin's 'to hers domy woong \"\n\n\n\"It the he hryou the be so rouge sae you ont he lllong anto bing an he finge on't and sthe",
+      "seed": 125,
+      "temperature": 0.8,
+      "top_k": 40,
+      "lexicon_hit_rate": 0.5471698113207547,
+      "repeated_word_trigram_fraction": 0.0,
+      "utf8_replacements": 0
+    }
+  ],
+  "checkpoint": "r1_more_training.pt"
+}

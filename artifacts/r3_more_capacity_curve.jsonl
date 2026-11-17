@@ -1,0 +1,3 @@
+{"step": 200, "batch_loss": 2.20713472366333, "validation": {"loss": 2.3150013679405674, "bits_per_byte": 3.339840993179023, "perplexity": 10.124936769045583, "accuracy": 0.345703125, "targets": 1024}, "lr": 0.001, "elapsed_seconds": 2.7657057080000413}
+{"step": 400, "batch_loss": 1.8589190244674683, "validation": {"loss": 2.0499697134418966, "bits_per_byte": 2.9574811395551936, "perplexity": 7.767665846881191, "accuracy": 0.4169921875, "targets": 1024}, "lr": 0.001, "elapsed_seconds": 5.539461875000143}
+{"step": 600, "batch_loss": 1.7015628814697266, "validation": {"loss": 1.8885707496565374, "bits_per_byte": 2.7246316548974385, "perplexity": 6.609914703741691, "accuracy": 0.4638671875, "targets": 1024}, "lr": 0.001, "elapsed_seconds": 8.304753999999775}

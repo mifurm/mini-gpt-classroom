@@ -1,0 +1,76 @@
+{
+  "identifier": "wonderfulwizardo00baumiala",
+  "title": "The wonderful wizard of Oz",
+  "creator": [
+    "Baum, L. Frank (Lyman Frank), 1856-1919",
+    "Denslow, W. W. (William Wallace), 1856-1915"
+  ],
+  "mediatype": "texts",
+  "description": "Publisher's green and red illustrated cloth over boards; illustrated endpapers. Plate detached",
+  "date": "1900, c1899",
+  "year": "1900",
+  "subject": [
+    "Adventure and adventurers",
+    "Wizards"
+  ],
+  "publicdate": "2007-11-27 22:24:10",
+  "addeddate": "2007-11-27 22:23:45",
+  "uploader": "scanner-alyson-wieczorek@archive.org",
+  "updater": [
+    "alyson-wieczorek",
+    "marcus lucero",
+    "marcus lucero",
+    "ARossi"
+  ],
+  "updatedate": [
+    "2007-11-27 22:23:42",
+    "2007-12-05 19:33:33",
+    "2007-12-07 00:58:33",
+    "2008-09-26 22:19:18"
+  ],
+  "contributor": "Charles E. Young Research Library, UCLA",
+  "publisher": "Chicago ; New York : G.M. Hill Co.",
+  "language": "eng",
+  "possible-copyright-status": "NOT_IN_COPYRIGHT",
+  "sponsor": "msn",
+  "scanningcenter": "iala",
+  "call_number": "srlf_ucla:LAGE-446512",
+  "repub_state": "4",
+  "imagecount": "316",
+  "ppi": "400",
+  "lcamid": "1020707447",
+  "rcamid": "1020707127",
+  "camera": "5D",
+  "operator": "scanner-carri-cregar@archive.org",
+  "scanner": "iala2",
+  "scandate": "20071128155652",
+  "identifier-access": "http://www.archive.org/details/wonderfulwizardo00baumiala",
+  "identifier-ark": "ark:/13960/t6m042969",
+  "curatestate": "approved",
+  "sponsordate": "20080430",
+  "curation": "[curator]julie@archive.org[/curator][date]20080530201904[/date][state]approved[/state]",
+  "filesxml": [
+    "Thu Mar 18 14:24:39 UTC 2010",
+    "Sat Dec 26 19:08:01 UTC 2020"
+  ],
+  "collection": [
+    "cdl",
+    "yrlsc",
+    "iacl",
+    "bannedbooks",
+    "americana"
+  ],
+  "foldoutcount": "0",
+  "backup_location": "ia903601_15",
+  "openlibrary_edition": "OL7170815M",
+  "openlibrary_work": "OL18417W",
+  "openlibrary_subject": "openlibrary_staff_picks",
+  "external-identifier": "urn:oclc:record:904359523",
+  "lccn": "03032405",
+  "oclc-id": "4051769",
+  "associated-names": "Denslow, W. W. (William Wallace), 1856-1915",
+  "ocr_module_version": "0.0.21",
+  "ocr_converted": "abbyy-to-hocr 1.1.37",
+  "page_number_confidence": "67",
+  "page_number_module_version": "1.0.3"
+}

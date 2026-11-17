@@ -1,0 +1,27 @@
+{
+  "slides": 85,
+  "lecture": 62,
+  "appendix": 23,
+  "recorded_samples": 59,
+  "source_excerpts": 26,
+  "native_tables": 27,
+  "native_charts": 3,
+  "native_text_fidelity": "passed",
+  "native_chart_fidelity": "passed",
+  "native_geometry": "passed",
+  "native_font_layout_estimates": "passed",
+  "notes": "passed",
+  "source_hashes": "passed",
+  "preserved_artifacts": 13,
+  "pdf_pages": 85,
+  "pdf_page_size_points": [
+    960,
+    540
+  ],
+  "limitation": "PowerPoint structurally checked, not office-rendered; PDF browser-rendered.",
+  "output_sha256": {
+    "deep-dive.pptx": "22ea60fe4f10e5c9c5215d0da7cc63a09a01319fb560f19786bab83a31031063",
+    "deep-dive.html": "686cb56f1bccab902adf1d4b4119745ed98b5680ae4e2e656c305c1a3fe98a31",
+    "deep-dive.pdf": "7d29606cc21af19b9df5bce4c383591ef28d24ed164c0ddca8cb6d3abcd48d2c"
+  }
+}

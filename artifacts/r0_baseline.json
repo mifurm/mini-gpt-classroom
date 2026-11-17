@@ -1,0 +1,92 @@
+{
+  "name": "r0_baseline",
+  "steps": 200,
+  "context": 32,
+  "width": 64,
+  "layers": 1,
+  "schedule": false,
+  "change": "Baseline: one small block, 200 updates",
+  "config": {
+    "context": 32,
+    "width": 64,
+    "heads": 4,
+    "layers": 1
+  },
+  "seed": 42,
+  "batch_size": 32,
+  "learning_rate": 0.001,
+  "weight_decay": 0.01,
+  "parameters": 68544,
+  "training_tokens": 204800,
+  "training_seconds": 0.6294307090001894,
+  "best_step": 200,
+  "initial_validation": {
+    "loss": 5.536990635562688,
+    "bits_per_byte": 7.98818893137492,
+    "perplexity": 253.91273260498423,
+    "accuracy": 0.0205078125,
+    "targets": 1024
+  },
+  "validation": {
+    "loss": 2.557994694056106,
+    "bits_per_byte": 3.6904062597350253,
+    "perplexity": 12.90990303590457,
+    "accuracy": 0.2919921875,
+    "targets": 1024
+  },
+  "train": {
+    "loss": 2.403195687686093,
+    "bits_per_byte": 3.467078500910469,
+    "perplexity": 11.058459356321263,
+    "accuracy": 0.3125,
+    "targets": 512
+  },
+  "curve": [
+    {
+      "step": 200,
+      "batch_loss": 2.46787166595459,
+      "validation": {
+        "loss": 2.557994694056106,
+        "bits_per_byte": 3.6904062597350253,
+        "perplexity": 12.90990303590457,
+        "accuracy": 0.2919921875,
+        "targets": 1024
+      },
+      "lr": 0.001,
+      "elapsed_seconds": 0.6222606250003082
+    }
+  ],
+  "samples": [
+    {
+      "prompt": "Alice said, \"",
+      "continuation": " ! 'The s say the bre an tin we aly s d he \" thanitond f anal t thang w le arid oug s lound ghm I ty werer d  lyouint t selphd thit hind y ou, he wn s \"hinisThan ce thed the ig th thinous ce s The lduid s the thed tous tbed tove the m poug ",
+      "seed": 123,
+      "temperature": 0.8,
+      "top_k": 40,
+      "lexicon_hit_rate": 0.4827586206896552,
+      "repeated_word_trigram_fraction": 0.0,
+      "utf8_replacements": 0
+    },
+    {
+      "prompt": "The Queen ",
+      "continuation": "t talis aikin s tht they t topu shin ashid y hothe Hin f tofis s shicto s he oucang as t wald, we oon o t he thiwhe, t ooul, r wakelis t on hanled und, koling  fth than quguced ad anghed ay t it thawouooullld tid t thius, w wan we tout t st",
+      "seed": 124,
+      "temperature": 0.8,
+      "top_k": 40,
+      "lexicon_hit_rate": 0.4642857142857143,
+      "repeated_word_trigram_fraction": 0.0,
+      "utf8_replacements": 0
+    },
+    {
+      "prompt": "The little ",
+      "continuation": "y hthe wher ay and the ame ke Que ol ooas ce oul thin her hen w thex: \"\n\n\n\" ove \" ca t ceedned t whengut,an here wi, t'tn n'g\n'to he t d she tou s\" thsat the he heveng s ! \" s \" \" he-athey theshing l tond wouoke th t the  ind cedou antt t t",
+      "seed": 125,
+      "temperature": 0.8,
+      "top_k": 40,
+      "lexicon_hit_rate": 0.4827586206896552,
+      "repeated_word_trigram_fraction": 0.0,
+      "utf8_replacements": 0
+    }
+  ],
+  "checkpoint": "r0_baseline.pt"
+}

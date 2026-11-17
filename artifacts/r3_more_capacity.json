@@ -1,0 +1,118 @@
+{
+  "name": "r3_more_capacity",
+  "steps": 600,
+  "context": 64,
+  "width": 128,
+  "layers": 2,
+  "schedule": false,
+  "change": "Increase width to 128 and depth to two blocks",
+  "config": {
+    "context": 64,
+    "width": 128,
+    "heads": 4,
+    "layers": 2
+  },
+  "seed": 42,
+  "batch_size": 32,
+  "learning_rate": 0.001,
+  "weight_decay": 0.01,
+  "parameters": 437760,
+  "training_tokens": 1228800,
+  "training_seconds": 8.311570374999974,
+  "best_step": 600,
+  "initial_validation": {
+    "loss": 5.57262620748952,
+    "bits_per_byte": 8.039600194273003,
+    "perplexity": 263.12421142946926,
+    "accuracy": 0.0361328125,
+    "targets": 1024
+  },
+  "validation": {
+    "loss": 1.8885707496565374,
+    "bits_per_byte": 2.7246316548974385,
+    "perplexity": 6.609914703741691,
+    "accuracy": 0.4638671875,
+    "targets": 1024
+  },
+  "train": {
+    "loss": 1.635725264708526,
+    "bits_per_byte": 2.3598527276517776,
+    "perplexity": 5.1331795612827475,
+    "accuracy": 0.5390625,
+    "targets": 512
+  },
+  "curve": [
+    {
+      "step": 200,
+      "batch_loss": 2.20713472366333,
+      "validation": {
+        "loss": 2.3150013679405674,
+        "bits_per_byte": 3.339840993179023,
+        "perplexity": 10.124936769045583,
+        "accuracy": 0.345703125,
+        "targets": 1024
+      },
+      "lr": 0.001,
+      "elapsed_seconds": 2.7657057080000413
+    },
+    {
+      "step": 400,
+      "batch_loss": 1.8589190244674683,
+      "validation": {
+        "loss": 2.0499697134418966,
+        "bits_per_byte": 2.9574811395551936,
+        "perplexity": 7.767665846881191,
+        "accuracy": 0.4169921875,
+        "targets": 1024
+      },
+      "lr": 0.001,
+      "elapsed_seconds": 5.539461875000143
+    },
+    {
+      "step": 600,
+      "batch_loss": 1.7015628814697266,
+      "validation": {
+        "loss": 1.8885707496565374,
+        "bits_per_byte": 2.7246316548974385,
+        "perplexity": 6.609914703741691,
+        "accuracy": 0.4638671875,
+        "targets": 1024
+      },
+      "lr": 0.001,
+      "elapsed_seconds": 8.304753999999775
+    }
+  ],
+  "samples": [
+    {
+      "prompt": "Alice said, \"",
+      "continuation": " said Alice. Hall drumpt turthen, you do bectiles oment. \" I \" wehat no loose doong stoo nothim I that's puck it : Ho they phing it his, you mant wass ! \" Alice to It got theim to this ore wen The imumpted Alice said. \" becaling the not to ",
+      "seed": 123,
+      "temperature": 0.8,
+      "top_k": 40,
+      "lexicon_hit_rate": 0.5869565217391305,
+      "repeated_word_trigram_fraction": 0.0,
+      "utf8_replacements": 0
+    },
+    {
+      "prompt": "The Queen ",
+      "continuation": "trough tought says ! \" aid to jest,\" said ther to his if to ifirst imtomsten ouch, quicke ald to fight ! \" said Alice too loor the wishe only quace if the has tot loook a goot asher hiss alll\n\nto bawousE to old the was aye thand ever up lad",
+      "seed": 124,
+      "temperature": 0.8,
+      "top_k": 40,
+      "lexicon_hit_rate": 0.5208333333333334,
+      "repeated_word_trigram_fraction": 0.0,
+      "utf8_replacements": 0
+    },
+    {
+      "prompt": "The little ",
+      "continuation": "for a began ! \"\n\n\" Alice couldn't slooking are linting, \" Alice to Alice oliove : conte a deedd awacn'ut, and if the twon thro's she say. you'd it helse for the hras tremever but he ! \"\n\n\" You Alice. Mongs byoce the fight is a I his wenly i",
+      "seed": 125,
+      "temperature": 0.8,
+      "top_k": 40,
+      "lexicon_hit_rate": 0.6875,
+      "repeated_word_trigram_fraction": 0.0,
+      "utf8_replacements": 0
+    }
+  ],
+  "checkpoint": "r3_more_capacity.pt"
+}

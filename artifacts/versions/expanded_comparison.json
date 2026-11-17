@@ -1,0 +1,5456 @@
+{
+  "versions": [
+    {
+      "name": "v3",
+      "parent": "v2",
+      "books": 1,
+      "layers": 3,
+      "steps": 1800,
+      "checkpoint": "v3.pt",
+      "parent_sha256": "bbad33db6ea0b0f6c941ec36a55c69d0ac497c243bdb3ce03a77a5952dc57422",
+      "config": {
+        "context": 128,
+        "width": 128,
+        "heads": 4,
+        "layers": 3,
+        "dropout": 0.1
+      },
+      "parameters": 644224,
+      "seed": 42,
+      "batch_size": 32,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.01,
+      "best_step": 1400,
+      "training_seconds": 107.35990070800108,
+      "training_documents": [
+        "original",
+        "alice"
+      ],
+      "available_train_bytes": 250152,
+      "presented_bytes": 7372800,
+      "document_windows": {
+        "original": 28795,
+        "alice": 28805
+      },
+      "initial_validation": {
+        "per_book": {
+          "original": {
+            "loss": 1.516491312542641,
+            "bits_per_byte": 2.187834496156463,
+            "perplexity": 4.556210797135738,
+            "accuracy": 0.583984375,
+            "targets": 1024
+          },
+          "alice": {
+            "loss": 1.500169170375159,
+            "bits_per_byte": 2.1642866225947524,
+            "perplexity": 4.482447303492925,
+            "accuracy": 0.625,
+            "targets": 256
+          },
+          "oz": {
+            "loss": 2.2990723155157866,
+            "bits_per_byte": 3.3168602282397317,
+            "perplexity": 9.964933851065053,
+            "accuracy": 0.41796875,
+            "targets": 256
+          },
+          "peter": {
+            "loss": 2.079006373045104,
+            "bits_per_byte": 2.9993721843687218,
+            "perplexity": 7.99651940829924,
+            "accuracy": 0.4765625,
+            "targets": 256
+          },
+          "willows": {
+            "loss": 1.9377384880979207,
+            "bits_per_byte": 2.795565707318548,
+            "perplexity": 6.943031454130113,
+            "accuracy": 0.51171875,
+            "targets": 256
+          },
+          "garden": {
+            "loss": 2.029689584584503,
+            "bits_per_byte": 2.9282230982240427,
+            "perplexity": 7.611723195799368,
+            "accuracy": 0.4453125,
+            "targets": 256
+          }
+        },
+        "new_books_macro": {
+          "loss": 1.9691351863236948,
+          "bits_per_byte": 2.8408615681491596,
+          "perplexity": 7.164477869962438,
+          "accuracy": 0.49531250000000004,
+          "targets": 1280
+        },
+        "combined": {
+          "loss": 1.7428132494331678,
+          "bits_per_byte": 2.5143480321528116,
+          "perplexity": 5.7133940374319465,
+          "accuracy": 0.5396484375,
+          "targets": 2304
+        }
+      },
+      "validation": {
+        "per_book": {
+          "original": {
+            "loss": 1.4272199398619705,
+            "bits_per_byte": 2.0590431294967093,
+            "perplexity": 4.167098289945232,
+            "accuracy": 0.6025390625,
+            "targets": 1024
+          },
+          "alice": {
+            "loss": 1.2022325224472183,
+            "bits_per_byte": 1.7344548981300314,
+            "perplexity": 3.3275374384458076,
+            "accuracy": 0.6484375,
+            "targets": 256
+          },
+          "oz": {
+            "loss": 2.173666095769022,
+            "bits_per_byte": 3.1359372969144426,
+            "perplexity": 8.790451677596737,
+            "accuracy": 0.44921875,
+            "targets": 256
+          },
+          "peter": {
+            "loss": 1.8534456913448594,
+            "bits_per_byte": 2.673956907460245,
+            "perplexity": 6.38177129548358,
+            "accuracy": 0.53515625,
+            "targets": 256
+          },
+          "willows": {
+            "loss": 1.8184948976386295,
+            "bits_per_byte": 2.623533570705134,
+            "perplexity": 6.162576158308363,
+            "accuracy": 0.50390625,
+            "targets": 256
+          },
+          "garden": {
+            "loss": 1.805267221862266,
+            "bits_per_byte": 2.6044500684600873,
+            "perplexity": 6.081596366910527,
+            "accuracy": 0.51953125,
+            "targets": 256
+          }
+        },
+        "new_books_macro": {
+          "loss": 1.770621285812399,
+          "bits_per_byte": 2.554466548333988,
+          "perplexity": 5.874501972580528,
+          "accuracy": 0.53125,
+          "targets": 1280
+        },
+        "combined": {
+          "loss": 1.5989206128371847,
+          "bits_per_byte": 2.3067548389153485,
+          "perplexity": 4.94768906907257,
+          "accuracy": 0.56689453125,
+          "targets": 2304
+        }
+      },
+      "train_per_book": {
+        "original": {
+          "loss": 0.7539451717274233,
+          "bits_per_byte": 1.0877129603533315,
+          "perplexity": 2.1253684418083023,
+          "accuracy": 0.77734375,
+          "targets": 256
+        },
+        "alice": {
+          "loss": 1.1761799579865055,
+          "bits_per_byte": 1.696868992580121,
+          "perplexity": 3.2419660715874707,
+          "accuracy": 0.640625,
+          "targets": 256
+        }
+      },
+      "curve": [
+        {
+          "step": 0,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.516491312542641,
+                "bits_per_byte": 2.187834496156463,
+                "perplexity": 4.556210797135738,
+                "accuracy": 0.583984375,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.500169170375159,
+                "bits_per_byte": 2.1642866225947524,
+                "perplexity": 4.482447303492925,
+                "accuracy": 0.625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 2.2990723155157866,
+                "bits_per_byte": 3.3168602282397317,
+                "perplexity": 9.964933851065053,
+                "accuracy": 0.41796875,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 2.079006373045104,
+                "bits_per_byte": 2.9993721843687218,
+                "perplexity": 7.99651940829924,
+                "accuracy": 0.4765625,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.9377384880979207,
+                "bits_per_byte": 2.795565707318548,
+                "perplexity": 6.943031454130113,
+                "accuracy": 0.51171875,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 2.029689584584503,
+                "bits_per_byte": 2.9282230982240427,
+                "perplexity": 7.611723195799368,
+                "accuracy": 0.4453125,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.9691351863236948,
+              "bits_per_byte": 2.8408615681491596,
+              "perplexity": 7.164477869962438,
+              "accuracy": 0.49531250000000004,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.7428132494331678,
+              "bits_per_byte": 2.5143480321528116,
+              "perplexity": 5.7133940374319465,
+              "accuracy": 0.5396484375,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 0.0
+        },
+        {
+          "step": 200,
+          "batch_loss": 1.3990519046783447,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.458278832273244,
+                "bits_per_byte": 2.103851639553958,
+                "perplexity": 4.298554624141404,
+                "accuracy": 0.587890625,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.2566199320383475,
+                "bits_per_byte": 1.8129193442339502,
+                "perplexity": 3.5135254391961483,
+                "accuracy": 0.63671875,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 2.1900471937346992,
+                "bits_per_byte": 3.1595702257138414,
+                "perplexity": 8.935634810726592,
+                "accuracy": 0.4375,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.8964493215794391,
+                "bits_per_byte": 2.735998031539896,
+                "perplexity": 6.662197076919503,
+                "accuracy": 0.5078125,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.8276880160143492,
+                "bits_per_byte": 2.63679643699609,
+                "perplexity": 6.2194906604728635,
+                "accuracy": 0.5,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.862333416351703,
+                "bits_per_byte": 2.686779184252403,
+                "perplexity": 6.438743525544237,
+                "accuracy": 0.4921875,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.8066275759437076,
+              "bits_per_byte": 2.606412644547236,
+              "perplexity": 6.089875121091757,
+              "accuracy": 0.51484375,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.6324532041084758,
+              "bits_per_byte": 2.355132142050597,
+              "perplexity": 5.11641093562789,
+              "accuracy": 0.5513671875,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 11.89377745800084
+        },
+        {
+          "step": 400,
+          "batch_loss": 1.349084496498108,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.4373129446318131,
+                "bits_per_byte": 2.07360425742583,
+                "perplexity": 4.209369797279788,
+                "accuracy": 0.5927734375,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.240786760049673,
+                "bits_per_byte": 1.7900769055243473,
+                "perplexity": 3.4583332731618635,
+                "accuracy": 0.6328125,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 2.126481151290079,
+                "bits_per_byte": 3.0678638115100507,
+                "perplexity": 8.385308204849151,
+                "accuracy": 0.44140625,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.88654459895929,
+                "bits_per_byte": 2.721708537334426,
+                "perplexity": 6.59653557909442,
+                "accuracy": 0.51953125,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.8077731284502079,
+                "bits_per_byte": 2.608065327467442,
+                "perplexity": 6.096855390170021,
+                "accuracy": 0.515625,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.8423603122516852,
+                "bits_per_byte": 2.6579640860161486,
+                "perplexity": 6.311417610474933,
+                "accuracy": 0.48828125,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.780789190200187,
+              "bits_per_byte": 2.569135733570483,
+              "perplexity": 5.9345380502711516,
+              "accuracy": 0.51953125,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.6090510674160001,
+              "bits_per_byte": 2.3213699954981566,
+              "perplexity": 4.998066148983931,
+              "accuracy": 0.55615234375,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 23.786507458000415
+        },
+        {
+          "step": 600,
+          "batch_loss": 1.2678117752075195,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.4423043229403163,
+                "bits_per_byte": 2.0808052941587083,
+                "perplexity": 4.230432877549185,
+                "accuracy": 0.5947265625,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.2215189580558672,
+                "bits_per_byte": 1.7622793431390533,
+                "perplexity": 3.392336639211889,
+                "accuracy": 0.62890625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 2.1523170270626224,
+                "bits_per_byte": 3.1051371013641225,
+                "perplexity": 8.604772808618659,
+                "accuracy": 0.4375,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.847685433397487,
+                "bits_per_byte": 2.6656466118853297,
+                "perplexity": 6.345116319072749,
+                "accuracy": 0.53125,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.8301879085991004,
+                "bits_per_byte": 2.640403019630866,
+                "perplexity": 6.235058169498717,
+                "accuracy": 0.51953125,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.8218979487299123,
+                "bits_per_byte": 2.6284431356384195,
+                "perplexity": 6.183583443988886,
+                "accuracy": 0.47265625,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.774721455168998,
+              "bits_per_byte": 2.5603818423315583,
+              "perplexity": 5.898637872378999,
+              "accuracy": 0.5179687500000001,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.6085128890546572,
+              "bits_per_byte": 2.3205935682451333,
+              "perplexity": 4.995377021613973,
+              "accuracy": 0.55634765625,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 35.702554875002534
+        },
+        {
+          "step": 800,
+          "batch_loss": 1.312774658203125,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.4415344601416749,
+                "bits_per_byte": 2.0796946169169437,
+                "perplexity": 4.227177277997898,
+                "accuracy": 0.59765625,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.219315072589211,
+                "bits_per_byte": 1.7590998085056213,
+                "perplexity": 3.3848685502238944,
+                "accuracy": 0.640625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 2.1547789362763297,
+                "bits_per_byte": 3.1086888855778567,
+                "perplexity": 8.625983076241752,
+                "accuracy": 0.44140625,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.8344193577439682,
+                "bits_per_byte": 2.64650771032794,
+                "perplexity": 6.261497399737457,
+                "accuracy": 0.51171875,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.8256715022471326,
+                "bits_per_byte": 2.6338872225842422,
+                "perplexity": 6.206961608679263,
+                "accuracy": 0.51953125,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.802123627033609,
+                "bits_per_byte": 2.5999148197902198,
+                "perplexity": 6.062508310298865,
+                "accuracy": 0.48828125,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.76726169917805,
+              "bits_per_byte": 2.549619689357176,
+              "perplexity": 5.854799189405311,
+              "accuracy": 0.5203125000000001,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.6043980796598625,
+              "bits_per_byte": 2.31465715313706,
+              "perplexity": 4.974864229372963,
+              "accuracy": 0.5589843750000001,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 47.553058875000715
+        },
+        {
+          "step": 1000,
+          "batch_loss": 1.2880767583847046,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.4336196850212986,
+                "bits_per_byte": 2.0682760101010254,
+                "perplexity": 4.193852174764594,
+                "accuracy": 0.5947265625,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.2062188229821231,
+                "bits_per_byte": 1.7402059141432316,
+                "perplexity": 3.340828476151758,
+                "accuracy": 0.6484375,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 2.1659981057244977,
+                "bits_per_byte": 3.124874725703622,
+                "perplexity": 8.723304353164462,
+                "accuracy": 0.44921875,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.8362070912796753,
+                "bits_per_byte": 2.6490868646343357,
+                "perplexity": 6.272701300433248,
+                "accuracy": 0.52734375,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.835961632963972,
+                "bits_per_byte": 2.648732743139526,
+                "perplexity": 6.271161802686126,
+                "accuracy": 0.50390625,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.7808849179831157,
+                "bits_per_byte": 2.5692738395681896,
+                "perplexity": 5.935106177633761,
+                "accuracy": 0.5078125,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.765054114186677,
+              "bits_per_byte": 2.546434817437781,
+              "perplexity": 5.841888478576291,
+              "accuracy": 0.52734375,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.5993368996039878,
+              "bits_per_byte": 2.3073554137694035,
+              "perplexity": 4.949749155321854,
+              "accuracy": 0.56103515625,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 59.408427665999625
+        },
+        {
+          "step": 1200,
+          "batch_loss": 1.2426398992538452,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.4404086630944661,
+                "bits_per_byte": 2.078070435099888,
+                "perplexity": 4.222421012097701,
+                "accuracy": 0.59765625,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.2273828814008425,
+                "bits_per_byte": 1.7707391962690022,
+                "perplexity": 3.412287479154194,
+                "accuracy": 0.625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 2.1926982537716526,
+                "bits_per_byte": 3.163394896882253,
+                "perplexity": 8.959355143198415,
+                "accuracy": 0.421875,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.8700914471686474,
+                "bits_per_byte": 2.697971656839073,
+                "perplexity": 6.488889762752062,
+                "accuracy": 0.5234375,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.8307172226639068,
+                "bits_per_byte": 2.6411666584072346,
+                "perplexity": 6.238359347085507,
+                "accuracy": 0.49609375,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.7716949124095436,
+                "bits_per_byte": 2.556015464101455,
+                "perplexity": 5.880812381048298,
+                "accuracy": 0.48828125,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.7785169434829187,
+              "bits_per_byte": 2.5658575744998036,
+              "perplexity": 5.921068624392624,
+              "accuracy": 0.5109375,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.6094628032886924,
+              "bits_per_byte": 2.3219640047998458,
+              "perplexity": 5.00012445582186,
+              "accuracy": 0.554296875,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 71.32467741599976
+        },
+        {
+          "step": 1400,
+          "batch_loss": 1.2002652883529663,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.4272199398619705,
+                "bits_per_byte": 2.0590431294967093,
+                "perplexity": 4.167098289945232,
+                "accuracy": 0.6025390625,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.2022325224472183,
+                "bits_per_byte": 1.7344548981300314,
+                "perplexity": 3.3275374384458076,
+                "accuracy": 0.6484375,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 2.173666095769022,
+                "bits_per_byte": 3.1359372969144426,
+                "perplexity": 8.790451677596737,
+                "accuracy": 0.44921875,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.8534456913448594,
+                "bits_per_byte": 2.673956907460245,
+                "perplexity": 6.38177129548358,
+                "accuracy": 0.53515625,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.8184948976386295,
+                "bits_per_byte": 2.623533570705134,
+                "perplexity": 6.162576158308363,
+                "accuracy": 0.50390625,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.805267221862266,
+                "bits_per_byte": 2.6044500684600873,
+                "perplexity": 6.081596366910527,
+                "accuracy": 0.51953125,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.770621285812399,
+              "bits_per_byte": 2.554466548333988,
+              "perplexity": 5.874501972580528,
+              "accuracy": 0.53125,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.5989206128371847,
+              "bits_per_byte": 2.3067548389153485,
+              "perplexity": 4.94768906907257,
+              "accuracy": 0.56689453125,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 83.24323645800177
+        },
+        {
+          "step": 1600,
+          "batch_loss": 1.303072214126587,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.430207877530549,
+                "bits_per_byte": 2.063353812353653,
+                "perplexity": 4.179567939885632,
+                "accuracy": 0.6064453125,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1936895960517404,
+                "bits_per_byte": 1.722130060584596,
+                "perplexity": 3.2992316104835453,
+                "accuracy": 0.625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 2.1837248817175805,
+                "bits_per_byte": 3.1504490575197917,
+                "perplexity": 8.87931914955843,
+                "accuracy": 0.44921875,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.8510492788917645,
+                "bits_per_byte": 2.6704996150982407,
+                "perplexity": 6.366496249243913,
+                "accuracy": 0.53125,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.8427304855517832,
+                "bits_per_byte": 2.6584981332004696,
+                "perplexity": 6.313754361234786,
+                "accuracy": 0.5078125,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.8057604521047494,
+                "bits_per_byte": 2.6051616492849345,
+                "perplexity": 6.0845967340363405,
+                "accuracy": 0.46484375,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.7753909388635236,
+              "bits_per_byte": 2.5613477031376064,
+              "perplexity": 5.9025882364590885,
+              "accuracy": 0.515625,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.6027994081970363,
+              "bits_per_byte": 2.3123507577456297,
+              "perplexity": 4.966917409767398,
+              "accuracy": 0.56103515625,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 95.25917791599932
+        },
+        {
+          "step": 1800,
+          "batch_loss": 1.2363580465316772,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.4373489776362156,
+                "bits_per_byte": 2.0736562420625897,
+                "perplexity": 4.209521476252933,
+                "accuracy": 0.591796875,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1890053036937331,
+                "bits_per_byte": 1.7153720552296248,
+                "perplexity": 3.283813185461856,
+                "accuracy": 0.625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 2.1772907534284514,
+                "bits_per_byte": 3.1411665725446216,
+                "perplexity": 8.822371870538037,
+                "accuracy": 0.44921875,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.8419125436809054,
+                "bits_per_byte": 2.6573180925196187,
+                "perplexity": 6.308592188646651,
+                "accuracy": 0.515625,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.8408919408620932,
+                "bits_per_byte": 2.6558456738942007,
+                "perplexity": 6.3021569061684986,
+                "accuracy": 0.51953125,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.787717765757435,
+                "bits_per_byte": 2.5791315551673493,
+                "perplexity": 5.9757987193210615,
+                "accuracy": 0.48828125,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.7673636614845236,
+              "bits_per_byte": 2.549766789871083,
+              "perplexity": 5.855396188669795,
+              "accuracy": 0.51953125,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.6023563195603696,
+              "bits_per_byte": 2.311711515966836,
+              "perplexity": 4.964717112603202,
+              "accuracy": 0.5556640625,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 107.35968279100052
+        }
+      ],
+      "samples": [
+        {
+          "prompt": "Alice said, \"",
+          "continuation": " So you will about was on in a thing tone that was made. That the sort you again.\"\n\n\" I'm afraid I'd mean promison,\" Alice replied.\n\n\"Which was the King remarked at the room in the time,\" said Tweedledum, \"And here, and because it makes to ",
+          "seed": 123,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.9787234042553191,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "The Queen ",
+          "continuation": "said to herself, \"that you to talk,\" said the Lion.\n\n\" I don't say it once,\" said Tweedledum. \" Of course ? \"\n\n\" Yes, too. Three are soldiers the word, you know the gave this dark ! \"\n\nAlice was good and looking at the other, \" we could not",
+          "seed": 124,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 1.0,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "The little ",
+          "continuation": "for a bottle.\n\n\" Of course you are ? \" he said, as if her hand it was a convericefusted tone down ; now in another up the same's she story. However, that they were she came on again, and hand she had to fan to be herself, and seemed to stra",
+          "seed": 125,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.9591836734693877,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "Dorothy said, \"",
+          "continuation": "but I don't see it turn to crab : I wonder, if you are you see anything I'm so many convering to herself answer, if you like a hurry directions : but I don't believe in that all many my dream : and we did on't be any purcular hug to she see",
+          "seed": 126,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.9629629629629629,
+          "repeated_word_trigram_fraction": 0.038461538461538436,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "Wendy ",
+          "continuation": "rather a conversation.\"\n\n\" Well, what is is the house ? \" said the Tiger-lily. \" Not it was a well of life, * You'm not but every names in somebody to be me, like hold.\"\n\n\"Exclaiment to do it round at the seems,\" Alice said, \"only the extre",
+          "seed": 127,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.9565217391304348,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "The Mole ",
+          "continuation": "other little shelf in a minute.\n\n\" I can't know,\" said the Tiger-lily, \"you've seen if it would be seen the words the sea confuse ! \" the Queen said in a tone of delight, and went on a more or two large first of with the room.\n\n\"While, I'm ",
+          "seed": 128,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.9803921568627451,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "Mary Lennox ",
+          "continuation": "did you think it side.\"\n\n\" That's not a long wax,\" said, the Knight : \" thought it would her, in something it was so up to the thumble. The Knight couldn't go by think to shrow her Rose.\"\n\nThere was more very good about, and the Darmouse sh",
+          "seed": 129,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.9375,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        }
+      ],
+      "tests": {
+        "per_book": {
+          "original": {
+            "loss": 1.4116074033014416,
+            "bits_per_byte": 2.036519000425137,
+            "perplexity": 4.102544550599457,
+            "accuracy": 0.5960736196319019,
+            "targets": 16300
+          },
+          "alice": {
+            "loss": 1.4329097299726108,
+            "bits_per_byte": 2.0672517614730292,
+            "perplexity": 4.190875784916186,
+            "accuracy": 0.59765625,
+            "targets": 2048
+          },
+          "oz": {
+            "loss": 1.7785164692174789,
+            "bits_per_byte": 2.5658568902794054,
+            "perplexity": 5.921065816235075,
+            "accuracy": 0.52392578125,
+            "targets": 2048
+          },
+          "peter": {
+            "loss": 1.7745875637979225,
+            "bits_per_byte": 2.56018867791449,
+            "perplexity": 5.897848148536572,
+            "accuracy": 0.53515625,
+            "targets": 2048
+          },
+          "willows": {
+            "loss": 1.8443902143506676,
+            "bits_per_byte": 2.6608926157078403,
+            "perplexity": 6.3242421822389225,
+            "accuracy": 0.50341796875,
+            "targets": 2048
+          },
+          "garden": {
+            "loss": 1.7480185574830571,
+            "bits_per_byte": 2.521857704262686,
+            "perplexity": 5.743211550752231,
+            "accuracy": 0.53076171875,
+            "targets": 2048
+          }
+        },
+        "new_books_macro": {
+          "loss": 1.7156845069643474,
+          "bits_per_byte": 2.4752095299274903,
+          "perplexity": 5.560480397534884,
+          "accuracy": 0.53818359375,
+          "targets": 10240
+        },
+        "combined": {
+          "loss": 1.5636459551328945,
+          "bits_per_byte": 2.2558642651763137,
+          "perplexity": 4.776203361836872,
+          "accuracy": 0.5671286066909509,
+          "targets": 26540
+        }
+      }
+    },
+    {
+      "name": "v4",
+      "parent": "v3",
+      "books": 2,
+      "layers": 3,
+      "steps": 1800,
+      "checkpoint": "v4.pt",
+      "parent_sha256": "497987b8591d0d4cd892959c354c8813ae6bb26c1f91666c46af7f46a907ea71",
+      "config": {
+        "context": 128,
+        "width": 128,
+        "heads": 4,
+        "layers": 3,
+        "dropout": 0.1
+      },
+      "parameters": 644224,
+      "seed": 42,
+      "batch_size": 32,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.01,
+      "best_step": 1800,
+      "training_seconds": 109.07610562499758,
+      "training_documents": [
+        "original",
+        "alice",
+        "oz"
+      ],
+      "available_train_bytes": 418197,
+      "presented_bytes": 7372800,
+      "document_windows": {
+        "original": 28795,
+        "alice": 14333,
+        "oz": 14472
+      },
+      "initial_validation": {
+        "per_book": {
+          "original": {
+            "loss": 1.4272199398619705,
+            "bits_per_byte": 2.0590431294967093,
+            "perplexity": 4.167098289945232,
+            "accuracy": 0.6025390625,
+            "targets": 1024
+          },
+          "alice": {
+            "loss": 1.2022325224472183,
+            "bits_per_byte": 1.7344548981300314,
+            "perplexity": 3.3275374384458076,
+            "accuracy": 0.6484375,
+            "targets": 256
+          },
+          "oz": {
+            "loss": 2.173666095769022,
+            "bits_per_byte": 3.1359372969144426,
+            "perplexity": 8.790451677596737,
+            "accuracy": 0.44921875,
+            "targets": 256
+          },
+          "peter": {
+            "loss": 1.8534456913448594,
+            "bits_per_byte": 2.673956907460245,
+            "perplexity": 6.38177129548358,
+            "accuracy": 0.53515625,
+            "targets": 256
+          },
+          "willows": {
+            "loss": 1.8184948976386295,
+            "bits_per_byte": 2.623533570705134,
+            "perplexity": 6.162576158308363,
+            "accuracy": 0.50390625,
+            "targets": 256
+          },
+          "garden": {
+            "loss": 1.805267221862266,
+            "bits_per_byte": 2.6044500684600873,
+            "perplexity": 6.081596366910527,
+            "accuracy": 0.51953125,
+            "targets": 256
+          }
+        },
+        "new_books_macro": {
+          "loss": 1.770621285812399,
+          "bits_per_byte": 2.554466548333988,
+          "perplexity": 5.874501972580528,
+          "accuracy": 0.53125,
+          "targets": 1280
+        },
+        "combined": {
+          "loss": 1.5989206128371847,
+          "bits_per_byte": 2.3067548389153485,
+          "perplexity": 4.94768906907257,
+          "accuracy": 0.56689453125,
+          "targets": 2304
+        }
+      },
+      "validation": {
+        "per_book": {
+          "original": {
+            "loss": 1.3910229177847668,
+            "bits_per_byte": 2.0068218652509793,
+            "perplexity": 4.01895901572382,
+            "accuracy": 0.6005859375,
+            "targets": 1024
+          },
+          "alice": {
+            "loss": 1.1900680341483394,
+            "bits_per_byte": 1.7169052511862868,
+            "perplexity": 3.2873048487611243,
+            "accuracy": 0.625,
+            "targets": 256
+          },
+          "oz": {
+            "loss": 1.6128132957123853,
+            "bits_per_byte": 2.3267977436040437,
+            "perplexity": 5.016905431496222,
+            "accuracy": 0.53515625,
+            "targets": 256
+          },
+          "peter": {
+            "loss": 1.7462136034997684,
+            "bits_per_byte": 2.5192537061019626,
+            "perplexity": 5.732854667847129,
+            "accuracy": 0.55078125,
+            "targets": 256
+          },
+          "willows": {
+            "loss": 1.7356293178789883,
+            "bits_per_byte": 2.503983809725511,
+            "perplexity": 5.672496484226026,
+            "accuracy": 0.52734375,
+            "targets": 256
+          },
+          "garden": {
+            "loss": 1.734004773186257,
+            "bits_per_byte": 2.501640087153605,
+            "perplexity": 5.663288741387967,
+            "accuracy": 0.49609375,
+            "targets": 256
+          }
+        },
+        "new_books_macro": {
+          "loss": 1.6037458048851478,
+          "bits_per_byte": 2.313716119554282,
+          "perplexity": 4.971620309007239,
+          "accuracy": 0.546875,
+          "targets": 1280
+        },
+        "combined": {
+          "loss": 1.4973843613349573,
+          "bits_per_byte": 2.1602689924026306,
+          "perplexity": 4.469981908647986,
+          "accuracy": 0.57373046875,
+          "targets": 2304
+        }
+      },
+      "train_per_book": {
+        "original": {
+          "loss": 0.7880005566104273,
+          "bits_per_byte": 1.1368444952396064,
+          "perplexity": 2.198995261243235,
+          "accuracy": 0.7421875,
+          "targets": 256
+        },
+        "alice": {
+          "loss": 1.1684455445300728,
+          "bits_per_byte": 1.6857105926423406,
+          "perplexity": 3.216988085132896,
+          "accuracy": 0.65625,
+          "targets": 256
+        },
+        "oz": {
+          "loss": 1.1524199864078355,
+          "bits_per_byte": 1.662590599411911,
+          "perplexity": 3.165844948785433,
+          "accuracy": 0.64453125,
+          "targets": 256
+        }
+      },
+      "curve": [
+        {
+          "step": 0,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.4272199398619705,
+                "bits_per_byte": 2.0590431294967093,
+                "perplexity": 4.167098289945232,
+                "accuracy": 0.6025390625,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.2022325224472183,
+                "bits_per_byte": 1.7344548981300314,
+                "perplexity": 3.3275374384458076,
+                "accuracy": 0.6484375,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 2.173666095769022,
+                "bits_per_byte": 3.1359372969144426,
+                "perplexity": 8.790451677596737,
+                "accuracy": 0.44921875,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.8534456913448594,
+                "bits_per_byte": 2.673956907460245,
+                "perplexity": 6.38177129548358,
+                "accuracy": 0.53515625,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.8184948976386295,
+                "bits_per_byte": 2.623533570705134,
+                "perplexity": 6.162576158308363,
+                "accuracy": 0.50390625,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.805267221862266,
+                "bits_per_byte": 2.6044500684600873,
+                "perplexity": 6.081596366910527,
+                "accuracy": 0.51953125,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.770621285812399,
+              "bits_per_byte": 2.554466548333988,
+              "perplexity": 5.874501972580528,
+              "accuracy": 0.53125,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.5989206128371847,
+              "bits_per_byte": 2.3067548389153485,
+              "perplexity": 4.94768906907257,
+              "accuracy": 0.56689453125,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 0.0
+        },
+        {
+          "step": 200,
+          "batch_loss": 1.361863613128662,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.4113180213880057,
+                "bits_per_byte": 2.0361015105736997,
+                "perplexity": 4.101357520168301,
+                "accuracy": 0.59375,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1948364146038557,
+                "bits_per_byte": 1.723784570022532,
+                "perplexity": 3.3030174008945914,
+                "accuracy": 0.65234375,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.7335240776482124,
+                "bits_per_byte": 2.5009465900846903,
+                "perplexity": 5.660567077957465,
+                "accuracy": 0.51953125,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.76167604087766,
+                "bits_per_byte": 2.5415612878271028,
+                "perplexity": 5.8221874455341585,
+                "accuracy": 0.54296875,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.7532948859009139,
+                "bits_per_byte": 2.5294698371052293,
+                "perplexity": 5.7735947063328545,
+                "accuracy": 0.515625,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.7621617642870717,
+                "bits_per_byte": 2.542262038581105,
+                "perplexity": 5.82501610518793,
+                "accuracy": 0.51171875,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.6410986366635427,
+              "bits_per_byte": 2.367604864724132,
+              "perplexity": 5.160836282758547,
+              "accuracy": 0.5484375,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.5262083290257742,
+              "bits_per_byte": 2.201853187648916,
+              "perplexity": 4.600699370601081,
+              "accuracy": 0.57109375,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 12.120748875000572
+        },
+        {
+          "step": 400,
+          "batch_loss": 1.3456281423568726,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.4100670884778808,
+                "bits_per_byte": 2.034296795867778,
+                "perplexity": 4.096230204702578,
+                "accuracy": 0.6005859375,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1973228528621576,
+                "bits_per_byte": 1.7273717421672607,
+                "perplexity": 3.3112403684421103,
+                "accuracy": 0.625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.6655279161711292,
+                "bits_per_byte": 2.402848865122217,
+                "perplexity": 5.288464378820877,
+                "accuracy": 0.51953125,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.7512505065827781,
+                "bits_per_byte": 2.526520421201259,
+                "perplexity": 5.761803345837514,
+                "accuracy": 0.54296875,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.7679620078338303,
+                "bits_per_byte": 2.550630021181962,
+                "perplexity": 5.858900791981769,
+                "accuracy": 0.515625,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.7459161106978627,
+                "bits_per_byte": 2.518824514711953,
+                "perplexity": 5.7311494385083765,
+                "accuracy": 0.5078125,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.6255958788295517,
+              "bits_per_byte": 2.3452391128769308,
+              "perplexity": 5.081446061352172,
+              "accuracy": 0.5421875,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.5178314836537163,
+              "bits_per_byte": 2.1897679543723543,
+              "perplexity": 4.56232099266127,
+              "accuracy": 0.57138671875,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 24.232848874999036
+        },
+        {
+          "step": 600,
+          "batch_loss": 1.2997766733169556,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.4166088039740714,
+                "bits_per_byte": 2.0437344963730384,
+                "perplexity": 4.123114415865426,
+                "accuracy": 0.60546875,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1964519366273407,
+                "bits_per_byte": 1.7261152756342608,
+                "perplexity": 3.3083578108631504,
+                "accuracy": 0.6484375,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.6483309071501253,
+                "bits_per_byte": 2.3780388254894924,
+                "perplexity": 5.198296143334138,
+                "accuracy": 0.52734375,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.7569022940390369,
+                "bits_per_byte": 2.534674226936562,
+                "perplexity": 5.794460031106515,
+                "accuracy": 0.52734375,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.756773218194212,
+                "bits_per_byte": 2.5344880098553344,
+                "perplexity": 5.793712154550133,
+                "accuracy": 0.53515625,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.7453914904335477,
+                "bits_per_byte": 2.5180676476582757,
+                "perplexity": 5.728143549919093,
+                "accuracy": 0.50390625,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.6207699692888524,
+              "bits_per_byte": 2.338276797114785,
+              "perplexity": 5.056982539175064,
+              "accuracy": 0.5484375,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.518689386631462,
+              "bits_per_byte": 2.191005646743912,
+              "perplexity": 4.5662367008349944,
+              "accuracy": 0.576953125,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 36.67036825000105
+        },
+        {
+          "step": 800,
+          "batch_loss": 1.3099737167358398,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.410972907700362,
+                "bits_per_byte": 2.0356036167679936,
+                "perplexity": 4.099942329765006,
+                "accuracy": 0.5966796875,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1956561731701072,
+                "bits_per_byte": 1.7249672316407894,
+                "perplexity": 3.3057261878274056,
+                "accuracy": 0.6484375,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.6141933341069148,
+                "bits_per_byte": 2.328788718152068,
+                "perplexity": 5.023833733174991,
+                "accuracy": 0.53515625,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.7202210231541812,
+                "bits_per_byte": 2.481754339337476,
+                "perplexity": 5.585762910787449,
+                "accuracy": 0.55078125,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.7705230044712152,
+                "bits_per_byte": 2.5543247583304503,
+                "perplexity": 5.873924647018505,
+                "accuracy": 0.53125,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.7222740179138327,
+                "bits_per_byte": 2.4847161846961963,
+                "perplexity": 5.597242232233429,
+                "accuracy": 0.50390625,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.6045735105632504,
+              "bits_per_byte": 2.314910246431396,
+              "perplexity": 4.975737050856646,
+              "accuracy": 0.55390625,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.5077732091318063,
+              "bits_per_byte": 2.175256931599695,
+              "perplexity": 4.516661926310985,
+              "accuracy": 0.57529296875,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 49.30572983299862
+        },
+        {
+          "step": 1000,
+          "batch_loss": 1.2386335134506226,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.401124474012562,
+                "bits_per_byte": 2.0213953303260803,
+                "perplexity": 4.059762498566555,
+                "accuracy": 0.6103515625,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.185493242554628,
+                "bits_per_byte": 1.710305222040939,
+                "perplexity": 3.272300461314366,
+                "accuracy": 0.640625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.6090777687882678,
+                "bits_per_byte": 2.321408517435512,
+                "perplexity": 4.9981996059905285,
+                "accuracy": 0.5625,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.7419145812613124,
+                "bits_per_byte": 2.5130515280378707,
+                "perplexity": 5.708261898447612,
+                "accuracy": 0.5390625,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.7687476593346219,
+                "bits_per_byte": 2.5517634767060207,
+                "perplexity": 5.863505654853831,
+                "accuracy": 0.53515625,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.7250526220913969,
+                "bits_per_byte": 2.4887248631637613,
+                "perplexity": 5.612816380058657,
+                "accuracy": 0.5078125,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.6060571748060455,
+              "bits_per_byte": 2.317050721476821,
+              "perplexity": 4.983124853154398,
+              "accuracy": 0.5570312500000001,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.5035908244093037,
+              "bits_per_byte": 2.169223025901451,
+              "perplexity": 4.49781095695575,
+              "accuracy": 0.58369140625,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 61.606604541000706
+        },
+        {
+          "step": 1200,
+          "batch_loss": 1.3025959730148315,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.4104071776285139,
+                "bits_per_byte": 2.034787440798856,
+                "perplexity": 4.097623525066833,
+                "accuracy": 0.59765625,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.2073489349032798,
+                "bits_per_byte": 1.7418363210075336,
+                "perplexity": 3.344606120417554,
+                "accuracy": 0.62890625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.6428155040833303,
+                "bits_per_byte": 2.3700817808365233,
+                "perplexity": 5.169704364913615,
+                "accuracy": 0.51953125,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.7696554617397169,
+                "bits_per_byte": 2.5530731587339583,
+                "perplexity": 5.868830976193636,
+                "accuracy": 0.54296875,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.7634538563657998,
+                "bits_per_byte": 2.5441261334154577,
+                "perplexity": 5.832547426888667,
+                "accuracy": 0.515625,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.7026763953883233,
+                "bits_per_byte": 2.45644279186543,
+                "perplexity": 5.488617461979606,
+                "accuracy": 0.515625,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.61719003049609,
+              "bits_per_byte": 2.3331120371717806,
+              "perplexity": 5.038911217621392,
+              "accuracy": 0.54453125,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.513798604062302,
+              "bits_per_byte": 2.1839497389853184,
+              "perplexity": 4.543958752679053,
+              "accuracy": 0.57109375,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 73.92609549999906
+        },
+        {
+          "step": 1400,
+          "batch_loss": 1.2026402950286865,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3975872721370237,
+                "bits_per_byte": 2.0162922267216183,
+                "perplexity": 4.0454276665858755,
+                "accuracy": 0.6025390625,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1849782577826886,
+                "bits_per_byte": 1.7095622560643287,
+                "perplexity": 3.270615710255383,
+                "accuracy": 0.65234375,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.6047887862346215,
+                "bits_per_byte": 2.3152208235749074,
+                "perplexity": 4.9768083212959295,
+                "accuracy": 0.5390625,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.7816858987622481,
+                "bits_per_byte": 2.570429410566091,
+                "perplexity": 5.93986198800624,
+                "accuracy": 0.54296875,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.7610798016596618,
+                "bits_per_byte": 2.5407010964641135,
+                "perplexity": 5.81871706373627,
+                "accuracy": 0.51953125,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.7309578735337823,
+                "bits_per_byte": 2.4972443401348934,
+                "perplexity": 5.646059530058062,
+                "accuracy": 0.51953125,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.6126981235946005,
+              "bits_per_byte": 2.326631585360867,
+              "perplexity": 5.016327657145338,
+              "accuracy": 0.5546875,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.505142697865812,
+              "bits_per_byte": 2.1714619060412423,
+              "perplexity": 4.504796409259319,
+              "accuracy": 0.57861328125,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 86.08903112500047
+        },
+        {
+          "step": 1600,
+          "batch_loss": 1.2848119735717773,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3995313372027063,
+                "bits_per_byte": 2.019096919751044,
+                "perplexity": 4.053299890766891,
+                "accuracy": 0.60546875,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1650611268818807,
+                "bits_per_byte": 1.6808279100849968,
+                "perplexity": 3.2061188572617954,
+                "accuracy": 0.65234375,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.6110223175173815,
+                "bits_per_byte": 2.324213908243771,
+                "perplexity": 5.007928304580884,
+                "accuracy": 0.546875,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.7687201079075976,
+                "bits_per_byte": 2.5517237283988834,
+                "perplexity": 5.863344109131092,
+                "accuracy": 0.53125,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.7451622459605005,
+                "bits_per_byte": 2.5177369177938598,
+                "perplexity": 5.726830555173597,
+                "accuracy": 0.5234375,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.741856138237381,
+                "bits_per_byte": 2.5129672125770703,
+                "perplexity": 5.7079283001092165,
+                "accuracy": 0.4921875,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.6063643873009483,
+              "bits_per_byte": 2.317493935419716,
+              "perplexity": 4.9846559665494885,
+              "accuracy": 0.54921875,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.5029478622518273,
+              "bits_per_byte": 2.16829542758538,
+              "perplexity": 4.494919964218003,
+              "accuracy": 0.57734375,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 97.58222841599854
+        },
+        {
+          "step": 1800,
+          "batch_loss": 1.259850263595581,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3910229177847668,
+                "bits_per_byte": 2.0068218652509793,
+                "perplexity": 4.01895901572382,
+                "accuracy": 0.6005859375,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1900680341483394,
+                "bits_per_byte": 1.7169052511862868,
+                "perplexity": 3.2873048487611243,
+                "accuracy": 0.625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.6128132957123853,
+                "bits_per_byte": 2.3267977436040437,
+                "perplexity": 5.016905431496222,
+                "accuracy": 0.53515625,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.7462136034997684,
+                "bits_per_byte": 2.5192537061019626,
+                "perplexity": 5.732854667847129,
+                "accuracy": 0.55078125,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.7356293178789883,
+                "bits_per_byte": 2.503983809725511,
+                "perplexity": 5.672496484226026,
+                "accuracy": 0.52734375,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.734004773186257,
+                "bits_per_byte": 2.501640087153605,
+                "perplexity": 5.663288741387967,
+                "accuracy": 0.49609375,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.6037458048851478,
+              "bits_per_byte": 2.313716119554282,
+              "perplexity": 4.971620309007239,
+              "accuracy": 0.546875,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4973843613349573,
+              "bits_per_byte": 2.1602689924026306,
+              "perplexity": 4.469981908647986,
+              "accuracy": 0.57373046875,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 109.06802249999964
+        }
+      ],
+      "samples": [
+        {
+          "prompt": "Alice said, \"",
+          "continuation": " So you should like that the window ? \"\n\n\" Well, it's a part of the great Hatter.\"\n\n\" No, it's my come and do not it I know how you had a good near how he were eyes they to size off. Took crossed all in saving his pocket-him. I do have not ",
+          "seed": 123,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 1.0,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "The Queen ",
+          "continuation": "cried and sixty-the bees usual\n\nshut as if your found if you silence.\"\n\n4* 1 never saw the little girl ! \" said Alice took very suddenly of his head. \" You know the gave you want be all say to the Tiger-lily ? \"\n\nAlice wouldn't see what lit",
+          "seed": 124,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 1.0,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "The little ",
+          "continuation": "for a country.\n\n\" The same a tire of this way with it hand: which ' you could tell you call you meann ugly and yet, and not going her down upon its mouth the hedgehog.\"\n\n\" Why, it wear something be a little good really May invion't as well ",
+          "seed": 125,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.9583333333333334,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "Dorothy said, \"",
+          "continuation": "but I don't see it's going, eat you, please, if you're you. I was reached his arm,\" the Messenger said, whispered the followed his middle.\n\n\"The Ball I don't believe in that away fly,\" Alice replied and looked at the Mock Turtle. \" Is that ",
+          "seed": 126,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 1.0,
+          "repeated_word_trigram_fraction": 0.021739130434782594,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "Wendy ",
+          "continuation": "I can talk to the big.\"\n\n\" Well, what is is the house ? \" said Alice. She had pine this, she found of her head them, and shoes came to the same of the Lion.\n\n\" However, you know because ? \" she struck the sea. \" And we could not cats quite ",
+          "seed": 127,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 1.0,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "The Mole ",
+          "continuation": "of tried with the night of her.\n\n\" I can't know,\" said the Tiger-lily, \"you're sometimes and fearfully down with plum-cake. They were ten in the proming upside the brook, and went on a good open said, \" I'll go twice things of the big, and ",
+          "seed": 128,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.9795918367346939,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "Mary Lennox ",
+          "continuation": "day ! \" the Scarecrow. \" You may be a very body want with you, you know.\"\n\n\"I shook come to to say the Tin Woodman\n\nand then ? \" said the Lion. \" Only for a game with brooch ! \"\n\n\" Really is more so many very lonely than the mean,\" said the",
+          "seed": 129,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 1.0,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        }
+      ],
+      "tests": {
+        "per_book": {
+          "original": {
+            "loss": 1.3787130093106916,
+            "bits_per_byte": 1.9890624213416341,
+            "perplexity": 3.9697892566017696,
+            "accuracy": 0.6046625766871165,
+            "targets": 16300
+          },
+          "alice": {
+            "loss": 1.381442926106521,
+            "bits_per_byte": 1.9930008587650168,
+            "perplexity": 3.980641256758524,
+            "accuracy": 0.60693359375,
+            "targets": 2048
+          },
+          "oz": {
+            "loss": 1.3790332404853345,
+            "bits_per_byte": 1.9895244172692295,
+            "perplexity": 3.9710607104472095,
+            "accuracy": 0.59521484375,
+            "targets": 2048
+          },
+          "peter": {
+            "loss": 1.7001917517368028,
+            "bits_per_byte": 2.4528582087910054,
+            "perplexity": 5.474997131288206,
+            "accuracy": 0.55029296875,
+            "targets": 2048
+          },
+          "willows": {
+            "loss": 1.777169730262571,
+            "bits_per_byte": 2.563913956667788,
+            "perplexity": 5.913097053371879,
+            "accuracy": 0.5234375,
+            "targets": 2048
+          },
+          "garden": {
+            "loss": 1.6680608703356476,
+            "bits_per_byte": 2.406503145534167,
+            "perplexity": 5.301876796041134,
+            "accuracy": 0.54736328125,
+            "targets": 2048
+          }
+        },
+        "new_books_macro": {
+          "loss": 1.5811797037853754,
+          "bits_per_byte": 2.2811601174054412,
+          "perplexity": 4.860686600638126,
+          "accuracy": 0.5646484375,
+          "targets": 10240
+        },
+        "combined": {
+          "loss": 1.4799463565480335,
+          "bits_per_byte": 2.135111269373538,
+          "perplexity": 4.392710034468632,
+          "accuracy": 0.5846555070935583,
+          "targets": 26540
+        }
+      }
+    },
+    {
+      "name": "v5",
+      "parent": "v4",
+      "books": 3,
+      "layers": 4,
+      "steps": 1800,
+      "checkpoint": "v5.pt",
+      "parent_sha256": "a6f0abd4c2fbbfe70cb0129f42f8efa6654c19edc2a9420c83fb8aa4c8dece4b",
+      "config": {
+        "context": 128,
+        "width": 128,
+        "heads": 4,
+        "layers": 4,
+        "dropout": 0.1
+      },
+      "parameters": 842496,
+      "seed": 42,
+      "batch_size": 32,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.01,
+      "best_step": 1800,
+      "training_seconds": 138.57842199999868,
+      "training_documents": [
+        "original",
+        "alice",
+        "oz",
+        "peter"
+      ],
+      "available_train_bytes": 625761,
+      "presented_bytes": 7372800,
+      "document_windows": {
+        "original": 28795,
+        "alice": 9644,
+        "oz": 9492,
+        "peter": 9669
+      },
+      "initial_validation": {
+        "per_book": {
+          "original": {
+            "loss": 1.3910229177847668,
+            "bits_per_byte": 2.0068218652509793,
+            "perplexity": 4.01895901572382,
+            "accuracy": 0.6005859375,
+            "targets": 1024
+          },
+          "alice": {
+            "loss": 1.1900680341483394,
+            "bits_per_byte": 1.7169052511862868,
+            "perplexity": 3.2873048487611243,
+            "accuracy": 0.625,
+            "targets": 256
+          },
+          "oz": {
+            "loss": 1.6128132957123853,
+            "bits_per_byte": 2.3267977436040437,
+            "perplexity": 5.016905431496222,
+            "accuracy": 0.53515625,
+            "targets": 256
+          },
+          "peter": {
+            "loss": 1.7462136034997684,
+            "bits_per_byte": 2.5192537061019626,
+            "perplexity": 5.732854667847129,
+            "accuracy": 0.55078125,
+            "targets": 256
+          },
+          "willows": {
+            "loss": 1.7356293178789883,
+            "bits_per_byte": 2.503983809725511,
+            "perplexity": 5.672496484226026,
+            "accuracy": 0.52734375,
+            "targets": 256
+          },
+          "garden": {
+            "loss": 1.734004773186257,
+            "bits_per_byte": 2.501640087153605,
+            "perplexity": 5.663288741387967,
+            "accuracy": 0.49609375,
+            "targets": 256
+          }
+        },
+        "new_books_macro": {
+          "loss": 1.6037458048851478,
+          "bits_per_byte": 2.313716119554282,
+          "perplexity": 4.971620309007239,
+          "accuracy": 0.546875,
+          "targets": 1280
+        },
+        "combined": {
+          "loss": 1.4973843613349573,
+          "bits_per_byte": 2.1602689924026306,
+          "perplexity": 4.469981908647986,
+          "accuracy": 0.57373046875,
+          "targets": 2304
+        }
+      },
+      "validation": {
+        "per_book": {
+          "original": {
+            "loss": 1.3687124237164134,
+            "bits_per_byte": 1.9746346260987833,
+            "perplexity": 3.930286891963626,
+            "accuracy": 0.609375,
+            "targets": 1024
+          },
+          "alice": {
+            "loss": 1.1574652625251929,
+            "bits_per_byte": 1.669869394246338,
+            "perplexity": 3.1818578715380172,
+            "accuracy": 0.62890625,
+            "targets": 256
+          },
+          "oz": {
+            "loss": 1.5512023110597966,
+            "bits_per_byte": 2.237911881581468,
+            "perplexity": 4.717138242001641,
+            "accuracy": 0.5390625,
+            "targets": 256
+          },
+          "peter": {
+            "loss": 1.5636391667021599,
+            "bits_per_byte": 2.255854471540957,
+            "perplexity": 4.776170939021226,
+            "accuracy": 0.58984375,
+            "targets": 256
+          },
+          "willows": {
+            "loss": 1.69692904956014,
+            "bits_per_byte": 2.448151124540836,
+            "perplexity": 5.457162955852967,
+            "accuracy": 0.54296875,
+            "targets": 256
+          },
+          "garden": {
+            "loss": 1.655987116906374,
+            "bits_per_byte": 2.389084401336838,
+            "perplexity": 5.2382481342367475,
+            "accuracy": 0.52734375,
+            "targets": 256
+          }
+        },
+        "new_books_macro": {
+          "loss": 1.5250445813507327,
+          "bits_per_byte": 2.2001742546492875,
+          "perplexity": 4.5953484315803035,
+          "accuracy": 0.565625,
+          "targets": 1280
+        },
+        "combined": {
+          "loss": 1.446878502533573,
+          "bits_per_byte": 2.0874044403740353,
+          "perplexity": 4.249827961770414,
+          "accuracy": 0.5875,
+          "targets": 2304
+        }
+      },
+      "train_per_book": {
+        "original": {
+          "loss": 0.7404494229328975,
+          "bits_per_byte": 1.068242710494386,
+          "perplexity": 2.096877687681713,
+          "accuracy": 0.765625,
+          "targets": 256
+        },
+        "alice": {
+          "loss": 1.1788467817947321,
+          "bits_per_byte": 1.700716406063174,
+          "perplexity": 3.2506233624965484,
+          "accuracy": 0.65625,
+          "targets": 256
+        },
+        "oz": {
+          "loss": 1.138704994367572,
+          "bits_per_byte": 1.6428040484095912,
+          "perplexity": 3.1227218032677007,
+          "accuracy": 0.6484375,
+          "targets": 256
+        },
+        "peter": {
+          "loss": 1.2484544018745396,
+          "bits_per_byte": 1.8011389743603954,
+          "perplexity": 3.4849524567765537,
+          "accuracy": 0.62109375,
+          "targets": 256
+        }
+      },
+      "curve": [
+        {
+          "step": 0,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3910229177847668,
+                "bits_per_byte": 2.0068218652509793,
+                "perplexity": 4.01895901572382,
+                "accuracy": 0.6005859375,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1900680341483394,
+                "bits_per_byte": 1.7169052511862868,
+                "perplexity": 3.2873048487611243,
+                "accuracy": 0.625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.6128132957123853,
+                "bits_per_byte": 2.3267977436040437,
+                "perplexity": 5.016905431496222,
+                "accuracy": 0.53515625,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.7462136034997684,
+                "bits_per_byte": 2.5192537061019626,
+                "perplexity": 5.732854667847129,
+                "accuracy": 0.55078125,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.7356293178789883,
+                "bits_per_byte": 2.503983809725511,
+                "perplexity": 5.672496484226026,
+                "accuracy": 0.52734375,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.734004773186257,
+                "bits_per_byte": 2.501640087153605,
+                "perplexity": 5.663288741387967,
+                "accuracy": 0.49609375,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.6037458048851478,
+              "bits_per_byte": 2.313716119554282,
+              "perplexity": 4.971620309007239,
+              "accuracy": 0.546875,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4973843613349573,
+              "bits_per_byte": 2.1602689924026306,
+              "perplexity": 4.469981908647986,
+              "accuracy": 0.57373046875,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 0.0
+        },
+        {
+          "step": 200,
+          "batch_loss": 1.3335449695587158,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3955028419537285,
+                "bits_per_byte": 2.0132850296330993,
+                "perplexity": 4.037004037336786,
+                "accuracy": 0.599609375,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.179870437820398,
+                "bits_per_byte": 1.7021932295349782,
+                "perplexity": 3.25395258638807,
+                "accuracy": 0.6640625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.600604389729824,
+                "bits_per_byte": 2.309184015488323,
+                "perplexity": 4.9560268911452265,
+                "accuracy": 0.546875,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.6129040599955715,
+                "bits_per_byte": 2.3269286887852862,
+                "perplexity": 5.017360807987173,
+                "accuracy": 0.58203125,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.7113578790260817,
+                "bits_per_byte": 2.4689675252571828,
+                "perplexity": 5.536474238006001,
+                "accuracy": 0.51953125,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.7197855328462879,
+                "bits_per_byte": 2.481126059629923,
+                "perplexity": 5.583330894775748,
+                "accuracy": 0.49609375,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.5649044598836328,
+              "bits_per_byte": 2.257679903739139,
+              "perplexity": 4.782218020402574,
+              "accuracy": 0.56171875,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4802036509186807,
+              "bits_per_byte": 2.135482466686119,
+              "perplexity": 4.393840399444422,
+              "accuracy": 0.5806640625,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 16.20535249999739
+        },
+        {
+          "step": 400,
+          "batch_loss": 1.274200201034546,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3973553126612757,
+                "bits_per_byte": 2.0159575799362695,
+                "perplexity": 4.044489400129263,
+                "accuracy": 0.5986328125,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1679363319577192,
+                "bits_per_byte": 1.6849759541894476,
+                "perplexity": 3.2153503713624434,
+                "accuracy": 0.64453125,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5506338962593418,
+                "bits_per_byte": 2.2370918323676836,
+                "perplexity": 4.714457712707531,
+                "accuracy": 0.54296875,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.623642983866148,
+                "bits_per_byte": 2.342421680997851,
+                "perplexity": 5.071532214433791,
+                "accuracy": 0.5703125,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.6785885010563106,
+                "bits_per_byte": 2.421691306167178,
+                "perplexity": 5.357987836999608,
+                "accuracy": 0.5390625,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.7015253924357125,
+                "bits_per_byte": 2.45478224561365,
+                "perplexity": 5.482303681362229,
+                "accuracy": 0.484375,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.5444654211150466,
+              "bits_per_byte": 2.2281926038671624,
+              "perplexity": 4.6854662061091705,
+              "accuracy": 0.55625,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4709103668881611,
+              "bits_per_byte": 2.1220750919017157,
+              "perplexity": 4.353196343524194,
+              "accuracy": 0.57744140625,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 31.95933145899835
+        },
+        {
+          "step": 600,
+          "batch_loss": 1.3312221765518188,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3942142023243278,
+                "bits_per_byte": 2.01142591563027,
+                "perplexity": 4.031805144419381,
+                "accuracy": 0.6005859375,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1876717063483113,
+                "bits_per_byte": 1.713448080952842,
+                "perplexity": 3.2794368197183394,
+                "accuracy": 0.6640625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5878931637353162,
+                "bits_per_byte": 2.2908455927824276,
+                "perplexity": 4.893428407892405,
+                "accuracy": 0.53125,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.616483090821987,
+                "bits_per_byte": 2.3320921388097444,
+                "perplexity": 5.035350270203179,
+                "accuracy": 0.5703125,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.703366306063117,
+                "bits_per_byte": 2.457438122574611,
+                "perplexity": 5.492405424284052,
+                "accuracy": 0.54296875,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.6611064689296882,
+                "bits_per_byte": 2.396470065113438,
+                "perplexity": 5.265133329093002,
+                "accuracy": 0.515625,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.551304147179684,
+              "bits_per_byte": 2.2380588000466126,
+              "perplexity": 4.717618641517776,
+              "accuracy": 0.5648437500000001,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.472759174752006,
+              "bits_per_byte": 2.1247423578384415,
+              "perplexity": 4.361252011553579,
+              "accuracy": 0.58271484375,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 47.663376999997126
+        },
+        {
+          "step": 800,
+          "batch_loss": 1.2935659885406494,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3997056022456924,
+                "bits_per_byte": 2.0193483310643603,
+                "perplexity": 4.0540063007960905,
+                "accuracy": 0.6064453125,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.20700584858281,
+                "bits_per_byte": 1.741341352074395,
+                "perplexity": 3.3434588286315914,
+                "accuracy": 0.640625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5784115961437806,
+                "bits_per_byte": 2.2771665822382654,
+                "perplexity": 4.847250302055438,
+                "accuracy": 0.546875,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.5605337496996299,
+                "bits_per_byte": 2.251374301831515,
+                "perplexity": 4.761361942535957,
+                "accuracy": 0.5859375,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.704266128743484,
+                "bits_per_byte": 2.458736292293256,
+                "perplexity": 5.497349839469439,
+                "accuracy": 0.52734375,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.6444001945877176,
+                "bits_per_byte": 2.372368005968547,
+                "perplexity": 5.177903240955907,
+                "accuracy": 0.515625,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.5389235035514846,
+              "bits_per_byte": 2.2201973068811958,
+              "perplexity": 4.6595715579256805,
+              "accuracy": 0.5632812500000001,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4693145528985885,
+              "bits_per_byte": 2.1197728189727782,
+              "perplexity": 4.346254991925918,
+              "accuracy": 0.5848632812500001,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 62.852663374997064
+        },
+        {
+          "step": 1000,
+          "batch_loss": 1.236386775970459,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3879551460136526,
+                "bits_per_byte": 2.0023960061302137,
+                "perplexity": 4.006648659043101,
+                "accuracy": 0.607421875,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1891003353584892,
+                "bits_per_byte": 1.7155091569410958,
+                "perplexity": 3.284125266524175,
+                "accuracy": 0.6484375,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5556521419202909,
+                "bits_per_byte": 2.244331630496698,
+                "perplexity": 4.738175480687905,
+                "accuracy": 0.5390625,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.5631175920173064,
+                "bits_per_byte": 2.255101998329666,
+                "perplexity": 4.7736804587111,
+                "accuracy": 0.5859375,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.7232212347739733,
+                "bits_per_byte": 2.4860827297629675,
+                "perplexity": 5.602546546217315,
+                "accuracy": 0.53125,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.6411993607733848,
+                "bits_per_byte": 2.367750178897899,
+                "perplexity": 5.161356129579283,
+                "accuracy": 0.515625,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.534458132968689,
+              "bits_per_byte": 2.2137551388856656,
+              "perplexity": 4.63881122993736,
+              "accuracy": 0.5640625,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.461206639491171,
+              "bits_per_byte": 2.1080755725079396,
+              "perplexity": 4.311158405113712,
+              "accuracy": 0.5857421875,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 78.06139541700031
+        },
+        {
+          "step": 1200,
+          "batch_loss": 1.2706843614578247,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3893709236504819,
+                "bits_per_byte": 2.004438541505869,
+                "perplexity": 4.012325200024911,
+                "accuracy": 0.6005859375,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.2011055582949552,
+                "bits_per_byte": 1.7328290325363018,
+                "perplexity": 3.323789535310274,
+                "accuracy": 0.63671875,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5783242449435875,
+                "bits_per_byte": 2.2770405610949314,
+                "perplexity": 4.846826907416202,
+                "accuracy": 0.53125,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.587966219177929,
+                "bits_per_byte": 2.290950989507195,
+                "perplexity": 4.8937859125293075,
+                "accuracy": 0.58203125,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.6870399292138245,
+                "bits_per_byte": 2.4338841396584527,
+                "perplexity": 5.40346237800686,
+                "accuracy": 0.546875,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.65469781768536,
+                "bits_per_byte": 2.387224335744459,
+                "perplexity": 5.231498816877549,
+                "accuracy": 0.51171875,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.5418267538631314,
+              "bits_per_byte": 2.224385811708268,
+              "perplexity": 4.673119116964996,
+              "accuracy": 0.56171875,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4655988387568066,
+              "bits_per_byte": 2.1144121766070687,
+              "perplexity": 4.330135517015237,
+              "accuracy": 0.58115234375,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 93.19543904199963
+        },
+        {
+          "step": 1400,
+          "batch_loss": 1.1970980167388916,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3806209539955319,
+                "bits_per_byte": 1.9918150036767435,
+                "perplexity": 3.9773706250297955,
+                "accuracy": 0.607421875,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1847713530219153,
+                "bits_per_byte": 1.7092637555920247,
+                "perplexity": 3.2699390742962855,
+                "accuracy": 0.63671875,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5767735668622436,
+                "bits_per_byte": 2.2748034055169613,
+                "perplexity": 4.839316863501937,
+                "accuracy": 0.55078125,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.576070668634884,
+                "bits_per_byte": 2.2737893377300997,
+                "perplexity": 4.835916511447666,
+                "accuracy": 0.5859375,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.702401798749463,
+                "bits_per_byte": 2.4560466326563017,
+                "perplexity": 5.487110512983591,
+                "accuracy": 0.52734375,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.653547033660459,
+                "bits_per_byte": 2.3855641053386,
+                "perplexity": 5.22548195433146,
+                "accuracy": 0.49609375,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.538712884185793,
+              "bits_per_byte": 2.2198934473667977,
+              "perplexity": 4.658590265263003,
+              "accuracy": 0.5593750000000001,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4596669190906626,
+              "bits_per_byte": 2.105854225521771,
+              "perplexity": 4.304525534261219,
+              "accuracy": 0.5833984375000001,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 108.32770020899989
+        },
+        {
+          "step": 1600,
+          "batch_loss": 1.3191773891448975,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3938262856995784,
+                "bits_per_byte": 2.0108662702394655,
+                "perplexity": 4.030241443488513,
+                "accuracy": 0.611328125,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1744262963931078,
+                "bits_per_byte": 1.6943389936959286,
+                "perplexity": 3.2362857423439855,
+                "accuracy": 0.64453125,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5559616646709173,
+                "bits_per_byte": 2.244778177434069,
+                "perplexity": 4.739642280787928,
+                "accuracy": 0.5625,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.5706514625856016,
+                "bits_per_byte": 2.265971076037245,
+                "perplexity": 4.80978056543626,
+                "accuracy": 0.59375,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.71817416236604,
+                "bits_per_byte": 2.478801343429035,
+                "perplexity": 5.574341324899344,
+                "accuracy": 0.5390625,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.675746018719508,
+                "bits_per_byte": 2.4175904709960583,
+                "perplexity": 5.342779476200526,
+                "accuracy": 0.50390625,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.538991920947035,
+              "bits_per_byte": 2.220296012318467,
+              "perplexity": 4.659890364581891,
+              "accuracy": 0.56875,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4664091033233069,
+              "bits_per_byte": 2.1155811412789665,
+              "perplexity": 4.333645494205858,
+              "accuracy": 0.5900390625,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 123.46933958400041
+        },
+        {
+          "step": 1800,
+          "batch_loss": 1.329091191291809,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3687124237164134,
+                "bits_per_byte": 1.9746346260987833,
+                "perplexity": 3.930286891963626,
+                "accuracy": 0.609375,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1574652625251929,
+                "bits_per_byte": 1.669869394246338,
+                "perplexity": 3.1818578715380172,
+                "accuracy": 0.62890625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5512023110597966,
+                "bits_per_byte": 2.237911881581468,
+                "perplexity": 4.717138242001641,
+                "accuracy": 0.5390625,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.5636391667021599,
+                "bits_per_byte": 2.255854471540957,
+                "perplexity": 4.776170939021226,
+                "accuracy": 0.58984375,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.69692904956014,
+                "bits_per_byte": 2.448151124540836,
+                "perplexity": 5.457162955852967,
+                "accuracy": 0.54296875,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.655987116906374,
+                "bits_per_byte": 2.389084401336838,
+                "perplexity": 5.2382481342367475,
+                "accuracy": 0.52734375,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.5250445813507327,
+              "bits_per_byte": 2.2001742546492875,
+              "perplexity": 4.5953484315803035,
+              "accuracy": 0.565625,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.446878502533573,
+              "bits_per_byte": 2.0874044403740353,
+              "perplexity": 4.249827961770414,
+              "accuracy": 0.5875,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 138.5703188749976
+        }
+      ],
+      "samples": [
+        {
+          "prompt": "Alice said, \"",
+          "continuation": " So you should like that the window ? \"\n\n\" Well, it's a melancholy of which when I can have got to your for?\" said Humpty Dumpty, as it as she stood spoke, \"That's all draw ! \"\n\n\" It's only what sometimes to have spoke,\" said the King.\n\n\" I",
+          "seed": 123,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 1.0,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "The Queen ",
+          "continuation": "cried at full six that a presents, and his hardly hand for their shartless were some shoes like a conversations way, it was srat sweet as they lay under they grot looked at bellow and fastened.\n\nThe Cap, loating a way upon than we so until ",
+          "seed": 124,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.8913043478260869,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "The little ",
+          "continuation": "forgetting way, for she must of the books from the bellowed with its minute or two, and then the wacnought and stuff then she had had done.\n\n\" You have to his eyes,\" said Alice : \" was speak on my name ! \" Alice replied. \" Not I heard the G",
+          "seed": 125,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.9565217391304348,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "Dorothy said, \"",
+          "continuation": "but I don't sent to until I eat you, please, if you'll you like to the bit's a pirate that may of the shapes were all followed him. Alice screamble to him, so she said \"That's the last,\" said Alice, \" and it's moment here and hand at all. N",
+          "seed": 126,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.9814814814814815,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "Wendy ",
+          "continuation": "I can talk toges to get to be along myself eyes, \" I think I have you are any pirates : you'd tell of come to really story of the way,\" he said, \"indeed cut of them of still they in them, Niih ant this came out of this would look at seem an",
+          "seed": 127,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.9622641509433962,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "The Mole ",
+          "continuation": "carefully for the night of his ment. However, the song the slowly way, he forts thing that it had been ditched to her stood no one that wouldn't have no upside to like a chair eyes to her eyes, and this side of the made of her hands and the",
+          "seed": 128,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.9411764705882353,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "Mary Lennox ",
+          "continuation": "dech that was some of please the boys of the Cat, and was well tell me ready.\n\n\"Not can one round much ! \" Alice asked, to the time.\n\n44 If I shall do not any my well,\" the Knight said in a very new more very good-bye, \" and what falling it",
+          "seed": 129,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.98,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        }
+      ],
+      "tests": {
+        "per_book": {
+          "original": {
+            "loss": 1.349852620886647,
+            "bits_per_byte": 1.9474256820841358,
+            "perplexity": 3.8568570686331816,
+            "accuracy": 0.6075460122699387,
+            "targets": 16300
+          },
+          "alice": {
+            "loss": 1.3513894571263378,
+            "bits_per_byte": 1.949642868105796,
+            "perplexity": 3.8627889833708022,
+            "accuracy": 0.607421875,
+            "targets": 2048
+          },
+          "oz": {
+            "loss": 1.333965653078593,
+            "bits_per_byte": 1.9245056324126937,
+            "perplexity": 3.7960674643676384,
+            "accuracy": 0.60595703125,
+            "targets": 2048
+          },
+          "peter": {
+            "loss": 1.412305894273402,
+            "bits_per_byte": 2.0375267098864898,
+            "perplexity": 4.105411141957659,
+            "accuracy": 0.59619140625,
+            "targets": 2048
+          },
+          "willows": {
+            "loss": 1.68573098069961,
+            "bits_per_byte": 2.4319957261282164,
+            "perplexity": 5.396394150937407,
+            "accuracy": 0.5400390625,
+            "targets": 2048
+          },
+          "garden": {
+            "loss": 1.5965136876180726,
+            "bits_per_byte": 2.303282379837945,
+            "perplexity": 4.935794671680725,
+            "accuracy": 0.5537109375,
+            "targets": 2048
+          }
+        },
+        "new_books_macro": {
+          "loss": 1.4759811345592033,
+          "bits_per_byte": 2.1293906632742283,
+          "perplexity": 4.375326451708517,
+          "accuracy": 0.5806640625,
+          "targets": 10240
+        },
+        "combined": {
+          "loss": 1.412916877722925,
+          "bits_per_byte": 2.038408172679182,
+          "perplexity": 4.107920246651549,
+          "accuracy": 0.5941050373849693,
+          "targets": 26540
+        }
+      }
+    },
+    {
+      "name": "v6",
+      "parent": "v5",
+      "books": 4,
+      "layers": 4,
+      "steps": 1800,
+      "checkpoint": "v6.pt",
+      "parent_sha256": "9ca66be25cf2515538d547f9d5117459e659c248c6998be5900b3370db48c828",
+      "config": {
+        "context": 128,
+        "width": 128,
+        "heads": 4,
+        "layers": 4,
+        "dropout": 0.1
+      },
+      "parameters": 842496,
+      "seed": 42,
+      "batch_size": 32,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.01,
+      "best_step": 1800,
+      "training_seconds": 146.64406933400096,
+      "training_documents": [
+        "original",
+        "alice",
+        "oz",
+        "peter",
+        "willows"
+      ],
+      "available_train_bytes": 893030,
+      "presented_bytes": 7372800,
+      "document_windows": {
+        "original": 28795,
+        "alice": 7180,
+        "oz": 7153,
+        "peter": 7195,
+        "willows": 7277
+      },
+      "initial_validation": {
+        "per_book": {
+          "original": {
+            "loss": 1.3687124237164134,
+            "bits_per_byte": 1.9746346260987833,
+            "perplexity": 3.930286891963626,
+            "accuracy": 0.609375,
+            "targets": 1024
+          },
+          "alice": {
+            "loss": 1.1574652625251929,
+            "bits_per_byte": 1.669869394246338,
+            "perplexity": 3.1818578715380172,
+            "accuracy": 0.62890625,
+            "targets": 256
+          },
+          "oz": {
+            "loss": 1.5512023110597966,
+            "bits_per_byte": 2.237911881581468,
+            "perplexity": 4.717138242001641,
+            "accuracy": 0.5390625,
+            "targets": 256
+          },
+          "peter": {
+            "loss": 1.5636391667021599,
+            "bits_per_byte": 2.255854471540957,
+            "perplexity": 4.776170939021226,
+            "accuracy": 0.58984375,
+            "targets": 256
+          },
+          "willows": {
+            "loss": 1.69692904956014,
+            "bits_per_byte": 2.448151124540836,
+            "perplexity": 5.457162955852967,
+            "accuracy": 0.54296875,
+            "targets": 256
+          },
+          "garden": {
+            "loss": 1.655987116906374,
+            "bits_per_byte": 2.389084401336838,
+            "perplexity": 5.2382481342367475,
+            "accuracy": 0.52734375,
+            "targets": 256
+          }
+        },
+        "new_books_macro": {
+          "loss": 1.5250445813507327,
+          "bits_per_byte": 2.2001742546492875,
+          "perplexity": 4.5953484315803035,
+          "accuracy": 0.565625,
+          "targets": 1280
+        },
+        "combined": {
+          "loss": 1.446878502533573,
+          "bits_per_byte": 2.0874044403740353,
+          "perplexity": 4.249827961770414,
+          "accuracy": 0.5875,
+          "targets": 2304
+        }
+      },
+      "validation": {
+        "per_book": {
+          "original": {
+            "loss": 1.3598297012578122,
+            "bits_per_byte": 1.9618195664581664,
+            "perplexity": 3.895529841471431,
+            "accuracy": 0.6201171875,
+            "targets": 1024
+          },
+          "alice": {
+            "loss": 1.1754714084236184,
+            "bits_per_byte": 1.6958467716395196,
+            "perplexity": 3.2396697915547286,
+            "accuracy": 0.62890625,
+            "targets": 256
+          },
+          "oz": {
+            "loss": 1.551532698167989,
+            "bits_per_byte": 2.238388529424031,
+            "perplexity": 4.71869698114384,
+            "accuracy": 0.56640625,
+            "targets": 256
+          },
+          "peter": {
+            "loss": 1.5274640466504366,
+            "bits_per_byte": 2.2036648052387733,
+            "perplexity": 4.606480178658187,
+            "accuracy": 0.59765625,
+            "targets": 256
+          },
+          "willows": {
+            "loss": 1.4932837865800366,
+            "bits_per_byte": 2.154353113538912,
+            "perplexity": 4.451689943095684,
+            "accuracy": 0.55078125,
+            "targets": 256
+          },
+          "garden": {
+            "loss": 1.6164085940978907,
+            "bits_per_byte": 2.3319846627553282,
+            "perplexity": 5.0349751670755225,
+            "accuracy": 0.5234375,
+            "targets": 256
+          }
+        },
+        "new_books_macro": {
+          "loss": 1.4728321067839945,
+          "bits_per_byte": 2.124847576519313,
+          "perplexity": 4.361570098124004,
+          "accuracy": 0.5734375,
+          "targets": 1280
+        },
+        "combined": {
+          "loss": 1.4163309040209033,
+          "bits_per_byte": 2.0433335714887395,
+          "perplexity": 4.1219687617583345,
+          "accuracy": 0.59677734375,
+          "targets": 2304
+        }
+      },
+      "train_per_book": {
+        "original": {
+          "loss": 0.716760009105684,
+          "bits_per_byte": 1.0340661106442988,
+          "perplexity": 2.0477876373603983,
+          "accuracy": 0.76171875,
+          "targets": 256
+        },
+        "alice": {
+          "loss": 1.1713359106557277,
+          "bits_per_byte": 1.6898805095181764,
+          "perplexity": 3.226299809184005,
+          "accuracy": 0.68359375,
+          "targets": 256
+        },
+        "oz": {
+          "loss": 1.1378416724068074,
+          "bits_per_byte": 1.6415585380981057,
+          "perplexity": 3.120027052343779,
+          "accuracy": 0.6875,
+          "targets": 256
+        },
+        "peter": {
+          "loss": 1.242746632144076,
+          "bits_per_byte": 1.7929044032757195,
+          "perplexity": 3.4651178102778903,
+          "accuracy": 0.6171875,
+          "targets": 256
+        },
+        "willows": {
+          "loss": 1.6024646326450238,
+          "bits_per_byte": 2.3118677787169304,
+          "perplexity": 4.965254885551501,
+          "accuracy": 0.5078125,
+          "targets": 256
+        }
+      },
+      "curve": [
+        {
+          "step": 0,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3687124237164134,
+                "bits_per_byte": 1.9746346260987833,
+                "perplexity": 3.930286891963626,
+                "accuracy": 0.609375,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1574652625251929,
+                "bits_per_byte": 1.669869394246338,
+                "perplexity": 3.1818578715380172,
+                "accuracy": 0.62890625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5512023110597966,
+                "bits_per_byte": 2.237911881581468,
+                "perplexity": 4.717138242001641,
+                "accuracy": 0.5390625,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.5636391667021599,
+                "bits_per_byte": 2.255854471540957,
+                "perplexity": 4.776170939021226,
+                "accuracy": 0.58984375,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.69692904956014,
+                "bits_per_byte": 2.448151124540836,
+                "perplexity": 5.457162955852967,
+                "accuracy": 0.54296875,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.655987116906374,
+                "bits_per_byte": 2.389084401336838,
+                "perplexity": 5.2382481342367475,
+                "accuracy": 0.52734375,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.5250445813507327,
+              "bits_per_byte": 2.2001742546492875,
+              "perplexity": 4.5953484315803035,
+              "accuracy": 0.565625,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.446878502533573,
+              "bits_per_byte": 2.0874044403740353,
+              "perplexity": 4.249827961770414,
+              "accuracy": 0.5875,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 0.0
+        },
+        {
+          "step": 200,
+          "batch_loss": 1.3548405170440674,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3827906275564779,
+                "bits_per_byte": 1.9949451809634682,
+                "perplexity": 3.986009589394312,
+                "accuracy": 0.6064453125,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.182261470498986,
+                "bits_per_byte": 1.7056427605229807,
+                "perplexity": 3.2617422022586235,
+                "accuracy": 0.66015625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5583343505787752,
+                "bits_per_byte": 2.2482012396269226,
+                "perplexity": 4.7509013150297585,
+                "accuracy": 0.55078125,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.5392329716885342,
+                "bits_per_byte": 2.2206437750278307,
+                "perplexity": 4.661013770002993,
+                "accuracy": 0.59375,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.5593546653628891,
+                "bits_per_byte": 2.2496732427061095,
+                "perplexity": 4.755751203665143,
+                "accuracy": 0.5546875,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.6613647397190903,
+                "bits_per_byte": 2.396842671100515,
+                "perplexity": 5.2664933348515355,
+                "accuracy": 0.4921875,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.5001096395696552,
+              "bits_per_byte": 2.1642007377968717,
+              "perplexity": 4.482180467736872,
+              "accuracy": 0.5703125,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4414501335630665,
+              "bits_per_byte": 2.07957295938017,
+              "perplexity": 4.22682082963012,
+              "accuracy": 0.58837890625,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 15.530589500001952
+        },
+        {
+          "step": 400,
+          "batch_loss": 1.2663850784301758,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3817586392629053,
+                "bits_per_byte": 1.9934563365700757,
+                "perplexity": 3.9818981959798125,
+                "accuracy": 0.61328125,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.188792856123655,
+                "bits_per_byte": 1.715065558173824,
+                "perplexity": 3.2831156214305293,
+                "accuracy": 0.65234375,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5704897845679398,
+                "bits_per_byte": 2.2657378239629433,
+                "perplexity": 4.809002992508971,
+                "accuracy": 0.5390625,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.5546519351323695,
+                "bits_per_byte": 2.2428886371239,
+                "perplexity": 4.7334386946874085,
+                "accuracy": 0.59375,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.5386357061956915,
+                "bits_per_byte": 2.219782103063212,
+                "perplexity": 4.658230738503578,
+                "accuracy": 0.578125,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.646878903089771,
+                "bits_per_byte": 2.3759440264322684,
+                "perplexity": 5.190753673400736,
+                "accuracy": 0.515625,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.4998898370218854,
+              "bits_per_byte": 2.1638836297512296,
+              "perplexity": 4.481195381316718,
+              "accuracy": 0.57578125,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4408242381423952,
+              "bits_per_byte": 2.0786699831606525,
+              "perplexity": 4.22417610957428,
+              "accuracy": 0.59453125,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 31.601381709002453
+        },
+        {
+          "step": 600,
+          "batch_loss": 1.302149772644043,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3805622399830568,
+                "bits_per_byte": 1.9917302972621151,
+                "perplexity": 3.9771371044968307,
+                "accuracy": 0.60546875,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1659807517595482,
+                "bits_per_byte": 1.6821546483354857,
+                "perplexity": 3.2090686400626276,
+                "accuracy": 0.64453125,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5675403877222607,
+                "bits_per_byte": 2.2614827437600686,
+                "perplexity": 4.7948402303218165,
+                "accuracy": 0.55078125,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.5360141732286365,
+                "bits_per_byte": 2.2160000304521152,
+                "perplexity": 4.646035025770455,
+                "accuracy": 0.59375,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.5281067018543126,
+                "bits_per_byte": 2.2045919607144064,
+                "perplexity": 4.609441508571673,
+                "accuracy": 0.5625,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.61770611328609,
+                "bits_per_byte": 2.3338565872536017,
+                "perplexity": 5.041512384132046,
+                "accuracy": 0.51953125,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.4830696255701696,
+              "bits_per_byte": 2.1396171941031357,
+              "perplexity": 4.406451096989848,
+              "accuracy": 0.57421875,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4318159327766131,
+              "bits_per_byte": 2.0656737456826253,
+              "perplexity": 4.186294322785855,
+              "accuracy": 0.58984375,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 47.86053254199942
+        },
+        {
+          "step": 800,
+          "batch_loss": 1.2735860347747803,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.373339159735881,
+                "bits_per_byte": 1.9813095952095716,
+                "perplexity": 3.9485134240556596,
+                "accuracy": 0.611328125,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1705648076456612,
+                "bits_per_byte": 1.6887680430295389,
+                "perplexity": 3.223812958621967,
+                "accuracy": 0.6640625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5715803137970283,
+                "bits_per_byte": 2.267311125073694,
+                "perplexity": 4.81425021143786,
+                "accuracy": 0.546875,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.5167248806080806,
+                "bits_per_byte": 2.1881714636461833,
+                "perplexity": 4.557275106766893,
+                "accuracy": 0.5859375,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.5172202792809912,
+                "bits_per_byte": 2.188886172854854,
+                "perplexity": 4.559533334122107,
+                "accuracy": 0.58984375,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.637803976864319,
+                "bits_per_byte": 2.3628516753703757,
+                "perplexity": 5.14386106207115,
+                "accuracy": 0.5234375,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.4827788516392162,
+              "bits_per_byte": 2.1391976959949295,
+              "perplexity": 4.40517000214634,
+              "accuracy": 0.58203125,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4280590056875486,
+              "bits_per_byte": 2.0602536456022507,
+              "perplexity": 4.170596227006652,
+              "accuracy": 0.5966796875,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 64.19665412500035
+        },
+        {
+          "step": 1000,
+          "batch_loss": 1.2605105638504028,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3654847644149193,
+                "bits_per_byte": 1.9699780980308386,
+                "perplexity": 3.9176217153520416,
+                "accuracy": 0.6044921875,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1831883787991728,
+                "bits_per_byte": 1.706980006531019,
+                "perplexity": 3.2647669397895673,
+                "accuracy": 0.65625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5666346422000856,
+                "bits_per_byte": 2.260176029186919,
+                "perplexity": 4.7904992914434,
+                "accuracy": 0.546875,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.5130424278921737,
+                "bits_per_byte": 2.182858807374636,
+                "perplexity": 4.540524018148099,
+                "accuracy": 0.58203125,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.5067623031063704,
+                "bits_per_byte": 2.1737985024899937,
+                "perplexity": 4.512098312635743,
+                "accuracy": 0.5546875,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.602509632618137,
+                "bits_per_byte": 2.3119326999549807,
+                "perplexity": 4.965478326915241,
+                "accuracy": 0.53125,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.474427476923188,
+              "bits_per_byte": 2.1271492091075097,
+              "perplexity": 4.368533970318387,
+              "accuracy": 0.57421875,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4199561206690536,
+              "bits_per_byte": 2.0485636535691745,
+              "perplexity": 4.136938910157169,
+              "accuracy": 0.58935546875,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 80.5933735840008
+        },
+        {
+          "step": 1200,
+          "batch_loss": 1.3218272924423218,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.370105476809968,
+                "bits_per_byte": 1.9766443768885498,
+                "perplexity": 3.935765805599798,
+                "accuracy": 0.611328125,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1939776559184452,
+                "bits_per_byte": 1.72254564312577,
+                "perplexity": 3.300182123597257,
+                "accuracy": 0.6328125,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.546088857995187,
+                "bits_per_byte": 2.230534728203337,
+                "perplexity": 4.6930789424753305,
+                "accuracy": 0.55078125,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.5563363809787916,
+                "bits_per_byte": 2.245318778793179,
+                "perplexity": 4.74141863483766,
+                "accuracy": 0.59765625,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.4883008209578747,
+                "bits_per_byte": 2.147164213746899,
+                "perplexity": 4.429562501075409,
+                "accuracy": 0.5546875,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.6068128182629948,
+                "bits_per_byte": 2.318140884544842,
+                "perplexity": 4.986891741878014,
+                "accuracy": 0.53515625,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.4783033068226588,
+              "bits_per_byte": 2.1327408496828055,
+              "perplexity": 4.385498519514038,
+              "accuracy": 0.57421875,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4242043918163134,
+              "bits_per_byte": 2.0546926132856775,
+              "perplexity": 4.154551132626952,
+              "accuracy": 0.5927734375,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 97.17606020899984
+        },
+        {
+          "step": 1400,
+          "batch_loss": 1.1701420545578003,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3833843478018721,
+                "bits_per_byte": 1.995801738217174,
+                "perplexity": 3.9883768666665533,
+                "accuracy": 0.611328125,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1996667531959702,
+                "bits_per_byte": 1.7307532755551902,
+                "perplexity": 3.3190106887177535,
+                "accuracy": 0.63671875,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5797118554797862,
+                "bits_per_byte": 2.2790424599341903,
+                "perplexity": 4.8535570838520385,
+                "accuracy": 0.546875,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.5525904917712978,
+                "bits_per_byte": 2.2399146030098085,
+                "perplexity": 4.723691029496983,
+                "accuracy": 0.59375,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.4771875505289245,
+                "bits_per_byte": 2.1311311536109945,
+                "perplexity": 4.380608100704856,
+                "accuracy": 0.5625,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.6327083051174327,
+                "bits_per_byte": 2.355500175011145,
+                "perplexity": 5.1177163037130855,
+                "accuracy": 0.52734375,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.4883729912186823,
+              "bits_per_byte": 2.1472683334242655,
+              "perplexity": 4.429882195292444,
+              "accuracy": 0.5734375,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4358786695102772,
+              "bits_per_byte": 2.0715350358207196,
+              "perplexity": 4.203336730475258,
+              "accuracy": 0.5923828125,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 113.71397866700136
+        },
+        {
+          "step": 1600,
+          "batch_loss": 1.3471499681472778,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3687622532826698,
+                "bits_per_byte": 1.974706514966911,
+                "perplexity": 3.9304827413342194,
+                "accuracy": 0.6025390625,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.199221519851534,
+                "bits_per_byte": 1.7301109396171337,
+                "perplexity": 3.3175332834080553,
+                "accuracy": 0.6328125,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5747805369857133,
+                "bits_per_byte": 2.2719280711977476,
+                "perplexity": 4.829681565318973,
+                "accuracy": 0.5625,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.5119335002578396,
+                "bits_per_byte": 2.1812589629758774,
+                "perplexity": 4.535491696346068,
+                "accuracy": 0.5859375,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.4933199719400818,
+                "bits_per_byte": 2.154405317978402,
+                "perplexity": 4.4518510320135976,
+                "accuracy": 0.578125,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.6246866824295694,
+                "bits_per_byte": 2.343927419739482,
+                "perplexity": 5.0768281285085575,
+                "accuracy": 0.5078125,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.4807884422929476,
+              "bits_per_byte": 2.1363261423017286,
+              "perplexity": 4.396410630861257,
+              "accuracy": 0.5734375,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4247753477878087,
+              "bits_per_byte": 2.0555163286343197,
+              "perplexity": 4.1569238757064655,
+              "accuracy": 0.58798828125,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 130.20233170900246
+        },
+        {
+          "step": 1800,
+          "batch_loss": 1.2661577463150024,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3598297012578122,
+                "bits_per_byte": 1.9618195664581664,
+                "perplexity": 3.895529841471431,
+                "accuracy": 0.6201171875,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1754714084236184,
+                "bits_per_byte": 1.6958467716395196,
+                "perplexity": 3.2396697915547286,
+                "accuracy": 0.62890625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.551532698167989,
+                "bits_per_byte": 2.238388529424031,
+                "perplexity": 4.71869698114384,
+                "accuracy": 0.56640625,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.5274640466504366,
+                "bits_per_byte": 2.2036648052387733,
+                "perplexity": 4.606480178658187,
+                "accuracy": 0.59765625,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.4932837865800366,
+                "bits_per_byte": 2.154353113538912,
+                "perplexity": 4.451689943095684,
+                "accuracy": 0.55078125,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.6164085940978907,
+                "bits_per_byte": 2.3319846627553282,
+                "perplexity": 5.0349751670755225,
+                "accuracy": 0.5234375,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.4728321067839945,
+              "bits_per_byte": 2.124847576519313,
+              "perplexity": 4.361570098124004,
+              "accuracy": 0.5734375,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4163309040209033,
+              "bits_per_byte": 2.0433335714887395,
+              "perplexity": 4.1219687617583345,
+              "accuracy": 0.59677734375,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 146.6363471250006
+        }
+      ],
+      "samples": [
+        {
+          "prompt": "Alice said, \"",
+          "continuation": " So you should like that the window ? \"\n\n\" Well, it's a plan forth of green ! \" said the Rat, my mouth and down this, which had somehow, you may comply here ! \" the Queen replied, as soon creature it as she could speak to clasp it again, an",
+          "seed": 123,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.9782608695652174,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "The Queen ",
+          "continuation": "(who was funny at the mark town shut of it, that he could of sight it out her lister.\n\n\" Of course it out of the beast, of course,\" said the Caterpillar, looking at the queer darker interrupted in a sun, \" and it wasn't oping of ever the da",
+          "seed": 124,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.9591836734693877,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "The little ",
+          "continuation": "first of West.\"\n\n\" I suppose that she's me a sulky,\" said Alice : '* and seems to be always like a cneedless to find then I'm\n\njust as she said, \"I must be be a hungry small so many ! \"\n\n\" You how to the same came ! \" he said.\n\nAlice took a",
+          "seed": 125,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.98,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "Dorothy said, \"",
+          "continuation": "but I don't see it's going,\" and if he would hardly have a little girl been so much a thought to herself : she had no found the sent directions by the greatle and stood up his eyes other shall says, and her feet in me of the whight the same",
+          "seed": 126,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.9615384615384616,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "Wendy ",
+          "continuation": "rather a catch stopped him up his head, and they had talked by him the road.\n\n\"Oh with: fyou moment it seem to them,\" the King said interestly. \" She musch help her feelings flying and many of the most crose to the bit of the other of the e",
+          "seed": 127,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.9183673469387755,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "The Mole ",
+          "continuation": "carefully for the night of him.\n\n\" I can't know,\" said the Tiger-lily, \"you've seen it wouldn't be seen before, if you don't make a bit of conversation,\" the Rose said with a seemed to him, \" of saying this time.\"\n\n44 Don't you go by the ba",
+          "seed": 128,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 1.0,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "Mary Lennox ",
+          "continuation": "dech that was some of pleases gently without quite eager and stiddly under the cool of both road, and sat they were guessed the turn was the end of the twins and were find the room. They had not never their\n\nold no best, the much fame out o",
+          "seed": 129,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.9591836734693877,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        }
+      ],
+      "tests": {
+        "per_book": {
+          "original": {
+            "loss": 1.3444445952718993,
+            "bits_per_byte": 1.9396235503487387,
+            "perplexity": 3.8360553855295483,
+            "accuracy": 0.6078527607361963,
+            "targets": 16300
+          },
+          "alice": {
+            "loss": 1.3583226375732984,
+            "bits_per_byte": 1.9596453331542145,
+            "perplexity": 3.889663451537356,
+            "accuracy": 0.60302734375,
+            "targets": 2048
+          },
+          "oz": {
+            "loss": 1.3286264589937815,
+            "bits_per_byte": 1.9168028035841924,
+            "perplexity": 3.775853534483616,
+            "accuracy": 0.60400390625,
+            "targets": 2048
+          },
+          "peter": {
+            "loss": 1.382533573466084,
+            "bits_per_byte": 1.9945743303020167,
+            "perplexity": 3.984985101005116,
+            "accuracy": 0.59375,
+            "targets": 2048
+          },
+          "willows": {
+            "loss": 1.5047700234182138,
+            "bits_per_byte": 2.1709242504638264,
+            "perplexity": 4.5031178995342245,
+            "accuracy": 0.56689453125,
+            "targets": 2048
+          },
+          "garden": {
+            "loss": 1.5661330933903628,
+            "bits_per_byte": 2.2594524472063684,
+            "perplexity": 4.788097224653021,
+            "accuracy": 0.55859375,
+            "targets": 2048
+          }
+        },
+        "new_books_macro": {
+          "loss": 1.4280771573683482,
+          "bits_per_byte": 2.0602798329421237,
+          "perplexity": 4.170671931025184,
+          "accuracy": 0.5852539062500001,
+          "targets": 10240
+        },
+        "combined": {
+          "loss": 1.3862608763201236,
+          "bits_per_byte": 1.999951691645431,
+          "perplexity": 3.9998660630433704,
+          "accuracy": 0.5965533334930981,
+          "targets": 26540
+        }
+      }
+    },
+    {
+      "name": "v7",
+      "parent": "v6",
+      "books": 5,
+      "layers": 4,
+      "steps": 2600,
+      "checkpoint": "v7.pt",
+      "parent_sha256": "d0a5947bdc5b83010892432e2be39eaea7943e1a29c8c8f5fcd05f4f943139c0",
+      "config": {
+        "context": 128,
+        "width": 128,
+        "heads": 4,
+        "layers": 4,
+        "dropout": 0.1
+      },
+      "parameters": 842496,
+      "seed": 42,
+      "batch_size": 32,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.01,
+      "best_step": 1000,
+      "training_seconds": 219.58962383299877,
+      "training_documents": [
+        "original",
+        "alice",
+        "oz",
+        "peter",
+        "willows",
+        "garden"
+      ],
+      "available_train_bytes": 1240716,
+      "presented_bytes": 10649600,
+      "document_windows": {
+        "original": 41656,
+        "alice": 8253,
+        "oz": 8366,
+        "peter": 8160,
+        "willows": 8395,
+        "garden": 8370
+      },
+      "initial_validation": {
+        "per_book": {
+          "original": {
+            "loss": 1.3598297012578122,
+            "bits_per_byte": 1.9618195664581664,
+            "perplexity": 3.895529841471431,
+            "accuracy": 0.6201171875,
+            "targets": 1024
+          },
+          "alice": {
+            "loss": 1.1754714084236184,
+            "bits_per_byte": 1.6958467716395196,
+            "perplexity": 3.2396697915547286,
+            "accuracy": 0.62890625,
+            "targets": 256
+          },
+          "oz": {
+            "loss": 1.551532698167989,
+            "bits_per_byte": 2.238388529424031,
+            "perplexity": 4.71869698114384,
+            "accuracy": 0.56640625,
+            "targets": 256
+          },
+          "peter": {
+            "loss": 1.5274640466504366,
+            "bits_per_byte": 2.2036648052387733,
+            "perplexity": 4.606480178658187,
+            "accuracy": 0.59765625,
+            "targets": 256
+          },
+          "willows": {
+            "loss": 1.4932837865800366,
+            "bits_per_byte": 2.154353113538912,
+            "perplexity": 4.451689943095684,
+            "accuracy": 0.55078125,
+            "targets": 256
+          },
+          "garden": {
+            "loss": 1.6164085940978907,
+            "bits_per_byte": 2.3319846627553282,
+            "perplexity": 5.0349751670755225,
+            "accuracy": 0.5234375,
+            "targets": 256
+          }
+        },
+        "new_books_macro": {
+          "loss": 1.4728321067839945,
+          "bits_per_byte": 2.124847576519313,
+          "perplexity": 4.361570098124004,
+          "accuracy": 0.5734375,
+          "targets": 1280
+        },
+        "combined": {
+          "loss": 1.4163309040209033,
+          "bits_per_byte": 2.0433335714887395,
+          "perplexity": 4.1219687617583345,
+          "accuracy": 0.59677734375,
+          "targets": 2304
+        }
+      },
+      "validation": {
+        "per_book": {
+          "original": {
+            "loss": 1.3435123000396416,
+            "bits_per_byte": 1.938278532640516,
+            "perplexity": 3.8324807159655556,
+            "accuracy": 0.6103515625,
+            "targets": 1024
+          },
+          "alice": {
+            "loss": 1.1814748928701704,
+            "bits_per_byte": 1.7045079688786142,
+            "perplexity": 3.2591775975739266,
+            "accuracy": 0.66015625,
+            "targets": 256
+          },
+          "oz": {
+            "loss": 1.5672817515686575,
+            "bits_per_byte": 2.2611096106638704,
+            "perplexity": 4.793600271643487,
+            "accuracy": 0.57421875,
+            "targets": 256
+          },
+          "peter": {
+            "loss": 1.52570495716418,
+            "bits_per_byte": 2.201126975560471,
+            "perplexity": 4.5983840907665146,
+            "accuracy": 0.58984375,
+            "targets": 256
+          },
+          "willows": {
+            "loss": 1.4496072407939664,
+            "bits_per_byte": 2.0913411775301887,
+            "perplexity": 4.261440466467149,
+            "accuracy": 0.5859375,
+            "targets": 256
+          },
+          "garden": {
+            "loss": 1.4730257240481137,
+            "bits_per_byte": 2.1251269071860883,
+            "perplexity": 4.36241465515144,
+            "accuracy": 0.546875,
+            "targets": 256
+          }
+        },
+        "new_books_macro": {
+          "loss": 1.4394189132890176,
+          "bits_per_byte": 2.0766425279638465,
+          "perplexity": 4.218243939191994,
+          "accuracy": 0.59140625,
+          "targets": 1280
+        },
+        "combined": {
+          "loss": 1.3914656066643296,
+          "bits_per_byte": 2.0074605303021813,
+          "perplexity": 4.020738558050237,
+          "accuracy": 0.60087890625,
+          "targets": 2304
+        }
+      },
+      "train_per_book": {
+        "original": {
+          "loss": 0.7038697860133993,
+          "bits_per_byte": 1.0154694497131072,
+          "perplexity": 2.021560597219812,
+          "accuracy": 0.78125,
+          "targets": 256
+        },
+        "alice": {
+          "loss": 1.1712117910888935,
+          "bits_per_byte": 1.6897014428346273,
+          "perplexity": 3.225899387099834,
+          "accuracy": 0.63671875,
+          "targets": 256
+        },
+        "oz": {
+          "loss": 1.1246716381572242,
+          "bits_per_byte": 1.622558194997894,
+          "perplexity": 3.0792055892759973,
+          "accuracy": 0.6796875,
+          "targets": 256
+        },
+        "peter": {
+          "loss": 1.2242312826754187,
+          "bits_per_byte": 1.7661924004169614,
+          "perplexity": 3.401550246895225,
+          "accuracy": 0.61328125,
+          "targets": 256
+        },
+        "willows": {
+          "loss": 1.555067378276533,
+          "bits_per_byte": 2.2434879948877557,
+          "perplexity": 4.735405577877214,
+          "accuracy": 0.50390625,
+          "targets": 256
+        },
+        "garden": {
+          "loss": 1.3007690771352145,
+          "bits_per_byte": 1.8766130969246875,
+          "perplexity": 3.6721197252240083,
+          "accuracy": 0.61328125,
+          "targets": 256
+        }
+      },
+      "curve": [
+        {
+          "step": 0,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3598297012578122,
+                "bits_per_byte": 1.9618195664581664,
+                "perplexity": 3.895529841471431,
+                "accuracy": 0.6201171875,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1754714084236184,
+                "bits_per_byte": 1.6958467716395196,
+                "perplexity": 3.2396697915547286,
+                "accuracy": 0.62890625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.551532698167989,
+                "bits_per_byte": 2.238388529424031,
+                "perplexity": 4.71869698114384,
+                "accuracy": 0.56640625,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.5274640466504366,
+                "bits_per_byte": 2.2036648052387733,
+                "perplexity": 4.606480178658187,
+                "accuracy": 0.59765625,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.4932837865800366,
+                "bits_per_byte": 2.154353113538912,
+                "perplexity": 4.451689943095684,
+                "accuracy": 0.55078125,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.6164085940978907,
+                "bits_per_byte": 2.3319846627553282,
+                "perplexity": 5.0349751670755225,
+                "accuracy": 0.5234375,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.4728321067839945,
+              "bits_per_byte": 2.124847576519313,
+              "perplexity": 4.361570098124004,
+              "accuracy": 0.5734375,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4163309040209033,
+              "bits_per_byte": 2.0433335714887395,
+              "perplexity": 4.1219687617583345,
+              "accuracy": 0.59677734375,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 0.0
+        },
+        {
+          "step": 200,
+          "batch_loss": 1.3373571634292603,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.376706894731381,
+                "bits_per_byte": 1.9861682097866076,
+                "perplexity": 3.961833387358147,
+                "accuracy": 0.6142578125,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1944252898849754,
+                "bits_per_byte": 1.7231914424294166,
+                "perplexity": 3.3016597278997795,
+                "accuracy": 0.65625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5677955814882125,
+                "bits_per_byte": 2.261850910540673,
+                "perplexity": 4.796063999799859,
+                "accuracy": 0.56640625,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.5192387205447062,
+                "bits_per_byte": 2.1917981680563416,
+                "perplexity": 4.5687457786083225,
+                "accuracy": 0.59765625,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.506185142685922,
+                "bits_per_byte": 2.1729658360136157,
+                "perplexity": 4.509494859453855,
+                "accuracy": 0.5625,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.5432380894216635,
+                "bits_per_byte": 2.2264219385195925,
+                "perplexity": 4.679719112452657,
+                "accuracy": 0.5390625,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.466176564805096,
+              "bits_per_byte": 2.115245659111928,
+              "perplexity": 4.332637871864228,
+              "accuracy": 0.584375,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4214417297682385,
+              "bits_per_byte": 2.0507069344492677,
+              "perplexity": 4.143089351689636,
+              "accuracy": 0.59931640625,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 16.55647845799831
+        },
+        {
+          "step": 400,
+          "batch_loss": 1.2554796934127808,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.36685993602174,
+                "bits_per_byte": 1.97196205128837,
+                "perplexity": 3.9230128235010935,
+                "accuracy": 0.6103515625,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.182287926085479,
+                "bits_per_byte": 1.705680927866418,
+                "perplexity": 3.261828494703027,
+                "accuracy": 0.64453125,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5702326824305715,
+                "bits_per_byte": 2.26536690398436,
+                "perplexity": 4.807766746488543,
+                "accuracy": 0.5625,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.5201414271166414,
+                "bits_per_byte": 2.19310049835105,
+                "perplexity": 4.572871877496276,
+                "accuracy": 0.60546875,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.478600934342694,
+                "bits_per_byte": 2.1331702354299926,
+                "perplexity": 4.386803958820215,
+                "accuracy": 0.5859375,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.530770539017766,
+                "bits_per_byte": 2.2084350653798563,
+                "perplexity": 4.621736679060438,
+                "accuracy": 0.53125,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.4564067017986304,
+              "bits_per_byte": 2.1011507262023357,
+              "perplexity": 4.2905146972770485,
+              "accuracy": 0.5859375,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.411633318910185,
+              "bits_per_byte": 2.036556388745353,
+              "perplexity": 4.102650871916567,
+              "accuracy": 0.59814453125,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 33.64101849999861
+        },
+        {
+          "step": 600,
+          "batch_loss": 1.3162307739257812,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.372845655811906,
+                "bits_per_byte": 1.9805976195457935,
+                "perplexity": 3.9465652979305017,
+                "accuracy": 0.60546875,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.188257080663064,
+                "bits_per_byte": 1.7142925975737993,
+                "perplexity": 3.2813570797800815,
+                "accuracy": 0.66015625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5515507213854676,
+                "bits_per_byte": 2.2384145314305077,
+                "perplexity": 4.7187820280121535,
+                "accuracy": 0.5859375,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.504250337848788,
+                "bits_per_byte": 2.1701745026699943,
+                "perplexity": 4.500778302124575,
+                "accuracy": 0.59765625,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.4763940966530527,
+                "bits_per_byte": 2.1299864416391,
+                "perplexity": 4.377133668811685,
+                "accuracy": 0.5703125,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.5060688995264115,
+                "bits_per_byte": 2.1727981325838526,
+                "perplexity": 4.508970691989627,
+                "accuracy": 0.55078125,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.445304227215357,
+              "bits_per_byte": 2.085133241179451,
+              "perplexity": 4.243142826006322,
+              "accuracy": 0.59296875,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4090749415136314,
+              "bits_per_byte": 2.032865430362622,
+              "perplexity": 4.092168157747102,
+              "accuracy": 0.59921875,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 50.333366332997684
+        },
+        {
+          "step": 800,
+          "batch_loss": 1.246325135231018,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3712162270873698,
+                "bits_per_byte": 1.9782468508054232,
+                "perplexity": 3.940139887366708,
+                "accuracy": 0.609375,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1724000691206413,
+                "bits_per_byte": 1.6914157656582272,
+                "perplexity": 3.2297349308690366,
+                "accuracy": 0.66015625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.56252281409553,
+                "bits_per_byte": 2.254243915171489,
+                "perplexity": 4.770842023171717,
+                "accuracy": 0.578125,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.5082984632194893,
+                "bits_per_byte": 2.176014713067202,
+                "perplexity": 4.5190349446146865,
+                "accuracy": 0.59765625,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.471627823753579,
+                "bits_per_byte": 2.123110163363506,
+                "perplexity": 4.356320694786978,
+                "accuracy": 0.58984375,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.4882817308610754,
+                "bits_per_byte": 2.1471366725589163,
+                "perplexity": 4.429477941105617,
+                "accuracy": 0.5703125,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.440626180210063,
+              "bits_per_byte": 2.078384245963868,
+              "perplexity": 4.2233395608335025,
+              "accuracy": 0.59921875,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4059212036487163,
+              "bits_per_byte": 2.0283155483846453,
+              "perplexity": 4.079282861182082,
+              "accuracy": 0.604296875,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 67.48648220799805
+        },
+        {
+          "step": 1000,
+          "batch_loss": 1.267460823059082,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3435123000396416,
+                "bits_per_byte": 1.938278532640516,
+                "perplexity": 3.8324807159655556,
+                "accuracy": 0.6103515625,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1814748928701704,
+                "bits_per_byte": 1.7045079688786142,
+                "perplexity": 3.2591775975739266,
+                "accuracy": 0.66015625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5672817515686575,
+                "bits_per_byte": 2.2611096106638704,
+                "perplexity": 4.793600271643487,
+                "accuracy": 0.57421875,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.52570495716418,
+                "bits_per_byte": 2.201126975560471,
+                "perplexity": 4.5983840907665146,
+                "accuracy": 0.58984375,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.4496072407939664,
+                "bits_per_byte": 2.0913411775301887,
+                "perplexity": 4.261440466467149,
+                "accuracy": 0.5859375,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.4730257240481137,
+                "bits_per_byte": 2.1251269071860883,
+                "perplexity": 4.36241465515144,
+                "accuracy": 0.546875,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.4394189132890176,
+              "bits_per_byte": 2.0766425279638465,
+              "perplexity": 4.218243939191994,
+              "accuracy": 0.59140625,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.3914656066643296,
+              "bits_per_byte": 2.0074605303021813,
+              "perplexity": 4.020738558050237,
+              "accuracy": 0.60087890625,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 85.55965274999835
+        },
+        {
+          "step": 1200,
+          "batch_loss": 1.3030657768249512,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3546124787025509,
+                "bits_per_byte": 1.9542927053504768,
+                "perplexity": 3.875258920251705,
+                "accuracy": 0.615234375,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.2181054244882432,
+                "bits_per_byte": 1.7573546551891341,
+                "perplexity": 3.3807765258638094,
+                "accuracy": 0.640625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.543664055221143,
+                "bits_per_byte": 2.2270364772660898,
+                "perplexity": 4.681712937366196,
+                "accuracy": 0.5546875,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.5269413852874436,
+                "bits_per_byte": 2.202910764282319,
+                "perplexity": 4.604073178527189,
+                "accuracy": 0.5859375,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.4630458343897317,
+                "bits_per_byte": 2.1107289698673215,
+                "perplexity": 4.319094761675384,
+                "accuracy": 0.578125,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.486429970842039,
+                "bits_per_byte": 2.1444651475625363,
+                "perplexity": 4.421283200637114,
+                "accuracy": 0.55078125,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.4476373340457203,
+              "bits_per_byte": 2.0884992028334803,
+              "perplexity": 4.253054089037719,
+              "accuracy": 0.58203125,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4011249063741356,
+              "bits_per_byte": 2.021395954091979,
+              "perplexity": 4.059764253852237,
+              "accuracy": 0.5986328125,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 103.71335945799729
+        },
+        {
+          "step": 1400,
+          "batch_loss": 1.164309024810791,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3833036488362254,
+                "bits_per_byte": 1.9956853142196305,
+                "perplexity": 3.9880550217652537,
+                "accuracy": 0.6044921875,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1902578014546066,
+                "bits_per_byte": 1.7171790275379615,
+                "perplexity": 3.2879287309415006,
+                "accuracy": 0.64453125,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5552222358111862,
+                "bits_per_byte": 2.2437114070850446,
+                "perplexity": 4.736138947893058,
+                "accuracy": 0.5625,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.5249759796418232,
+                "bits_per_byte": 2.2000752833040473,
+                "perplexity": 4.595033193637916,
+                "accuracy": 0.58984375,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.467910697286925,
+                "bits_per_byte": 2.117747483443707,
+                "perplexity": 4.340157758284988,
+                "accuracy": 0.56640625,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.5042147179262884,
+                "bits_per_byte": 2.170123113984447,
+                "perplexity": 4.5006179876054775,
+                "accuracy": 0.54296875,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.4485162864241659,
+              "bits_per_byte": 2.0897672630710415,
+              "perplexity": 4.256793964390332,
+              "accuracy": 0.58125,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.4159099676301956,
+              "bits_per_byte": 2.042726288645336,
+              "perplexity": 4.120234040234473,
+              "accuracy": 0.59287109375,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 121.32251329099745
+        },
+        {
+          "step": 1600,
+          "batch_loss": 1.2912236452102661,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.363429710561915,
+                "bits_per_byte": 1.9670132820283497,
+                "perplexity": 3.909579058628149,
+                "accuracy": 0.611328125,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.2197782440021,
+                "bits_per_byte": 1.7597680236060778,
+                "perplexity": 3.3864366877029375,
+                "accuracy": 0.6484375,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5615927721707124,
+                "bits_per_byte": 2.2529021482987357,
+                "perplexity": 4.766407002770623,
+                "accuracy": 0.5625,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.4991794264992109,
+                "bits_per_byte": 2.162858724013172,
+                "perplexity": 4.478013023487755,
+                "accuracy": 0.58984375,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.466368334884237,
+                "bits_per_byte": 2.1155223248540955,
+                "perplexity": 4.33346882184493,
+                "accuracy": 0.578125,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.475436751901384,
+                "bits_per_byte": 2.1286052851134465,
+                "perplexity": 4.3729452480676985,
+                "accuracy": 0.55078125,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.444471105891529,
+              "bits_per_byte": 2.0839313011771057,
+              "perplexity": 4.239609245392993,
+              "accuracy": 0.5859375,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.403950408226722,
+              "bits_per_byte": 2.0254722916027275,
+              "perplexity": 4.071251346030448,
+              "accuracy": 0.5986328125,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 137.85708929099928
+        },
+        {
+          "step": 1800,
+          "batch_loss": 1.2408902645111084,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3616523993658465,
+                "bits_per_byte": 1.964449163979665,
+                "perplexity": 3.902636691196498,
+                "accuracy": 0.60546875,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1765023680368643,
+                "bits_per_byte": 1.697334131960906,
+                "perplexity": 3.2430114825483174,
+                "accuracy": 0.64453125,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5385513690388848,
+                "bits_per_byte": 2.2196604302653244,
+                "perplexity": 4.657837893133307,
+                "accuracy": 0.57421875,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.5063892768533549,
+                "bits_per_byte": 2.173260339364647,
+                "perplexity": 4.510415495395961,
+                "accuracy": 0.5859375,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.462334587912892,
+                "bits_per_byte": 2.1097028581023354,
+                "perplexity": 4.316023912937633,
+                "accuracy": 0.55859375,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.4712508414951344,
+                "bits_per_byte": 2.1225662929287448,
+                "perplexity": 4.35467874868467,
+                "accuracy": 0.56640625,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.431005688667426,
+              "bits_per_byte": 2.0645048105243915,
+              "perplexity": 4.182903776242166,
+              "accuracy": 0.5859375,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.3963290440166363,
+              "bits_per_byte": 2.0144769872520283,
+              "perplexity": 4.040340796629297,
+              "accuracy": 0.595703125,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 153.8827692909981
+        },
+        {
+          "step": 2000,
+          "batch_loss": 1.2855477333068848,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3595306419739996,
+                "bits_per_byte": 1.9613881151124781,
+                "perplexity": 3.8943650212907963,
+                "accuracy": 0.61328125,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1660772807403816,
+                "bits_per_byte": 1.6822939102174361,
+                "perplexity": 3.209378423139159,
+                "accuracy": 0.65625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5422351484918977,
+                "bits_per_byte": 2.224975000613915,
+                "perplexity": 4.675027983470833,
+                "accuracy": 0.55859375,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.517797398618029,
+                "bits_per_byte": 2.1897187800604,
+                "perplexity": 4.562165488437618,
+                "accuracy": 0.59765625,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.4612701293946202,
+                "bits_per_byte": 2.1081671690767925,
+                "perplexity": 4.311432128833862,
+                "accuracy": 0.58203125,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.4529777814669842,
+                "bits_per_byte": 2.096203839844266,
+                "perplexity": 4.275828058245755,
+                "accuracy": 0.55078125,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.4280715477423827,
+              "bits_per_byte": 2.060271739962562,
+              "perplexity": 4.170648535181247,
+              "accuracy": 0.5890625,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.3938010948581911,
+              "bits_per_byte": 2.0108299275375203,
+              "perplexity": 4.0301399195942995,
+              "accuracy": 0.601171875,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 171.07226937499945
+        },
+        {
+          "step": 2200,
+          "batch_loss": 1.2721307277679443,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3607161052972252,
+                "bits_per_byte": 1.9630983771700514,
+                "perplexity": 3.898984385693352,
+                "accuracy": 0.611328125,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1861184857661726,
+                "bits_per_byte": 1.7112072573215837,
+                "perplexity": 3.2743470847159575,
+                "accuracy": 0.66015625,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5652415027283837,
+                "bits_per_byte": 2.258166153779828,
+                "perplexity": 4.783830104423821,
+                "accuracy": 0.5625,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.5068181840473471,
+                "bits_per_byte": 2.1738791216464213,
+                "perplexity": 4.512350459980282,
+                "accuracy": 0.59765625,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.4590449909422887,
+                "bits_per_byte": 2.1049569728663227,
+                "perplexity": 4.301849260977176,
+                "accuracy": 0.5703125,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.4777609485668108,
+                "bits_per_byte": 2.1319583921167085,
+                "perplexity": 4.383120653072007,
+                "accuracy": 0.5390625,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.4389968224102008,
+              "bits_per_byte": 2.076033579546173,
+              "perplexity": 4.216463832610441,
+              "accuracy": 0.5859375,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.399856463853713,
+              "bits_per_byte": 2.0195659783581124,
+              "perplexity": 4.054617940840894,
+              "accuracy": 0.5986328125,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 188.13690966599825
+        },
+        {
+          "step": 2400,
+          "batch_loss": 1.2500749826431274,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3609122116109766,
+                "bits_per_byte": 1.9633812987763877,
+                "perplexity": 3.899749076126465,
+                "accuracy": 0.6123046875,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.171124683799576,
+                "bits_per_byte": 1.6895757735803036,
+                "perplexity": 3.2256183999868027,
+                "accuracy": 0.63671875,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5408686229093007,
+                "bits_per_byte": 2.223003520932654,
+                "perplexity": 4.668643801199742,
+                "accuracy": 0.56640625,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.514681235285849,
+                "bits_per_byte": 2.1852231066744636,
+                "perplexity": 4.547971163031522,
+                "accuracy": 0.58984375,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.4567975576651406,
+                "bits_per_byte": 2.101714612022652,
+                "perplexity": 4.292191997886866,
+                "accuracy": 0.56640625,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.4679954878696435,
+                "bits_per_byte": 2.1178698103969094,
+                "perplexity": 4.340525778392503,
+                "accuracy": 0.546875,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.430293517505902,
+              "bits_per_byte": 2.0634773647213964,
+              "perplexity": 4.179925893308332,
+              "accuracy": 0.58125,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.3956028645584393,
+              "bits_per_byte": 2.0134293317488923,
+              "perplexity": 4.037407849190648,
+              "accuracy": 0.59677734375,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 204.12647795799785
+        },
+        {
+          "step": 2600,
+          "batch_loss": 1.2626776695251465,
+          "validation": {
+            "per_book": {
+              "original": {
+                "loss": 1.3646850540387279,
+                "bits_per_byte": 1.9688243598369597,
+                "perplexity": 3.914490005013812,
+                "accuracy": 0.6083984375,
+                "targets": 1024
+              },
+              "alice": {
+                "loss": 1.1959323289085546,
+                "bits_per_byte": 1.7253656401551605,
+                "perplexity": 3.306639209146146,
+                "accuracy": 0.62109375,
+                "targets": 256
+              },
+              "oz": {
+                "loss": 1.5268181798987825,
+                "bits_per_byte": 2.202733016479087,
+                "perplexity": 4.60350596684429,
+                "accuracy": 0.57421875,
+                "targets": 256
+              },
+              "peter": {
+                "loss": 1.4895619445069315,
+                "bits_per_byte": 2.1489836304370713,
+                "perplexity": 4.43515225059907,
+                "accuracy": 0.60546875,
+                "targets": 256
+              },
+              "willows": {
+                "loss": 1.4648927846615152,
+                "bits_per_byte": 2.1133935558651924,
+                "perplexity": 4.327079286159401,
+                "accuracy": 0.5703125,
+                "targets": 256
+              },
+              "garden": {
+                "loss": 1.4438182037662841,
+                "bits_per_byte": 2.082989362518829,
+                "perplexity": 4.236842098942666,
+                "accuracy": 0.546875,
+                "targets": 256
+              }
+            },
+            "new_books_macro": {
+              "loss": 1.4242046883484136,
+              "bits_per_byte": 2.054693041091068,
+              "perplexity": 4.154552364584908,
+              "accuracy": 0.58359375,
+              "targets": 1280
+            },
+            "combined": {
+              "loss": 1.3944448711935706,
+              "bits_per_byte": 2.011758700464014,
+              "perplexity": 4.0327352636237,
+              "accuracy": 0.59599609375,
+              "targets": 2304
+            }
+          },
+          "elapsed_seconds": 219.5894113329996
+        }
+      ],
+      "samples": [
+        {
+          "prompt": "Alice said, \"",
+          "continuation": " So you see you to drift the window ? \"\n\n\" Well, it's a plan of beautiful Hatta lagoon handked it to herself, \" Do you know her hands all them are not before had called round him, but one come of the night way by a short eyes of the side of",
+          "seed": 123,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.98,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "The Queen ",
+          "continuation": "cried a little street : \" what doesn't have they had been ? \"\n\nThe Knight looked at him, with the money took at her, though, rather suddenly as he could not help see an explained back to as if the Tiger-lily were straighter, and even the mu",
+          "seed": 124,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 1.0,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "The little ",
+          "continuation": "for a country. There was a little slowly and sticking her head of the Queen, \" I thought isn't suppose\n\nlarge it with the same's shouting, you know.\"\n\n\" You'll shouldn't say have heard a convenient.\" Mind why didn't you have to be anybody o",
+          "seed": 125,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 1.0,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "Dorothy said, \"",
+          "continuation": "but I don't know you get to rather , place, I think I always I am a cupboard of the conversation.\"\n\n44 I dare say, * well, would you do be the slabe ' $ \" DUMY OWN\n\ncould and well,\" the Knight said, looking at her remarked.\n\n44 You've been ",
+          "seed": 126,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.9565217391304348,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "Wendy ",
+          "continuation": "rather a child stop and delightly and still a little time. Alice thought she getting it, she found of her head them, and she began took herself on, \" I don't like to see the cleveres of all over, you know. I wonder if you don't make such a ",
+          "seed": 127,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.96,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "The Mole ",
+          "continuation": "of tried white standing on his men painting. But she took up on the branches the side of animal but they turned up to see him one side, with nothing on time a border start him enough to herself with the side. But a bady, as she was so much ",
+          "seed": 128,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.98,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "Mary Lennox ",
+          "continuation": "dech that this Would like to do it that?\"\n\nYou may try that/' said Alice.\n\n\"I shouldn't know,\" said Alice.\n\n\" If you had put him up.\" The Lion were puzzled over the Munchkin side, that into her to, who she was very beside, though for a tree",
+          "seed": 129,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.9791666666666666,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        }
+      ],
+      "tests": {
+        "per_book": {
+          "original": {
+            "loss": 1.3491950731839701,
+            "bits_per_byte": 1.9464770412743357,
+            "perplexity": 3.8543218347381067,
+            "accuracy": 0.6122699386503068,
+            "targets": 16300
+          },
+          "alice": {
+            "loss": 1.347635421460117,
+            "bits_per_byte": 1.944226939466819,
+            "perplexity": 3.848315120453035,
+            "accuracy": 0.60791015625,
+            "targets": 2048
+          },
+          "oz": {
+            "loss": 1.3387955614097287,
+            "bits_per_byte": 1.9314737172099712,
+            "perplexity": 3.8144464709690946,
+            "accuracy": 0.60498046875,
+            "targets": 2048
+          },
+          "peter": {
+            "loss": 1.3671031063273666,
+            "bits_per_byte": 1.9723128718823892,
+            "perplexity": 3.9239668997251638,
+            "accuracy": 0.6044921875,
+            "targets": 2048
+          },
+          "willows": {
+            "loss": 1.513235144551654,
+            "bits_per_byte": 2.183136838743565,
+            "perplexity": 4.541399137091458,
+            "accuracy": 0.5625,
+            "targets": 2048
+          },
+          "garden": {
+            "loss": 1.4287790349620089,
+            "bits_per_byte": 2.061292428265809,
+            "perplexity": 4.173600259748023,
+            "accuracy": 0.58056640625,
+            "targets": 2048
+          }
+        },
+        "new_books_macro": {
+          "loss": 1.3991096537421752,
+          "bits_per_byte": 2.018488559113711,
+          "perplexity": 4.051591041564427,
+          "accuracy": 0.5920898437500001,
+          "targets": 10240
+        },
+        "combined": {
+          "loss": 1.3741523634630726,
+          "bits_per_byte": 1.9824828001940233,
+          "perplexity": 3.9517256758194987,
+          "accuracy": 0.6021798912001535,
+          "targets": 26540
+        }
+      }
+    }
+  ],
+  "baselines": [
+    {
+      "name": "v1",
+      "config": {
+        "context": 64,
+        "width": 128,
+        "heads": 4,
+        "layers": 2,
+        "dropout": 0.0
+      },
+      "parameters": 437760,
+      "validation": {
+        "per_book": {
+          "original": {
+            "loss": 1.6215154786976882,
+            "bits_per_byte": 2.3393523398418483,
+            "perplexity": 5.060753972883319,
+            "accuracy": 0.5478515625,
+            "targets": 1024
+          },
+          "alice": {
+            "loss": 1.6302198089374542,
+            "bits_per_byte": 2.351910033913019,
+            "perplexity": 5.104996719123868,
+            "accuracy": 0.5703125,
+            "targets": 256
+          },
+          "oz": {
+            "loss": 2.3338239703348336,
+            "bits_per_byte": 3.3669962683098555,
+            "perplexity": 10.317319318326067,
+            "accuracy": 0.4375,
+            "targets": 256
+          },
+          "peter": {
+            "loss": 2.0529438333385315,
+            "bits_per_byte": 2.961771887581078,
+            "perplexity": 7.79080220452344,
+            "accuracy": 0.49609375,
+            "targets": 256
+          },
+          "willows": {
+            "loss": 2.001764376695064,
+            "bits_per_byte": 2.887935539286156,
+            "perplexity": 7.402104685235868,
+            "accuracy": 0.4609375,
+            "targets": 256
+          },
+          "garden": {
+            "loss": 2.073091582429697,
+            "bits_per_byte": 2.990838945279978,
+            "perplexity": 7.949361273079476,
+            "accuracy": 0.43359375,
+            "targets": 256
+          }
+        },
+        "new_books_macro": {
+          "loss": 2.0183687143471163,
+          "bits_per_byte": 2.9118905348740176,
+          "perplexity": 7.526037796990515,
+          "accuracy": 0.47968750000000004,
+          "targets": 1280
+        },
+        "combined": {
+          "loss": 1.8199420965224022,
+          "bits_per_byte": 2.625621437357933,
+          "perplexity": 6.171501088162406,
+          "accuracy": 0.51376953125,
+          "targets": 2304
+        }
+      },
+      "tests": {
+        "per_book": {
+          "original": {
+            "loss": 1.62804652740108,
+            "bits_per_byte": 2.348774651418036,
+            "perplexity": 5.093914171121466,
+            "accuracy": 0.548282208588957,
+            "targets": 16300
+          },
+          "alice": {
+            "loss": 1.7058152157964628,
+            "bits_per_byte": 2.460971152502494,
+            "perplexity": 5.50587231225332,
+            "accuracy": 0.53369140625,
+            "targets": 2048
+          },
+          "oz": {
+            "loss": 1.931686379777787,
+            "bits_per_byte": 2.786834360658168,
+            "perplexity": 6.901138374299739,
+            "accuracy": 0.4853515625,
+            "targets": 2048
+          },
+          "peter": {
+            "loss": 1.9750067218365643,
+            "bits_per_byte": 2.8493324033159797,
+            "perplexity": 7.206668095702771,
+            "accuracy": 0.48193359375,
+            "targets": 2048
+          },
+          "willows": {
+            "loss": 2.0603980141004,
+            "bits_per_byte": 2.972525997200116,
+            "perplexity": 7.84909323847726,
+            "accuracy": 0.46044921875,
+            "targets": 2048
+          },
+          "garden": {
+            "loss": 1.914161172232454,
+            "bits_per_byte": 2.7615508306419665,
+            "perplexity": 6.781248111365996,
+            "accuracy": 0.47705078125,
+            "targets": 2048
+          }
+        },
+        "new_books_macro": {
+          "loss": 1.9174135007487338,
+          "bits_per_byte": 2.766242948863745,
+          "perplexity": 6.803338861690842,
+          "accuracy": 0.48769531250000003,
+          "targets": 10240
+        },
+        "combined": {
+          "loss": 1.772730014074907,
+          "bits_per_byte": 2.5575088001408908,
+          "perplexity": 5.886902771280359,
+          "accuracy": 0.5179887605444785,
+          "targets": 26540
+        }
+      }
+    },
+    {
+      "name": "v2",
+      "config": {
+        "context": 128,
+        "width": 128,
+        "heads": 4,
+        "layers": 3,
+        "dropout": 0.1
+      },
+      "parameters": 644224,
+      "validation": {
+        "per_book": {
+          "original": {
+            "loss": 1.516491312542641,
+            "bits_per_byte": 2.187834496156463,
+            "perplexity": 4.556210797135738,
+            "accuracy": 0.583984375,
+            "targets": 1024
+          },
+          "alice": {
+            "loss": 1.500169170375159,
+            "bits_per_byte": 2.1642866225947524,
+            "perplexity": 4.482447303492925,
+            "accuracy": 0.625,
+            "targets": 256
+          },
+          "oz": {
+            "loss": 2.2990723155157866,
+            "bits_per_byte": 3.3168602282397317,
+            "perplexity": 9.964933851065053,
+            "accuracy": 0.41796875,
+            "targets": 256
+          },
+          "peter": {
+            "loss": 2.079006373045104,
+            "bits_per_byte": 2.9993721843687218,
+            "perplexity": 7.99651940829924,
+            "accuracy": 0.4765625,
+            "targets": 256
+          },
+          "willows": {
+            "loss": 1.9377384880979207,
+            "bits_per_byte": 2.795565707318548,
+            "perplexity": 6.943031454130113,
+            "accuracy": 0.51171875,
+            "targets": 256
+          },
+          "garden": {
+            "loss": 2.029689584584503,
+            "bits_per_byte": 2.9282230982240427,
+            "perplexity": 7.611723195799368,
+            "accuracy": 0.4453125,
+            "targets": 256
+          }
+        },
+        "new_books_macro": {
+          "loss": 1.9691351863236948,
+          "bits_per_byte": 2.8408615681491596,
+          "perplexity": 7.164477869962438,
+          "accuracy": 0.49531250000000004,
+          "targets": 1280
+        },
+        "combined": {
+          "loss": 1.7428132494331678,
+          "bits_per_byte": 2.5143480321528116,
+          "perplexity": 5.7133940374319465,
+          "accuracy": 0.5396484375,
+          "targets": 2304
+        }
+      },
+      "tests": {
+        "per_book": {
+          "original": {
+            "loss": 1.5599161228375127,
+            "bits_per_byte": 2.2504832546204185,
+            "perplexity": 4.758422105454613,
+            "accuracy": 0.5695705521472393,
+            "targets": 16300
+          },
+          "alice": {
+            "loss": 1.6283243978108821,
+            "bits_per_byte": 2.3491755336802673,
+            "perplexity": 5.09532981581347,
+            "accuracy": 0.56884765625,
+            "targets": 2048
+          },
+          "oz": {
+            "loss": 1.9175497441067755,
+            "bits_per_byte": 2.766439506480746,
+            "perplexity": 6.80426583456877,
+            "accuracy": 0.49755859375,
+            "targets": 2048
+          },
+          "peter": {
+            "loss": 1.9311874280611399,
+            "bits_per_byte": 2.7861145254909183,
+            "perplexity": 6.8976958983471235,
+            "accuracy": 0.49462890625,
+            "targets": 2048
+          },
+          "willows": {
+            "loss": 2.0106636639152384,
+            "bits_per_byte": 2.900774496826148,
+            "perplexity": 7.468272125702533,
+            "accuracy": 0.48828125,
+            "targets": 2048
+          },
+          "garden": {
+            "loss": 1.8505547981148283,
+            "bits_per_byte": 2.6697862301335396,
+            "perplexity": 6.363348917443893,
+            "accuracy": 0.50634765625,
+            "targets": 2048
+          }
+        },
+        "new_books_macro": {
+          "loss": 1.867656006401773,
+          "bits_per_byte": 2.6944580585223243,
+          "perplexity": 6.473105684487708,
+          "accuracy": 0.5111328125,
+          "targets": 10240
+        },
+        "combined": {
+          "loss": 1.7137860646196428,
+          "bits_per_byte": 2.4724706565713714,
+          "perplexity": 5.549934159970748,
+          "accuracy": 0.5403516823236196,
+          "targets": 26540
+        }
+      }
+    }
+  ],
+  "selected_by_common_validation": "v7",
+  "preserved_hashes": {
+    "artifacts/final.pt": "250ae8426e4f7bdd6b59ebb8787d207fff53be4af9850eb5d60cf946d1133ed1",
+    "artifacts/results.json": "988376b87d7d5e85067976084791f170920f71cb68c2e919e49ed396df1ae4d7",
+    "RESULTS.md": "c704351108b27386037d3790f3e5b4c19f778878a19edea96ecc6932ff79d1ef",
+    "slides.html": "f6fd0bb6f65111cebe98c67bd39e23683636c8737ddb1d4462f3883669cb42e8",
+    "slides.pdf": "44ea43d40fc5515c1bebc05c01e57c499d65fffb24c6e3c6c9c37986c7a7bb65",
+    "artifacts/versions/v1.pt": "5c83fffd39046213383b2017f1e7ee398a6de44cfad85a837892fd9ab5a2eea3",
+    "artifacts/versions/v2.pt": "bbad33db6ea0b0f6c941ec36a55c69d0ac497c243bdb3ce03a77a5952dc57422",
+    "artifacts/versions/comparison.json": "5e4bdff0f0dc8d032768a8a3aef5ec30773da8fd4e50fcb7c2f9f396af4adcd9",
+    "VERSIONS.md": "572c4a7ceaeb07d81658797973325b33839cf5c7ad0388306ebf526cb7aede8d",
+    "data/train.bin": "00e68f14ea7cd62d34bd8da9bf8773d9c54f4f89d10835c2aff21accb8073548",
+    "data/validation.bin": "2ef8f5cf3253037cd03a426928e1afdae6f91c57db638b4ccc338a228e13f2f3",
+    "data/test.bin": "074b96687cadbd8e0d1d93a56b2731d1abf7d1aac99f8a8b0a834dbbdef874e7",
+    "data/provenance.json": "93ac1fac0602789e19da60dab8c5860c1ab7357100dcbaa03b16bdc47752637d"
+  },
+  "expanded_manifest_sha256": "2d53d5f2c57f16be85b91e37545343b21aedfc9fdd294bde313eb31ec744199c",
+  "dataset_train_bytes": 1240716,
+  "environment": {
+    "python": "3.13.14",
+    "torch": "2.13.0",
+    "device": "cpu",
+    "threads": 4
+  },
+  "validation_protocol": "Fixed original 1024 targets and 256 targets per new book. Selection score = 0.5*original loss + 0.5*new-book macro loss.",
+  "test_protocol": "Original reused holdout: all 16300 targets. Fresh expanded holdout: 2048 distinct targets/book; equal-book macro. First scored after all five checkpoint selections; neither test selects recipes or checkpoints.",
+  "unigram_per_book": {
+    "original": {
+      "loss": 3.1728663444519043,
+      "bits_per_byte": 4.577478540544256,
+      "perplexity": 23.875822700956277,
+      "accuracy": 0.18773005902767181,
+      "targets": 16300
+    },
+    "alice": {
+      "loss": 3.133518695831299,
+      "bits_per_byte": 4.520711883008667,
+      "perplexity": 22.95460788902576,
+      "accuracy": 0.19189453125,
+      "targets": 2048
+    },
+    "oz": {
+      "loss": 3.171802520751953,
+      "bits_per_byte": 4.575943767367956,
+      "perplexity": 23.85043654050491,
+      "accuracy": 0.173828125,
+      "targets": 2048
+    },
+    "peter": {
+      "loss": 3.170718193054199,
+      "bits_per_byte": 4.574379413175708,
+      "perplexity": 23.824588867766824,
+      "accuracy": 0.17236328125,
+      "targets": 2048
+    },
+    "willows": {
+      "loss": 3.165762186050415,
+      "bits_per_byte": 4.567229406448738,
+      "perplexity": 23.70680614555555,
+      "accuracy": 0.1748046875,
+      "targets": 2048
+    },
+    "garden": {
+      "loss": 3.0968799591064453,
+      "bits_per_byte": 4.467853359231285,
+      "perplexity": 22.12880069811072,
+      "accuracy": 0.18310546875,
+      "targets": 2048
+    }
+  },
+  "unigram_new_macro": {
+    "loss": 3.1477363109588623,
+    "bits_per_byte": 4.541223565846471,
+    "perplexity": 23.283298732556204,
+    "accuracy": 0.17919921875,
+    "targets": 10240
+  },
+  "limitation": "Within-book held-out passages, imperfect OCR, one seed, unequal cumulative training, bundled data/depth changes. Exact-span audit is not semantic deduplication."
+}

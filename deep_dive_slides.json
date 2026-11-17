@@ -1,0 +1,3400 @@
+{
+  "title": "A tiny GPT, deeply explained: architecture, code, training, V1-V7",
+  "slide_count": 85,
+  "main_slides": 62,
+  "appendix_slides": 23,
+  "recorded_samples": 59,
+  "source_hashes": {
+    "model.py": "2b88c691329cecfe83149621825cf18f8defb318f2547a8078b265b5e517e112",
+    "data.py": "dd8c30d11841cb8a592c9e9774999babae3d494fba0bcfa57f2b71dd0e30b64b",
+    "expanded_data.py": "f0a024a9faf9f16a82faff8964815cf51a7059b14f807c122f706977d85ea7e5",
+    "train.py": "432ba617139e3ff1b105bb13e8b17f2f400056763659b17d5e6eabe1495fea13",
+    "train_versions.py": "fc2b882e3561e134c314768d1136d35a69e55eb2011d76c4e9be6c5151dd7902",
+    "train_expanded.py": "3964d05a3efe62b856082227caab79e8848f59d204093c9e645ea5487941dfc9",
+    "test_model.py": "2fe39b4b711a00a0c465ee5baf059859ae0e6da2be18c3896c7eb62be59410f8",
+    "test_expanded.py": "fd63cf101600630f94dc2a2c8c2681efb73f95a8edef40a722da1c9ea5bd570e",
+    "generate.py": "1091dcfecdd8b35a92a4c5763a1e3a272663d1061807112a4dcdb98a2d49e5ab",
+    "data/provenance.json": "93ac1fac0602789e19da60dab8c5860c1ab7357100dcbaa03b16bdc47752637d",
+    "data/expanded/manifest.json": "2d53d5f2c57f16be85b91e37545343b21aedfc9fdd294bde313eb31ec744199c",
+    "artifacts/results.json": "988376b87d7d5e85067976084791f170920f71cb68c2e919e49ed396df1ae4d7",
+    "artifacts/versions/comparison.json": "5e4bdff0f0dc8d032768a8a3aef5ec30773da8fd4e50fcb7c2f9f396af4adcd9",
+    "artifacts/versions/expanded_comparison.json": "1a068d7090fc269f691f02c11974ddc470cddea58d54e75b6aeeb0319240d236"
+  },
+  "slides": [
+    {
+      "section": "Orientation",
+      "title": "A tiny GPT, deeply explained",
+      "blocks": [
+        {
+          "kind": "text",
+          "text": "Architecture \u2192 actual Python \u2192 learning \u2192 seven version recipes \u2192 measured outcomes."
+        },
+        {
+          "kind": "text",
+          "text": "A decoder-only GPT-2-style model: 437,760\u2013842,496 parameters, trained locally on public-domain Internet Archive OCR."
+        },
+        {
+          "kind": "points",
+          "items": [
+            "Main lecture: internals and experiments.",
+            "Appendix: every recorded generated sample, unedited."
+          ]
+        }
+      ],
+      "notes": "Use the main lecture over two sessions, then browse the sample appendix during discussion. The deck is generated from source files and the three experiment JSON records. V1/V2 are scratch-trained; V3-V7 are warm-started continuations. No pretrained GPT-2 weights are used."
+    },
+    {
+      "section": "Orientation",
+      "title": "What students should be able to explain",
+      "blocks": [
+        {
+          "kind": "points",
+          "items": [
+            "Trace every tensor from byte IDs to next-byte logits.",
+            "Explain causality, pre-normalization, residual paths and weight tying.",
+            "Build a training batch without future or document-boundary leakage.",
+            "Distinguish scratch training, warm starts and identity depth growth.",
+            "Read the results without confusing byte accuracy with good writing."
+          ]
+        }
+      ],
+      "notes": "Prerequisites: Python, basic PyTorch, matrix multiplication, softmax, and gradients. Allocate a first session to architecture/code and a second to data/training/version comparisons. The appendix is searchable evidence, not material that must all be presented aloud."
+    },
+    {
+      "section": "Architecture",
+      "title": "GPT-2-style does not mean pretrained GPT-2",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Feature",
+            "Retained",
+            "Intentional simplification"
+          ],
+          "rows": [
+            [
+              "Decoder blocks",
+              "Causal attention + pre-LN residual MLP",
+              "1\u20134 blocks, not 12"
+            ],
+            [
+              "Embeddings",
+              "Learned tokens and absolute positions",
+              "256 bytes, not GPT-2 BPE"
+            ],
+            [
+              "MLP",
+              "4\u00d7 expansion, tanh GELU, biases",
+              "Width 64 or 128"
+            ],
+            [
+              "Output",
+              "Final LayerNorm + tied token matrix",
+              "No separate vocabulary head"
+            ],
+            [
+              "Engineering",
+              "AdamW, clipping, checkpoints",
+              "No KV cache or distributed training"
+            ]
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "Structurally faithful and readable; not compatible with the original GPT-2 checkpoint shapes."
+        }
+      ],
+      "notes": "Reference implementation: https://github.com/openai/gpt-2/blob/master/src/model.py . The reference's conv1d projections are pointwise linear maps. Our initialization and training engineering are implementation choices, not a claim to reproduce every original GPT-2 detail."
+    },
+    {
+      "section": "Architecture",
+      "title": "The family at a glance",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Version",
+            "Blocks",
+            "Width",
+            "Heads",
+            "Byte context",
+            "Dropout",
+            "Parameters"
+          ],
+          "rows": [
+            [
+              "V1",
+              2,
+              128,
+              4,
+              64,
+              0.0,
+              "437,760"
+            ],
+            [
+              "V2",
+              3,
+              128,
+              4,
+              128,
+              0.1,
+              "644,224"
+            ],
+            [
+              "V3",
+              3,
+              128,
+              4,
+              128,
+              0.1,
+              "644,224"
+            ],
+            [
+              "V4",
+              3,
+              128,
+              4,
+              128,
+              0.1,
+              "644,224"
+            ],
+            [
+              "V5",
+              4,
+              128,
+              4,
+              128,
+              0.1,
+              "842,496"
+            ],
+            [
+              "V6",
+              4,
+              128,
+              4,
+              128,
+              0.1,
+              "842,496"
+            ],
+            [
+              "V7",
+              4,
+              128,
+              4,
+              128,
+              0.1,
+              "842,496"
+            ]
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "The core mechanism stays the same. V5 adds depth; V3\u2013V7 mainly broaden data coverage."
+        }
+      ],
+      "notes": "V1 uses no dropout. All later named versions use dropout 0.1. V2 doubles context and adds a block relative to V1. V5 adds the fourth block. The vocabulary remains 256 because bytes represent new words without needing a tokenizer vocabulary update."
+    },
+    {
+      "section": "Data",
+      "title": "Six real Archive works, not synthetic text",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Work",
+            "Scan edition",
+            "Training bytes"
+          ],
+          "rows": [
+            [
+              "Through the Looking-Glass",
+              "[1899?]",
+              "132,440"
+            ],
+            [
+              "Alice's adventures in Wonderland",
+              "1872",
+              "117,712"
+            ],
+            [
+              "The wonderful wizard of Oz",
+              "1900, c1899",
+              "168,045"
+            ],
+            [
+              "Peter and Wendy",
+              "c1911",
+              "207,564"
+            ],
+            [
+              "The wind in the willows",
+              "c1913",
+              "267,269"
+            ],
+            [
+              "The secret garden",
+              "[1911]",
+              "347,686"
+            ]
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "Available training data: 1,240,716 bytes, 9.4\u00d7 the original corpus."
+        }
+      ],
+      "notes": "All scans are Internet Archive digitized books with NOT_IN_COPYRIGHT US metadata. This is not a Wayback crawl. Peter's metadata says c1911 but its title page says 1912. Rights are US-specific; Peter Pan-related material has special UK provisions. Review older language and OCR errors before classroom use. Source URLs are in the closing slide."
+    },
+    {
+      "section": "Data",
+      "title": "Extract the story, not the whole scanned volume",
+      "blocks": [
+        {
+          "kind": "code",
+          "text": "def extract_story(name, raw):\n    if name not in BOUNDARIES:\n        raise ValueError(f\"Story boundaries for {name} have not been verified.\")\n    start_pattern, end_pattern = BOUNDARIES[name]\n    start = re.search(start_pattern, raw, re.IGNORECASE)\n    endings = list(re.finditer(end_pattern, raw, re.IGNORECASE))\n    if start is None or not endings or endings[-1].end() <= start.start():\n        raise ValueError(f\"Reliable story boundaries not found for {name}.\")\n    return unwrap_story(raw[start.start():endings[-1].end()])",
+          "source": "expanded_data.py:86-94 \u00b7 extract_story",
+          "filename": "expanded_data.py",
+          "first_line": 86,
+          "last_line": 94
+        },
+        {
+          "kind": "points",
+          "items": [
+            "Alice: stop before advertisements for Looking-Glass.",
+            "Peter: exclude the separately bound Margaret Ogilvy.",
+            "Keep source, cleaned and split hashes; retain uncorrected OCR errors."
+          ]
+        }
+      ],
+      "notes": "This is actual code, not pseudocode. The verified start/end regular expressions are stored in BOUNDARIES and the corpus manifest. Missing reliable markers cause an explicit error. Decorative initial letters can be absent from OCR; the Oz opening is one example. Do not silently fill missing text with invented prose."
+    },
+    {
+      "section": "Data",
+      "title": "Split first; never move a holdout into training",
+      "blocks": [
+        {
+          "kind": "code",
+          "text": "def spans_for(content):\n    first, second = int(len(content) * 0.8), int(len(content) * 0.9)\n    spans = dict(train=(0, first), validation=(first + MAX_CONTEXT, second),\n                 test=(second + MAX_CONTEXT, len(content)))\n    if any(end - start <= 4 * MAX_CONTEXT for start, end in spans.values()):\n        raise ValueError(\"Expanded book is too short for useful disjoint splits.\")\n    return spans",
+          "source": "expanded_data.py:77-83 \u00b7 spans_for",
+          "filename": "expanded_data.py",
+          "first_line": 77,
+          "last_line": 83
+        },
+        {
+          "kind": "text",
+          "text": "Each new work: contiguous 80/10/10 passages, with 128 discarded bytes at both boundaries."
+        },
+        {
+          "kind": "text",
+          "text": "The original train/validation/test files remain frozen."
+        }
+      ],
+      "notes": "A window must fit within one book's training split. The test is within-book, not an unseen-author benchmark. A 128-byte boundary gap guards the maximum context. Byte cuts need not align with words or Unicode characters; the learning task itself is defined on bytes. Checksums detect accidental changes."
+    },
+    {
+      "section": "Data",
+      "title": "Tokenization: a deliberately visible choice",
+      "blocks": [
+        {
+          "kind": "code",
+          "text": "def encode(text: str) -> list[int]:\n    return list(text.encode(\"utf-8\"))",
+          "source": "model.py:28-29 \u00b7 encode",
+          "filename": "model.py",
+          "first_line": 28,
+          "last_line": 29
+        },
+        {
+          "kind": "code",
+          "text": "def decode(tokens: list[int]) -> str:\n    # An unfinished or invalid UTF-8 sequence is visible as a replacement character.\n    return bytes(tokens).decode(\"utf-8\", errors=\"replace\")",
+          "source": "model.py:32-34 \u00b7 decode",
+          "filename": "model.py",
+          "first_line": 32,
+          "last_line": 34
+        },
+        {
+          "kind": "text",
+          "text": "\u201cAlice\u201d \u2192 [65, 108, 105, 99, 101]. A Unicode character can occupy several bytes."
+        },
+        {
+          "kind": "text",
+          "text": "256 IDs, no unknown-word token. Byte perplexity is not GPT-2 BPE perplexity."
+        }
+      ],
+      "notes": "decode uses replacement characters for invalid or unfinished UTF-8. Generation can terminate mid-character or mid-word. Keeping bytes makes the Transformer visible without a tokenizer subsystem, but makes context much shorter in word terms. For cross-tokenizer comparisons, use normalized raw-byte metrics rather than token PPL."
+    },
+    {
+      "section": "Data",
+      "title": "A training example is a shifted window",
+      "blocks": [
+        {
+          "kind": "code",
+          "text": "def batch(data, context, batch_size, rng, device):\n    starts = torch.randint(len(data) - context, (batch_size,), generator=rng)\n    offsets = torch.arange(context)\n    x = data[starts[:, None] + offsets]\n    y = data[starts[:, None] + offsets + 1]\n    return x.to(device), y.to(device)",
+          "source": "train.py:48-53 \u00b7 batch",
+          "filename": "train.py",
+          "first_line": 48,
+          "last_line": 53
+        },
+        {
+          "kind": "text",
+          "text": "x = A l i c     y = l i c e. Every training position predicts the next byte."
+        },
+        {
+          "kind": "text",
+          "text": "The sampled start leaves room for the final target: len(data) \u2212 context."
+        }
+      ],
+      "notes": "starts are sampled from [0, len(data)-context), so y's largest possible index is len(data)-1. This is why the input and target share a window shifted by one. The helper receives only a training document, never a concatenation crossing validation or a book boundary."
+    },
+    {
+      "section": "Architecture",
+      "title": "The full computation graph",
+      "blocks": [
+        {
+          "kind": "diagram",
+          "label": "Byte IDs to cross-entropy",
+          "labels": [
+            "Byte IDs\n[B,T]",
+            "Token + position\n[B,T,C]",
+            "Decoder blocks\n[B,T,C]",
+            "Final norm\n[B,T,C]",
+            "Tied logits\n[B,T,256]",
+            "Next-byte loss\nscalar"
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "V7: B=32, T=128, C=128, H=4, L=4. The loss trains all positions."
+        },
+        {
+          "kind": "text",
+          "text": "Generation uses only the final position\u2019s logits, then appends one sampled byte."
+        }
+      ],
+      "notes": "Residual connections preserve the [batch, time, channel] shape throughout the stack. Token and position embeddings are added, not concatenated. Logits are unnormalized scores; cross-entropy combines log-softmax with the correct-target lookup."
+    },
+    {
+      "section": "Architecture",
+      "title": "Tensor shapes inside one attention block",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Tensor",
+            "General shape",
+            "V7 concrete shape"
+          ],
+          "rows": [
+            [
+              "Hidden x",
+              "[B,T,C]",
+              "[32,128,128]"
+            ],
+            [
+              "Packed QKV",
+              "[B,T,3C]",
+              "[32,128,384]"
+            ],
+            [
+              "Each of Q,K,V",
+              "[B,H,T,C/H]",
+              "[32,4,128,32]"
+            ],
+            [
+              "Attention scores",
+              "[B,H,T,T]",
+              "[32,4,128,128]"
+            ],
+            [
+              "Merged output",
+              "[B,T,C]",
+              "[32,128,128]"
+            ]
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "Scores alone contain 2,097,152 floats \u2248 8 MiB per block, before gradients."
+        }
+      ],
+      "notes": "Head width is C/H=32. Time appears twice in the score tensor: one axis for query positions and one for keys. Doubling context multiplies score memory by four, not two. Total training memory also includes activations, gradients and optimizer states."
+    },
+    {
+      "section": "Architecture / actual code",
+      "title": "Learned embeddings and positions",
+      "blocks": [
+        {
+          "kind": "code",
+          "text": "def forward(self, tokens, targets=None):\n    if tokens.ndim != 2 or not 1 <= tokens.shape[1] <= self.config.context:\n        raise ValueError(\"Input must have shape [batch, 1..context].\")\n    positions = torch.arange(tokens.shape[1], device=tokens.device)\n    x = self.embedding_dropout(self.token(tokens) + self.position(positions))\n    x = self.final_norm(self.blocks(x))",
+          "source": "model.py:104-109 \u00b7 GPT.forward",
+          "filename": "model.py",
+          "first_line": 104,
+          "last_line": 109
+        },
+        {
+          "kind": "text",
+          "text": "Embeddings: token table [256,C], position table [context,C]. Positions start at zero."
+        },
+        {
+          "kind": "text",
+          "text": "Layer blocks preserve width; positional information is learned, not sinusoidal."
+        }
+      ],
+      "notes": "Inspect GPT.__init__ for the two nn.Embedding tables. These are absolute learned positions like GPT-2. During cropped generation, positions reset for each window; this is a simplification, not a long-context or cached-decoding implementation."
+    },
+    {
+      "section": "Architecture / actual code",
+      "title": "Project Q, K and V; split the heads",
+      "blocks": [
+        {
+          "kind": "code",
+          "text": "def forward(self, x):\n    batch, length, width = x.shape\n    q, k, v = self.qkv(x).chunk(3, dim=-1)\n    q, k, v = [\n        t.view(batch, length, self.heads, width // self.heads).transpose(1, 2)\n        for t in (q, k, v)\n    ]",
+          "source": "model.py:48-54 \u00b7 CausalAttention.forward",
+          "filename": "model.py",
+          "first_line": 48,
+          "last_line": 54
+        },
+        {
+          "kind": "text",
+          "text": "One linear layer makes 3C features; chunk separates query, key and value roles."
+        }
+      ],
+      "notes": "Q identifies what each position seeks, K describes positions to match against, and V provides their content. view splits C into heads and head-width; transpose puts heads before time. Each head gets an independent attention matrix, not independent tokens."
+    },
+    {
+      "section": "Architecture",
+      "title": "The triangular mask is the causality guarantee",
+      "blocks": [
+        {
+          "kind": "mask",
+          "size": 5
+        },
+        {
+          "kind": "text",
+          "text": "1 = visible key; 0 = forbidden future key. A token may see itself and all earlier tokens."
+        },
+        {
+          "kind": "text",
+          "text": "Changing positions 8\u201315 must leave logits at positions 0\u20137 unchanged."
+        }
+      ],
+      "notes": "Rows are queries and columns are keys. Mask the future before softmax with minus infinity, so forbidden weights become zero. Zeroing scores instead would still give future keys probability mass. Evaluation disables dropout for the exact-prefix test."
+    },
+    {
+      "section": "Architecture / actual code",
+      "title": "Scale, mask, normalize, then mix values",
+      "blocks": [
+        {
+          "kind": "code",
+          "text": "scores = q @ k.transpose(-2, -1) / math.sqrt(width // self.heads)\nscores = scores.masked_fill(~self.mask[:length, :length], float(\"-inf\"))\nweights = self.attention_dropout(scores.softmax(dim=-1))",
+          "source": "model.py:55-57 \u00b7 CausalAttention.forward",
+          "filename": "model.py",
+          "first_line": 55,
+          "last_line": 57
+        },
+        {
+          "kind": "text",
+          "text": "softmax(QK\u1d40 / \u221ahead_width) V. Scaling prevents large dot products from saturating softmax."
+        }
+      ],
+      "notes": "The scale is 1/sqrt(32) for our 128-wide, four-head models. Before dropout, each attention row sums to one over visible keys. Training-time attention dropout scales surviving weights and does not renormalize the row. This is separate from the causal mask."
+    },
+    {
+      "section": "Architecture / actual code",
+      "title": "Merge heads and project back to the residual width",
+      "blocks": [
+        {
+          "kind": "code",
+          "text": "attended = (weights @ v).transpose(1, 2).contiguous().view(batch, length, width)\nreturn self.output_dropout(self.project(attended))",
+          "source": "model.py:58-59 \u00b7 CausalAttention.forward",
+          "filename": "model.py",
+          "first_line": 58,
+          "last_line": 59
+        },
+        {
+          "kind": "code",
+          "text": "self.heads = config.heads\nself.qkv = nn.Linear(config.width, 3 * config.width)\nself.project = nn.Linear(config.width, config.width)\nself.attention_dropout = nn.Dropout(config.dropout)\nself.output_dropout = nn.Dropout(config.dropout)",
+          "source": "model.py:40-44 \u00b7 CausalAttention.__init__",
+          "filename": "model.py",
+          "first_line": 40,
+          "last_line": 44
+        },
+        {
+          "kind": "text",
+          "text": "transpose \u2192 contiguous \u2192 view merges head outputs. The projection restores the C-wide residual interface."
+        }
+      ],
+      "notes": "After transposing the attended values, contiguous makes the memory layout compatible with view. The output projection mixes heads. Its output dropout is a regularization site, not a change in tensor shape or vocabulary."
+    },
+    {
+      "section": "Architecture / actual code",
+      "title": "A block has two pre-normalized residual branches",
+      "blocks": [
+        {
+          "kind": "code",
+          "text": "def forward(self, x):\n    x = x + self.attention(self.ln1(x))\n    return x + self.mlp(self.ln2(x))",
+          "source": "model.py:75-77 \u00b7 Block.forward",
+          "filename": "model.py",
+          "first_line": 75,
+          "last_line": 77
+        },
+        {
+          "kind": "code",
+          "text": "self.mlp = nn.Sequential(\n    nn.Linear(config.width, 4 * config.width),\n    nn.GELU(approximate=\"tanh\"),\n    nn.Linear(4 * config.width, config.width),\n    nn.Dropout(config.dropout),\n)",
+          "source": "model.py:68-73 \u00b7 Block.__init__",
+          "filename": "model.py",
+          "first_line": 68,
+          "last_line": 73
+        },
+        {
+          "kind": "text",
+          "text": "Attention communicates across time. The MLP transforms each position\u2019s features."
+        }
+      ],
+      "notes": "Pre-LN means normalize the branch input, then add its output to the untouched residual stream. LayerNorm normalizes features within one token, not across time. The MLP is position-wise: C\u21924C\u2192C, with tanh-approximate GELU between its linear maps."
+    },
+    {
+      "section": "Architecture",
+      "title": "Why LayerNorm and GELU are not optional details",
+      "blocks": [
+        {
+          "kind": "points",
+          "items": [
+            "LayerNorm(x) = gain\u00b7(x\u2212\u03bc)/\u221a(variance+\u03b5) + bias; statistics are across C.",
+            "GELU approximately gates x by the probability it exceeds a Gaussian threshold.",
+            "The residual path carries existing information and a direct gradient route.",
+            "Final LayerNorm precedes the tied vocabulary projection."
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "Our nn.LayerNorm default \u03b5 is 10\u207b\u2075; GELU uses approximate='tanh'."
+        }
+      ],
+      "notes": "Contrast LayerNorm with BatchNorm: its behavior does not depend on another example in the minibatch. GELU is not ReLU; it retains a smooth negative-side response. These operations are preserved from the GPT-2 structural pattern."
+    },
+    {
+      "section": "Architecture / actual code",
+      "title": "One embedding matrix serves two jobs",
+      "blocks": [
+        {
+          "kind": "code",
+          "text": "# F.linear uses the very same matrix as the input token embedding.\nlogits = F.linear(x, self.token.weight)\nloss = None\nif targets is not None:\n    loss = F.cross_entropy(logits.reshape(-1, 256), targets.reshape(-1))\nreturn logits, loss",
+          "source": "model.py:110-115 \u00b7 GPT.forward",
+          "filename": "model.py",
+          "first_line": 110,
+          "last_line": 115
+        },
+        {
+          "kind": "text",
+          "text": "F.linear(x, token.weight) uses the same [256,C] parameter matrix used for input lookup."
+        }
+      ],
+      "notes": "Weight tying reduces parameters and connects token representations with token prediction. F.linear interprets the embedding matrix as output rows. The loss flattens [B,T,256] and [B,T] so every target contributes. No softmax is needed before F.cross_entropy; supplying probabilities there would be incorrect."
+    },
+    {
+      "section": "Architecture",
+      "title": "Count the parameters instead of guessing",
+      "blocks": [
+        {
+          "kind": "text",
+          "text": "P = 256C + TC + L(12C\u00b2 + 13C) + 2C"
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "Component",
+            "V7 parameters"
+          ],
+          "rows": [
+            [
+              "Token embedding: 256\u00d7128",
+              "32,768"
+            ],
+            [
+              "Position embedding: 128\u00d7128",
+              "16,384"
+            ],
+            [
+              "One decoder block: 12\u00d7128\u00b2 + 13\u00d7128",
+              "198,272"
+            ],
+            [
+              "Four blocks",
+              "793,088"
+            ],
+            [
+              "Final LayerNorm",
+              "256"
+            ],
+            [
+              "Total",
+              "842,496"
+            ]
+          ]
+        }
+      ],
+      "notes": "Attention contributes 4C\u00b2+4C parameters; the MLP contributes 8C\u00b2+5C; two LayerNorms contribute 4C. The final norm adds 2C. Dropout and the causal mask have no learned parameters. There is no second output vocabulary matrix."
+    },
+    {
+      "section": "Architecture / actual code",
+      "title": "Initialization keeps residual branches controlled",
+      "blocks": [
+        {
+          "kind": "code",
+          "text": "def _initialize(module):\n    if isinstance(module, (nn.Linear, nn.Embedding)):\n        nn.init.normal_(module.weight, std=0.02)\n        if isinstance(module, nn.Linear):\n            nn.init.zeros_(module.bias)",
+          "source": "model.py:98-102 \u00b7 GPT._initialize",
+          "filename": "model.py",
+          "first_line": 98,
+          "last_line": 102
+        },
+        {
+          "kind": "code",
+          "text": "for block in self.blocks:\n    nn.init.normal_(block.attention.project.weight,\n                    std=0.02 / math.sqrt(2 * config.layers))\n    nn.init.normal_(block.mlp[2].weight,\n                    std=0.02 / math.sqrt(2 * config.layers))",
+          "source": "model.py:91-95 \u00b7 GPT.__init__",
+          "filename": "model.py",
+          "first_line": 91,
+          "last_line": 95
+        },
+        {
+          "kind": "text",
+          "text": "Linear/embedding weights start with \u03c3=0.02; residual projections use \u03c3=0.02/\u221a(2L)."
+        }
+      ],
+      "notes": "Biases are zero. Scaling residual output projections with depth controls accumulated residual variance. This is our training-oriented implementation choice, not a promise to match the original TensorFlow checkpoint initialization exactly."
+    },
+    {
+      "section": "Architecture / regularization",
+      "title": "Where V2\u2013V7 apply dropout",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Site",
+            "Actual operation",
+            "Training p",
+            "Evaluation"
+          ],
+          "rows": [
+            [
+              "Embeddings",
+              "token + position \u2192 dropout",
+              "0.1",
+              "Identity"
+            ],
+            [
+              "Attention weights",
+              "softmax scores \u2192 dropout",
+              "0.1",
+              "Identity"
+            ],
+            [
+              "Attention output",
+              "projection \u2192 dropout",
+              "0.1",
+              "Identity"
+            ],
+            [
+              "MLP output",
+              "second linear \u2192 dropout",
+              "0.1",
+              "Identity"
+            ]
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "model.eval() disables dropout, but does not disable gradients. no_grad() is a separate control."
+        }
+      ],
+      "notes": "V1 has p=0, so its legacy function is unchanged. The same saved state dict loads with a default dropout field when old checkpoints omit that field. The dropout tests check train/eval behavior, generation determinism and training-mode restoration."
+    },
+    {
+      "section": "Training / actual code",
+      "title": "One optimization step",
+      "blocks": [
+        {
+          "kind": "code",
+          "text": "optimizer.zero_grad(set_to_none=True)\n_, loss = model(x.to(device), y.to(device))\nif not torch.isfinite(loss).item():\n    raise RuntimeError(f\"Nonfinite {spec['name']} loss at step {step}\")\nloss.backward()\nnorm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)\nif not torch.isfinite(norm).item():\n    raise RuntimeError(f\"Nonfinite {spec['name']} gradient at step {step}\")\noptimizer.step()",
+          "source": "train_expanded.py:102-110 \u00b7 train_version",
+          "filename": "train_expanded.py",
+          "first_line": 102,
+          "last_line": 110
+        },
+        {
+          "kind": "text",
+          "text": "AdamW LR=0.0003 for new stages; weight decay=0.01; clip gradient norm to 1."
+        }
+      ],
+      "notes": "The scratch studies used LR=0.001. Expanded stages use a lower fixed LR because they warm-start learned weights. zero_grad precedes backward; clipping follows backward and precedes optimizer.step. Nonfinite loss or gradients raise an explicit error."
+    },
+    {
+      "section": "Training / evaluation",
+      "title": "Score next bytes without giving away the target",
+      "blocks": [
+        {
+          "kind": "code",
+          "text": "    for indices in positions.split(64):\n        offsets = torch.arange(-model.config.context, 0)\n        x = data[indices[:, None] + offsets].to(device)\n        y = data[indices].to(device)\n        logits = model(x)[0][:, -1]\n        losses.extend(F.cross_entropy(logits, y, reduction=\"none\").cpu().tolist())\n        correct += int((logits.argmax(-1) == y).sum().item())\nfinally:\n    model.train(previous_mode)",
+          "source": "train.py:70-78 \u00b7 evaluate",
+          "filename": "train.py",
+          "first_line": 70,
+          "last_line": 78
+        },
+        {
+          "kind": "text",
+          "text": "Inputs end immediately before the scored target. Only logits[:,\u22121] is compared with that target."
+        }
+      ],
+      "notes": "Evaluation positions are sampled without replacement using fixed generators. All versions score identical targets within a comparison but may use different context lengths. Conditioning on prior held-out bytes is normal autoregressive evaluation, not training on test targets. eval and no_grad serve different purposes."
+    },
+    {
+      "section": "Study 1 / recipes",
+      "title": "Baseline plus five improvement attempts",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Run",
+            "Change",
+            "Context",
+            "Width / blocks",
+            "Updates"
+          ],
+          "rows": [
+            [
+              "R0",
+              "Baseline: one small block, 200 updates",
+              32,
+              "64 / 1",
+              200
+            ],
+            [
+              "R1",
+              "Increase updates from 200 to 600",
+              32,
+              "64 / 1",
+              600
+            ],
+            [
+              "R2",
+              "Increase context from 32 to 64 bytes",
+              64,
+              "64 / 1",
+              600
+            ],
+            [
+              "R3",
+              "Increase width to 128 and depth to two blocks",
+              64,
+              "128 / 2",
+              600
+            ],
+            [
+              "R4",
+              "Increase updates from 600 to 1800",
+              64,
+              "128 / 2",
+              1800
+            ],
+            [
+              "R5",
+              "Add 100-step warmup and cosine learning-rate decay",
+              64,
+              "128 / 2",
+              1800
+            ]
+          ]
+        }
+      ],
+      "notes": "Each scratch run restarts seed 42 and its own batch generator. R1 adds training; R2 adds context; R3 adds width and depth together; R4 adds training; R5 adds a schedule. These are practical attempts, not five guaranteed successes or an equal-compute ablation."
+    },
+    {
+      "section": "Study 1 / all results",
+      "title": "The baseline experiment table",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Run",
+            "Parameters",
+            "Train loss",
+            "Val loss",
+            "Val BPB",
+            "Val PPL",
+            "Val accuracy"
+          ],
+          "rows": [
+            [
+              "R0",
+              "68,544",
+              "2.403",
+              "2.558",
+              "3.690",
+              "12.910",
+              "29.2%"
+            ],
+            [
+              "R1",
+              "68,544",
+              "1.989",
+              "2.139",
+              "3.086",
+              "8.494",
+              "40.3%"
+            ],
+            [
+              "R2",
+              "70,592",
+              "1.946",
+              "2.177",
+              "3.141",
+              "8.824",
+              "39.5%"
+            ],
+            [
+              "R3",
+              "437,760",
+              "1.636",
+              "1.889",
+              "2.725",
+              "6.610",
+              "46.4%"
+            ],
+            [
+              "R4",
+              "437,760",
+              "1.078",
+              "1.622",
+              "2.339",
+              "5.061",
+              "54.8%"
+            ],
+            [
+              "R5",
+              "437,760",
+              "1.158",
+              "1.641",
+              "2.368",
+              "5.162",
+              "53.5%"
+            ]
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "R2 and R5 regressed. Keep R4, not merely the latest run."
+        }
+      ],
+      "notes": "The scores use each run's validation-selected checkpoint. Loss is nats per byte; BPB=loss/ln(2), PPL=exp(loss). Uniform prediction has 8 bits/byte. Larger context processes more bytes per update, and width/depth changes are bundled."
+    },
+    {
+      "section": "Study 1 / all curves",
+      "title": "Learning curves expose diminishing returns",
+      "blocks": [
+        {
+          "kind": "chart",
+          "label": "Updates within run \u2192; validation loss in nats \u2193",
+          "series": [
+            {
+              "name": "R0",
+              "points": [
+                [
+                  200,
+                  2.557994694056106
+                ]
+              ]
+            },
+            {
+              "name": "R1",
+              "points": [
+                [
+                  200,
+                  2.557994694056106
+                ],
+                [
+                  400,
+                  2.3005382113915402
+                ],
+                [
+                  600,
+                  2.1393411363351333
+                ]
+              ]
+            },
+            {
+              "name": "R2",
+              "points": [
+                [
+                  200,
+                  2.5333772343146848
+                ],
+                [
+                  400,
+                  2.320394607097114
+                ],
+                [
+                  600,
+                  2.1774274243307445
+                ]
+              ]
+            },
+            {
+              "name": "R3",
+              "points": [
+                [
+                  200,
+                  2.3150013679405674
+                ],
+                [
+                  400,
+                  2.0499697134418966
+                ],
+                [
+                  600,
+                  1.8885707496565374
+                ]
+              ]
+            },
+            {
+              "name": "R4",
+              "points": [
+                [
+                  200,
+                  2.3150013679405674
+                ],
+                [
+                  400,
+                  2.0499697134418966
+                ],
+                [
+                  600,
+                  1.8885707496565374
+                ],
+                [
+                  800,
+                  1.7966634713284293
+                ],
+                [
+                  1000,
+                  1.769998966382218
+                ],
+                [
+                  1200,
+                  1.7188122726113306
+                ],
+                [
+                  1400,
+                  1.717319822892705
+                ],
+                [
+                  1600,
+                  1.643341506189472
+                ],
+                [
+                  1800,
+                  1.6215154786976882
+                ]
+              ]
+            },
+            {
+              "name": "R5",
+              "points": [
+                [
+                  200,
+                  2.4342747762239014
+                ],
+                [
+                  400,
+                  2.047050792061782
+                ],
+                [
+                  600,
+                  1.9043678550242475
+                ],
+                [
+                  800,
+                  1.7924367107261787
+                ],
+                [
+                  1000,
+                  1.7694425370682438
+                ],
+                [
+                  1200,
+                  1.7092374915459914
+                ],
+                [
+                  1400,
+                  1.6992626730284428
+                ],
+                [
+                  1600,
+                  1.6730373226926076
+                ],
+                [
+                  1800,
+                  1.6413592542187416
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "R0/R1 overlap early; R3/R4 overlap through update 600."
+        }
+      ],
+      "notes": "This chart contains every recorded validation checkpoint from the first study. Initialization and sampled windows are identical within each matching prefix. Do not mix this validation loss with the expanded study's weighted score."
+    },
+    {
+      "section": "V1 / build recipe",
+      "title": "V1: retain the smallest useful teaching model",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Setting",
+            "V1"
+          ],
+          "rows": [
+            [
+              "Blocks / width / heads",
+              "2 / 128 / 4"
+            ],
+            [
+              "Context / dropout",
+              "64 bytes / 0.0"
+            ],
+            [
+              "Scratch updates / best",
+              "1,800 / 1,800"
+            ],
+            [
+              "Parameters",
+              "437,760"
+            ],
+            [
+              "Test accuracy / BPB",
+              "54.8% / 2.349"
+            ]
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "Retraining reproduced the original selected weights exactly: True."
+        }
+      ],
+      "notes": "V1 repeats the selected R4 architecture and recipe. It was retrained separately, not merely copied under a new name. The exact tensor equality check protects the original teaching model while optional dropout/depth support was added."
+    },
+    {
+      "section": "V2 / build recipe",
+      "title": "V2: context, one more block, and dropout",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Change from V1",
+            "V2"
+          ],
+          "rows": [
+            [
+              "Context",
+              "64 \u2192 128 bytes"
+            ],
+            [
+              "Blocks",
+              "2 \u2192 3"
+            ],
+            [
+              "Dropout",
+              "0 \u2192 0.1"
+            ],
+            [
+              "Parameters",
+              "644,224"
+            ],
+            [
+              "Scratch updates / selected",
+              "3,600 / 2,600"
+            ]
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "Still width 128, four heads, byte tokens, learned positions and tied embeddings."
+        }
+      ],
+      "notes": "V2 is scratch-trained, not warm-started from V1. Context, depth and regularization change together. It uses the original single-book training corpus. Adding dropout was intended to regularize, but this bundled comparison does not isolate its effect."
+    },
+    {
+      "section": "V1\u2013V2 / measured comparison",
+      "title": "V2 improves prediction, with more compute",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Version",
+            "Val loss",
+            "Full val loss",
+            "Test BPB",
+            "Test PPL",
+            "Test accuracy"
+          ],
+          "rows": [
+            [
+              "V1",
+              "1.622",
+              "1.573",
+              "2.349",
+              "5.094",
+              "54.8%"
+            ],
+            [
+              "V2",
+              "1.516",
+              "1.505",
+              "2.250",
+              "4.758",
+              "57.0%"
+            ]
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "V2 validation at 1,800 updates: 1.547; equal updates still are not equal compute."
+        }
+      ],
+      "notes": "V2 presents twice as many bytes per update and was run for twice the updates. The initial test was already published, so this comparison reuses a holdout rather than introducing a new independent test. Checkpoints still use validation only."
+    },
+    {
+      "section": "V1\u2013V2 / all curves",
+      "title": "Select a checkpoint, not the final optimizer step",
+      "blocks": [
+        {
+          "kind": "chart",
+          "label": "Updates within scratch run \u2192; original validation loss \u2193",
+          "series": [
+            {
+              "name": "V1",
+              "points": [
+                [
+                  200,
+                  2.3150013679405674
+                ],
+                [
+                  400,
+                  2.0499697134418966
+                ],
+                [
+                  600,
+                  1.8885707496565374
+                ],
+                [
+                  800,
+                  1.7966634713284293
+                ],
+                [
+                  1000,
+                  1.769998966382218
+                ],
+                [
+                  1200,
+                  1.7188122726113306
+                ],
+                [
+                  1400,
+                  1.717319822892705
+                ],
+                [
+                  1600,
+                  1.643341506189472
+                ],
+                [
+                  1800,
+                  1.6215154786976882
+                ]
+              ]
+            },
+            {
+              "name": "V2",
+              "points": [
+                [
+                  200,
+                  2.451228512738453
+                ],
+                [
+                  400,
+                  2.0888068029571514
+                ],
+                [
+                  600,
+                  1.9524562940946453
+                ],
+                [
+                  800,
+                  1.7836203206305754
+                ],
+                [
+                  1000,
+                  1.7349082647606338
+                ],
+                [
+                  1200,
+                  1.683399326227999
+                ],
+                [
+                  1400,
+                  1.6350241944808772
+                ],
+                [
+                  1600,
+                  1.5647099687629407
+                ],
+                [
+                  1800,
+                  1.5472487184818817
+                ],
+                [
+                  2000,
+                  1.5526413560474168
+                ],
+                [
+                  2200,
+                  1.5392671476386681
+                ],
+                [
+                  2400,
+                  1.5536768785556632
+                ],
+                [
+                  2600,
+                  1.516491312542641
+                ],
+                [
+                  2800,
+                  1.554725510050325
+                ],
+                [
+                  3000,
+                  1.5491810446250227
+                ],
+                [
+                  3200,
+                  1.5548281676497933
+                ],
+                [
+                  3400,
+                  1.552818922127618
+                ],
+                [
+                  3600,
+                  1.575491145382312
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "V2: selected update 2,600; final update 3,600 was worse."
+        }
+      ],
+      "notes": "The selection point is 2,600 of 3,600 executed updates. More training did not keep improving held-out loss. The original record preserves all checks, not just the best score. The expanded warm-start chain starts from this selected V2 state."
+    },
+    {
+      "section": "Evaluation design",
+      "title": "Three studies use two validation objectives",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Study",
+            "Selection target set",
+            "Selection objective"
+          ],
+          "rows": [
+            [
+              "R0\u2013R5",
+              "1,024 original bytes",
+              "Original validation loss"
+            ],
+            [
+              "V1\u2013V2",
+              "Same original bytes",
+              "Original validation loss"
+            ],
+            [
+              "V3\u2013V7",
+              "Original 1,024 + 5\u00d7256 new bytes",
+              "\u00bd original + \u00bd new-book macro loss"
+            ]
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "Compare all seven versions on the common expanded validation/test suites, not on incompatible selection scores."
+        }
+      ],
+      "notes": "The full original validation scores for V1/V2 were measured after selection. Expanded common validation includes all five new books even in stages not yet training on those books. This keeps target offsets and weighting identical across stages."
+    },
+    {
+      "section": "Continual data expansion",
+      "title": "Add one work per version",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Version",
+            "New work",
+            "Training books",
+            "Available train bytes"
+          ],
+          "rows": [
+            [
+              "V3",
+              "Alice's adventures in Wonderland",
+              2,
+              "250,152"
+            ],
+            [
+              "V4",
+              "The wonderful wizard of Oz",
+              3,
+              "418,197"
+            ],
+            [
+              "V5",
+              "Peter and Wendy",
+              4,
+              "625,761"
+            ],
+            [
+              "V6",
+              "The wind in the willows",
+              5,
+              "893,030"
+            ],
+            [
+              "V7",
+              "The secret garden",
+              6,
+              "1,240,716"
+            ]
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "The original training file is rehearsed; its validation/test bytes are never added to training."
+        }
+      ],
+      "notes": "V3 adds Alice; V4 Oz; V5 Peter; V6 Willows; V7 Secret Garden. Each stage trains on the cumulative allowed training documents. All per-document splits are frozen before training. These volumes are unique available training bytes, not repeated exposures."
+    },
+    {
+      "section": "Continual learning",
+      "title": "Checkpoint lineage is not optimizer lineage",
+      "blocks": [
+        {
+          "kind": "diagram",
+          "label": "Warm-start chain",
+          "labels": [
+            "V2\n2,600 selected",
+            "V3\n1,400 selected",
+            "V4\n1,800 selected",
+            "V5\n1,800 selected",
+            "V6\n1,800 selected",
+            "V7\n1,000 selected"
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "Load parent weights \u2192 create a fresh AdamW optimizer \u2192 train \u2192 select by common validation."
+        },
+        {
+          "kind": "text",
+          "text": "V1 is independent. V3\u2013V7 inherit selected weights, not parent optimizer moments."
+        }
+      ],
+      "notes": "All stages use seed 42, but they are not independent seeds or scratch runs. The parent SHA-256 is saved for each version. Executed updates can exceed the selected checkpoint's update count; inherited learning is based on the selected state."
+    },
+    {
+      "section": "Continual learning / actual code",
+      "title": "Warm starts plus controlled depth growth",
+      "blocks": [
+        {
+          "kind": "code",
+          "text": "def grow_depth(parent, layers):\n    if layers < parent.config.layers:\n        raise ValueError(\"Depth growth cannot remove existing blocks.\")\n    model = GPT(replace(parent.config, layers=layers)).to(parent.token.weight.device)\n    state = model.state_dict()\n    state.update(parent.state_dict())\n    model.load_state_dict(state)\n    # New residual branches start as identity, preserving the parent's inference.\n    for block in model.blocks[parent.config.layers:]:\n        nn.init.zeros_(block.attention.project.weight)\n        nn.init.zeros_(block.mlp[2].weight)\n    return model",
+          "source": "model.py:151-162 \u00b7 grow_depth",
+          "filename": "model.py",
+          "first_line": 151,
+          "last_line": 162
+        }
+      ],
+      "notes": "This is the entire helper. It only permits adding blocks. Existing state tensors are copied, then new attention and MLP output projection weights are zeroed. Their biases already initialize to zero. With dropout disabled, the new residual branches add zero, preserving the parent's inference function before training."
+    },
+    {
+      "section": "Continual learning / correctness",
+      "title": "A new block starts as identity, but can learn",
+      "blocks": [
+        {
+          "kind": "code",
+          "text": "def test_depth_growth_preserves_function_and_new_branch_can_learn(self):\n    parent = GPT(Config(context=16, width=32, layers=2, dropout=0.1)).eval()\n    x = torch.randint(256, (2, 16))\n    expected = parent(x)[0].detach()\n    grown = grow_depth(parent, 3).eval()\n    torch.testing.assert_close(grown(x)[0], expected, rtol=0, atol=0)\n    self.assertEqual(grown.config, replace(parent.config, layers=3))\n    grown(x, torch.randint(256, (2, 16)))[1].backward()\n    self.assertGreater(grown.blocks[2].attention.project.weight.grad.abs().sum().item(), 0)\n    self.assertGreater(grown.blocks[2].mlp[2].weight.grad.abs().sum().item(), 0)\n    torch.testing.assert_close(parent(x)[0], expected, rtol=0, atol=0)\n    with self.assertRaises(ValueError):",
+          "source": "test_expanded.py:32-43 \u00b7 ExpandedTests.test_depth_growth_preserves_function_and_new_branch_can_learn",
+          "filename": "test_expanded.py",
+          "first_line": 32,
+          "last_line": 43
+        },
+        {
+          "kind": "text",
+          "text": "Zero output weights do not freeze the branch: output projections receive gradients on the first step."
+        }
+      ],
+      "notes": "Upstream parameters in a zero-output branch initially get no gradient through that zero projection; after the projection begins learning, their gradients can flow. The test checks exact inference preservation and nonzero gradients on both output projection matrices. Parent parameters are not aliased or modified."
+    },
+    {
+      "section": "Document-aware training / code",
+      "title": "Choose a document before choosing its window",
+      "blocks": [
+        {
+          "kind": "code",
+          "text": "def document_batch(documents, context, rng, batch_size=32):\n    if not documents or any(len(document) <= context for document in documents):\n        raise ValueError(\"Each training document must contain a complete shifted window.\")\n    if len(documents) < 2:\n        raise ValueError(\"Expanded training needs the original plus at least one new book.\")\n    weights = torch.tensor([0.5] + [0.5 / (len(documents) - 1)] * (len(documents) - 1))\n    chosen = torch.multinomial(weights, batch_size, replacement=True, generator=rng)\n    x = torch.empty((batch_size, context), dtype=torch.long)\n    y = torch.empty_like(x)",
+          "source": "train_expanded.py:44-52 \u00b7 document_batch",
+          "filename": "train_expanded.py",
+          "first_line": 44,
+          "last_line": 52
+        },
+        {
+          "kind": "text",
+          "text": "P(original)=0.5; P(each new book)=0.5 / number_of_new_books."
+        }
+      ],
+      "notes": "Rehearsal deliberately oversamples the small original document. It aims to reduce forgetting of the original style while sharing the rest of the windows across new works equally, not proportionally to their byte lengths."
+    },
+    {
+      "section": "Document-aware training / code",
+      "title": "No batch row crosses a book boundary",
+      "blocks": [
+        {
+          "kind": "code",
+          "text": "for index in chosen.unique().tolist():\n    rows = (chosen == index).nonzero().flatten()\n    x[rows], y[rows] = batch(documents[index], context, len(rows), rng, \"cpu\")\nreturn x, y, chosen",
+          "source": "train_expanded.py:53-56 \u00b7 document_batch",
+          "filename": "train_expanded.py",
+          "first_line": 53,
+          "last_line": 56
+        },
+        {
+          "kind": "text",
+          "text": "Group selected rows by document; call the original shifted-window helper for that document only."
+        }
+      ],
+      "notes": "x and y are assembled after document-local sampling. Concatenating documents and sampling arbitrary windows would create artificial transitions and could cross holdout boundaries. The tests use constant-valued synthetic books to make any crossing immediately visible."
+    },
+    {
+      "section": "Document-aware training / actual exposure",
+      "title": "How much each document is actually sampled",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "V7 document",
+            "Windows",
+            "Share of V7 windows"
+          ],
+          "rows": [
+            [
+              "original",
+              "41,656",
+              "50.1%"
+            ],
+            [
+              "alice",
+              "8,253",
+              "9.9%"
+            ],
+            [
+              "oz",
+              "8,366",
+              "10.1%"
+            ],
+            [
+              "peter",
+              "8,160",
+              "9.8%"
+            ],
+            [
+              "willows",
+              "8,395",
+              "10.1%"
+            ],
+            [
+              "garden",
+              "8,370",
+              "10.1%"
+            ]
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "Random mixture counts are recorded, rather than assumed to equal their expected percentages."
+        }
+      ],
+      "notes": "Every row is a 128-byte context with 128 shifted targets. Windows are sampled with replacement and overlap within the training partition. Available training bytes and total presented bytes are different quantities."
+    },
+    {
+      "section": "Common validation / actual code",
+      "title": "The same weighted score selects every new version",
+      "blocks": [
+        {
+          "kind": "code",
+          "text": "def suite(model, documents, positions, device):\n    per_book = {name: evaluate(model, content, positions[name], device)\n                for name, content in documents.items()}\n    new_metrics = [per_book[book[\"name\"]] for book in BOOKS]\n    macro = combine(new_metrics, [1 / len(new_metrics)] * len(new_metrics))\n    combined = combine([per_book[\"original\"], macro], [0.5, 0.5])\n    return dict(per_book=per_book, new_books_macro=macro, combined=combined)",
+          "source": "train_expanded.py:71-77 \u00b7 suite",
+          "filename": "train_expanded.py",
+          "first_line": 71,
+          "last_line": 77
+        },
+        {
+          "kind": "text",
+          "text": "loss = 0.5\u00b7original_loss + 0.1\u00b7(Alice + Oz + Peter + Willows + Garden losses)."
+        }
+      ],
+      "notes": "combine averages losses and accuracies with explicit weights, then computes PPL=exp(averaged loss), not average(per-book PPL). The five-book macro prevents the longest book from dominating. The original gets half the selection weight by design; it is not an unbiased corpus-size-weighted benchmark."
+    },
+    {
+      "section": "Checkpoint selection / actual code",
+      "title": "Save only when held-out loss improves",
+      "blocks": [
+        {
+          "kind": "code",
+          "text": "initial = suite(model, validation, positions, device)\nbest_loss = initial[\"combined\"][\"loss\"]\nbest_step = 0\nsave_model(model, path)\ncurve = [dict(step=0, validation=initial, elapsed_seconds=0.0)]",
+          "source": "train_expanded.py:90-94 \u00b7 train_version",
+          "filename": "train_expanded.py",
+          "first_line": 90,
+          "last_line": 94
+        },
+        {
+          "kind": "code",
+          "text": "if metrics[\"combined\"][\"loss\"] < best_loss:\n    best_loss, best_step = metrics[\"combined\"][\"loss\"], step\n    save_model(model, path)",
+          "source": "train_expanded.py:123-125 \u00b7 train_version",
+          "filename": "train_expanded.py",
+          "first_line": 123,
+          "last_line": 125
+        },
+        {
+          "kind": "text",
+          "text": "The initial parent is a valid candidate. Neither test score chooses a checkpoint."
+        }
+      ],
+      "notes": "Every 200 updates, the same validation suite is measured. The initial parent is saved at step zero; a stage can honestly fail to improve. In the actual runs every new version selected a later checkpoint. Test performance is scored after all five choices are finalized."
+    },
+    {
+      "section": "Compute / all executed runs",
+      "title": "Budgets and selected checkpoints are different",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Version",
+            "Executed / selected",
+            "Presented bytes",
+            "Training seconds"
+          ],
+          "rows": [
+            [
+              "V1",
+              "1,800 / 1,800",
+              "3,686,400",
+              "25.4"
+            ],
+            [
+              "V2",
+              "3,600 / 2,600",
+              "14,745,600",
+              "198.9"
+            ],
+            [
+              "V3",
+              "1,800 / 1,400",
+              "7,372,800",
+              "107.4"
+            ],
+            [
+              "V4",
+              "1,800 / 1,800",
+              "7,372,800",
+              "109.1"
+            ],
+            [
+              "V5",
+              "1,800 / 1,800",
+              "7,372,800",
+              "138.6"
+            ],
+            [
+              "V6",
+              "1,800 / 1,800",
+              "7,372,800",
+              "146.6"
+            ],
+            [
+              "V7",
+              "2,600 / 1,000",
+              "10,649,600",
+              "219.6"
+            ]
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "Times include periodic validation/checkpoint overhead; exclude final test and sample generation."
+        }
+      ],
+      "notes": "V2 executes 3,600 but selects 2,600. V3 selects 1,400 of 1,800. V7 selects 1,000 of 2,600. Later versions also inherit earlier selected computation. Do not describe this as an equal-compute comparison."
+    },
+    {
+      "section": "V3 / exact build",
+      "title": "V3: add alice and continue learning",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Build detail",
+            "Recorded value"
+          ],
+          "rows": [
+            [
+              "Parent checkpoint",
+              "V2.pt"
+            ],
+            [
+              "Added book",
+              "Alice's adventures in Wonderland"
+            ],
+            [
+              "Blocks / width / heads / context",
+              "3 / 128 / 4 / 128 bytes"
+            ],
+            [
+              "Available training bytes",
+              "250,152"
+            ],
+            [
+              "Updates executed / selected",
+              "1,800 / 1,400"
+            ],
+            [
+              "Common loss: parent \u2192 selected",
+              "1.743 \u2192 1.599"
+            ],
+            [
+              "Original / fresh test accuracy",
+              "59.6% / 53.8%"
+            ]
+          ]
+        }
+      ],
+      "notes": "V3 loads the recorded parent state and resets optimizer moments. The additional work is Alice's adventures in Wonderland. Only this and earlier new works are in training. All five new validation books remain in the common selection suite. No new block is introduced in this stage. Fixed examples are in the appendix; compare their errors, not just the aggregate score."
+    },
+    {
+      "section": "V4 / exact build",
+      "title": "V4: add oz and continue learning",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Build detail",
+            "Recorded value"
+          ],
+          "rows": [
+            [
+              "Parent checkpoint",
+              "V3.pt"
+            ],
+            [
+              "Added book",
+              "The wonderful wizard of Oz"
+            ],
+            [
+              "Blocks / width / heads / context",
+              "3 / 128 / 4 / 128 bytes"
+            ],
+            [
+              "Available training bytes",
+              "418,197"
+            ],
+            [
+              "Updates executed / selected",
+              "1,800 / 1,800"
+            ],
+            [
+              "Common loss: parent \u2192 selected",
+              "1.599 \u2192 1.497"
+            ],
+            [
+              "Original / fresh test accuracy",
+              "60.5% / 56.5%"
+            ]
+          ]
+        }
+      ],
+      "notes": "V4 loads the recorded parent state and resets optimizer moments. The additional work is The wonderful wizard of Oz. Only this and earlier new works are in training. All five new validation books remain in the common selection suite. No new block is introduced in this stage. Fixed examples are in the appendix; compare their errors, not just the aggregate score."
+    },
+    {
+      "section": "V5 / exact build",
+      "title": "V5: add peter and continue learning",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Build detail",
+            "Recorded value"
+          ],
+          "rows": [
+            [
+              "Parent checkpoint",
+              "V4.pt"
+            ],
+            [
+              "Added book",
+              "Peter and Wendy"
+            ],
+            [
+              "Blocks / width / heads / context",
+              "4 / 128 / 4 / 128 bytes"
+            ],
+            [
+              "Available training bytes",
+              "625,761"
+            ],
+            [
+              "Updates executed / selected",
+              "1,800 / 1,800"
+            ],
+            [
+              "Common loss: parent \u2192 selected",
+              "1.497 \u2192 1.447"
+            ],
+            [
+              "Original / fresh test accuracy",
+              "60.8% / 58.1%"
+            ]
+          ]
+        }
+      ],
+      "notes": "V5 loads the recorded parent state and resets optimizer moments. The additional work is Peter and Wendy. Only this and earlier new works are in training. All five new validation books remain in the common selection suite. V5 introduces the identity-initialized fourth block. Fixed examples are in the appendix; compare their errors, not just the aggregate score."
+    },
+    {
+      "section": "V6 / exact build",
+      "title": "V6: add willows and continue learning",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Build detail",
+            "Recorded value"
+          ],
+          "rows": [
+            [
+              "Parent checkpoint",
+              "V5.pt"
+            ],
+            [
+              "Added book",
+              "The wind in the willows"
+            ],
+            [
+              "Blocks / width / heads / context",
+              "4 / 128 / 4 / 128 bytes"
+            ],
+            [
+              "Available training bytes",
+              "893,030"
+            ],
+            [
+              "Updates executed / selected",
+              "1,800 / 1,800"
+            ],
+            [
+              "Common loss: parent \u2192 selected",
+              "1.447 \u2192 1.416"
+            ],
+            [
+              "Original / fresh test accuracy",
+              "60.8% / 58.5%"
+            ]
+          ]
+        }
+      ],
+      "notes": "V6 loads the recorded parent state and resets optimizer moments. The additional work is The wind in the willows. Only this and earlier new works are in training. All five new validation books remain in the common selection suite. No new block is introduced in this stage. Fixed examples are in the appendix; compare their errors, not just the aggregate score."
+    },
+    {
+      "section": "V7 / exact build",
+      "title": "V7: add garden and continue learning",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Build detail",
+            "Recorded value"
+          ],
+          "rows": [
+            [
+              "Parent checkpoint",
+              "V6.pt"
+            ],
+            [
+              "Added book",
+              "The secret garden"
+            ],
+            [
+              "Blocks / width / heads / context",
+              "4 / 128 / 4 / 128 bytes"
+            ],
+            [
+              "Available training bytes",
+              "1,240,716"
+            ],
+            [
+              "Updates executed / selected",
+              "2,600 / 1,000"
+            ],
+            [
+              "Common loss: parent \u2192 selected",
+              "1.416 \u2192 1.391"
+            ],
+            [
+              "Original / fresh test accuracy",
+              "61.2% / 59.2%"
+            ]
+          ]
+        }
+      ],
+      "notes": "V7 loads the recorded parent state and resets optimizer moments. The additional work is The secret garden. Only this and earlier new works are in training. All five new validation books remain in the common selection suite. No new block is introduced in this stage. Fixed examples are in the appendix; compare their errors, not just the aggregate score."
+    },
+    {
+      "section": "V3\u2013V7 / all learning curves",
+      "title": "Common validation improves across the warm-start chain",
+      "blocks": [
+        {
+          "kind": "chart",
+          "label": "Updates within this stage \u2192; common weighted validation loss \u2193",
+          "series": [
+            {
+              "name": "V3",
+              "points": [
+                [
+                  0,
+                  1.7428132494331678
+                ],
+                [
+                  200,
+                  1.6324532041084758
+                ],
+                [
+                  400,
+                  1.6090510674160001
+                ],
+                [
+                  600,
+                  1.6085128890546572
+                ],
+                [
+                  800,
+                  1.6043980796598625
+                ],
+                [
+                  1000,
+                  1.5993368996039878
+                ],
+                [
+                  1200,
+                  1.6094628032886924
+                ],
+                [
+                  1400,
+                  1.5989206128371847
+                ],
+                [
+                  1600,
+                  1.6027994081970363
+                ],
+                [
+                  1800,
+                  1.6023563195603696
+                ]
+              ]
+            },
+            {
+              "name": "V4",
+              "points": [
+                [
+                  0,
+                  1.5989206128371847
+                ],
+                [
+                  200,
+                  1.5262083290257742
+                ],
+                [
+                  400,
+                  1.5178314836537163
+                ],
+                [
+                  600,
+                  1.518689386631462
+                ],
+                [
+                  800,
+                  1.5077732091318063
+                ],
+                [
+                  1000,
+                  1.5035908244093037
+                ],
+                [
+                  1200,
+                  1.513798604062302
+                ],
+                [
+                  1400,
+                  1.505142697865812
+                ],
+                [
+                  1600,
+                  1.5029478622518273
+                ],
+                [
+                  1800,
+                  1.4973843613349573
+                ]
+              ]
+            },
+            {
+              "name": "V5",
+              "points": [
+                [
+                  0,
+                  1.4973843613349573
+                ],
+                [
+                  200,
+                  1.4802036509186807
+                ],
+                [
+                  400,
+                  1.4709103668881611
+                ],
+                [
+                  600,
+                  1.472759174752006
+                ],
+                [
+                  800,
+                  1.4693145528985885
+                ],
+                [
+                  1000,
+                  1.461206639491171
+                ],
+                [
+                  1200,
+                  1.4655988387568066
+                ],
+                [
+                  1400,
+                  1.4596669190906626
+                ],
+                [
+                  1600,
+                  1.4664091033233069
+                ],
+                [
+                  1800,
+                  1.446878502533573
+                ]
+              ]
+            },
+            {
+              "name": "V6",
+              "points": [
+                [
+                  0,
+                  1.446878502533573
+                ],
+                [
+                  200,
+                  1.4414501335630665
+                ],
+                [
+                  400,
+                  1.4408242381423952
+                ],
+                [
+                  600,
+                  1.4318159327766131
+                ],
+                [
+                  800,
+                  1.4280590056875486
+                ],
+                [
+                  1000,
+                  1.4199561206690536
+                ],
+                [
+                  1200,
+                  1.4242043918163134
+                ],
+                [
+                  1400,
+                  1.4358786695102772
+                ],
+                [
+                  1600,
+                  1.4247753477878087
+                ],
+                [
+                  1800,
+                  1.4163309040209033
+                ]
+              ]
+            },
+            {
+              "name": "V7",
+              "points": [
+                [
+                  0,
+                  1.4163309040209033
+                ],
+                [
+                  200,
+                  1.4214417297682385
+                ],
+                [
+                  400,
+                  1.411633318910185
+                ],
+                [
+                  600,
+                  1.4090749415136314
+                ],
+                [
+                  800,
+                  1.4059212036487163
+                ],
+                [
+                  1000,
+                  1.3914656066643296
+                ],
+                [
+                  1200,
+                  1.4011249063741356
+                ],
+                [
+                  1400,
+                  1.4159099676301956
+                ],
+                [
+                  1600,
+                  1.403950408226722
+                ],
+                [
+                  1800,
+                  1.3963290440166363
+                ],
+                [
+                  2000,
+                  1.3938010948581911
+                ],
+                [
+                  2200,
+                  1.399856463853713
+                ],
+                [
+                  2400,
+                  1.3956028645584393
+                ],
+                [
+                  2600,
+                  1.3944448711935706
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "All points use the same targets and weights. Stage zero is the inherited checkpoint."
+        }
+      ],
+      "notes": "Each line includes every recorded point, including step zero. The curves have different initial states, data coverage and inherited compute. V7's selected update is 1,000 even though the run continued to 2,600. This is not a test-tuning curve."
+    },
+    {
+      "section": "All seven versions / comparable results",
+      "title": "The final accuracy and loss table",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Version",
+            "Common val loss",
+            "Original test",
+            "Fresh macro",
+            "Fresh BPB",
+            "Fresh PPL"
+          ],
+          "rows": [
+            [
+              "V1",
+              "1.820",
+              "54.8%",
+              "48.8%",
+              "2.766",
+              "6.803"
+            ],
+            [
+              "V2",
+              "1.743",
+              "57.0%",
+              "51.1%",
+              "2.694",
+              "6.473"
+            ],
+            [
+              "V3",
+              "1.599",
+              "59.6%",
+              "53.8%",
+              "2.475",
+              "5.560"
+            ],
+            [
+              "V4",
+              "1.497",
+              "60.5%",
+              "56.5%",
+              "2.281",
+              "4.861"
+            ],
+            [
+              "V5",
+              "1.447",
+              "60.8%",
+              "58.1%",
+              "2.129",
+              "4.375"
+            ],
+            [
+              "V6",
+              "1.416",
+              "60.8%",
+              "58.5%",
+              "2.060",
+              "4.171"
+            ],
+            [
+              "V7",
+              "1.391",
+              "61.2%",
+              "59.2%",
+              "2.018",
+              "4.052"
+            ]
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "Original test: 16,300 targets, reused. New test: 5\u00d72,048 targets, first scored after selection."
+        }
+      ],
+      "notes": "All rows score identical target sets. The fresh set is new to this study but comes from held-out passages of the same five books, not unseen authors. The selected new recommendation is V7 by common validation, not by its test score."
+    },
+    {
+      "section": "All per-book results",
+      "title": "Fresh test accuracy by book",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Version",
+            "Alice",
+            "Oz",
+            "Peter",
+            "Willows",
+            "Garden"
+          ],
+          "rows": [
+            [
+              "V1",
+              "53.4%",
+              "48.5%",
+              "48.2%",
+              "46.0%",
+              "47.7%"
+            ],
+            [
+              "V2",
+              "56.9%",
+              "49.8%",
+              "49.5%",
+              "48.8%",
+              "50.6%"
+            ],
+            [
+              "V3",
+              "59.8%",
+              "52.4%",
+              "53.5%",
+              "50.3%",
+              "53.1%"
+            ],
+            [
+              "V4",
+              "60.7%",
+              "59.5%",
+              "55.0%",
+              "52.3%",
+              "54.7%"
+            ],
+            [
+              "V5",
+              "60.7%",
+              "60.6%",
+              "59.6%",
+              "54.0%",
+              "55.4%"
+            ],
+            [
+              "V6",
+              "60.3%",
+              "60.4%",
+              "59.4%",
+              "56.7%",
+              "55.9%"
+            ],
+            [
+              "V7",
+              "60.8%",
+              "60.5%",
+              "60.4%",
+              "56.2%",
+              "58.1%"
+            ]
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "Percent of next-byte targets predicted correctly."
+        }
+      ],
+      "notes": "These are all seven versions on the same 2,048 distinct targets in each book. Equal-book macro metrics give each work equal weight. Report every domain, including regressions; do not cherry-pick only the added book or best sample."
+    },
+    {
+      "section": "All per-book results",
+      "title": "Fresh test loss by book",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Version",
+            "Alice",
+            "Oz",
+            "Peter",
+            "Willows",
+            "Garden"
+          ],
+          "rows": [
+            [
+              "V1",
+              "1.706",
+              "1.932",
+              "1.975",
+              "2.060",
+              "1.914"
+            ],
+            [
+              "V2",
+              "1.628",
+              "1.918",
+              "1.931",
+              "2.011",
+              "1.851"
+            ],
+            [
+              "V3",
+              "1.433",
+              "1.779",
+              "1.775",
+              "1.844",
+              "1.748"
+            ],
+            [
+              "V4",
+              "1.381",
+              "1.379",
+              "1.700",
+              "1.777",
+              "1.668"
+            ],
+            [
+              "V5",
+              "1.351",
+              "1.334",
+              "1.412",
+              "1.686",
+              "1.597"
+            ],
+            [
+              "V6",
+              "1.358",
+              "1.329",
+              "1.383",
+              "1.505",
+              "1.566"
+            ],
+            [
+              "V7",
+              "1.348",
+              "1.339",
+              "1.367",
+              "1.513",
+              "1.429"
+            ]
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "Nats per byte; lower is better."
+        }
+      ],
+      "notes": "These are all seven versions on the same 2,048 distinct targets in each book. Equal-book macro metrics give each work equal weight. Report every domain, including regressions; do not cherry-pick only the added book or best sample."
+    },
+    {
+      "section": "All per-book results",
+      "title": "Fresh test bits per byte by book",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Version",
+            "Alice",
+            "Oz",
+            "Peter",
+            "Willows",
+            "Garden"
+          ],
+          "rows": [
+            [
+              "V1",
+              "2.461",
+              "2.787",
+              "2.849",
+              "2.973",
+              "2.762"
+            ],
+            [
+              "V2",
+              "2.349",
+              "2.766",
+              "2.786",
+              "2.901",
+              "2.670"
+            ],
+            [
+              "V3",
+              "2.067",
+              "2.566",
+              "2.560",
+              "2.661",
+              "2.522"
+            ],
+            [
+              "V4",
+              "1.993",
+              "1.990",
+              "2.453",
+              "2.564",
+              "2.407"
+            ],
+            [
+              "V5",
+              "1.950",
+              "1.925",
+              "2.038",
+              "2.432",
+              "2.303"
+            ],
+            [
+              "V6",
+              "1.960",
+              "1.917",
+              "1.995",
+              "2.171",
+              "2.259"
+            ],
+            [
+              "V7",
+              "1.944",
+              "1.931",
+              "1.972",
+              "2.183",
+              "2.061"
+            ]
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "Loss divided by ln(2); lower is better."
+        }
+      ],
+      "notes": "These are all seven versions on the same 2,048 distinct targets in each book. Equal-book macro metrics give each work equal weight. Report every domain, including regressions; do not cherry-pick only the added book or best sample."
+    },
+    {
+      "section": "All per-book results",
+      "title": "Fresh test byte perplexity by book",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Version",
+            "Alice",
+            "Oz",
+            "Peter",
+            "Willows",
+            "Garden"
+          ],
+          "rows": [
+            [
+              "V1",
+              "5.506",
+              "6.901",
+              "7.207",
+              "7.849",
+              "6.781"
+            ],
+            [
+              "V2",
+              "5.095",
+              "6.804",
+              "6.898",
+              "7.468",
+              "6.363"
+            ],
+            [
+              "V3",
+              "4.191",
+              "5.921",
+              "5.898",
+              "6.324",
+              "5.743"
+            ],
+            [
+              "V4",
+              "3.981",
+              "3.971",
+              "5.475",
+              "5.913",
+              "5.302"
+            ],
+            [
+              "V5",
+              "3.863",
+              "3.796",
+              "4.105",
+              "5.396",
+              "4.936"
+            ],
+            [
+              "V6",
+              "3.890",
+              "3.776",
+              "3.985",
+              "4.503",
+              "4.788"
+            ],
+            [
+              "V7",
+              "3.848",
+              "3.814",
+              "3.924",
+              "4.541",
+              "4.174"
+            ]
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "exp(loss), not BPE token perplexity."
+        }
+      ],
+      "notes": "These are all seven versions on the same 2,048 distinct targets in each book. Equal-book macro metrics give each work equal weight. Report every domain, including regressions; do not cherry-pick only the added book or best sample."
+    },
+    {
+      "section": "Results / tradeoffs",
+      "title": "Aggregate gains do not mean every domain improved",
+      "blocks": [
+        {
+          "kind": "points",
+          "items": [
+            "V6 improves Willows, but Alice, Oz and Peter accuracy each fall slightly from V5.",
+            "V7 improves Garden, while Willows falls from V6.",
+            "A rehearsal mixture protects the original book; it also biases the learning objective.",
+            "Data, depth and cumulative compute are bundled: no causal attribution from this study."
+          ]
+        }
+      ],
+      "notes": "The actual per-book tables make these reversals visible. V6\u2192V7 Willows goes from about 56.7% to 56.2%, despite improved macro accuracy. A model with broader training is not automatically superior for every target distribution."
+    },
+    {
+      "section": "Results / generalization",
+      "title": "Training loss is not a generalization guarantee",
+      "blocks": [
+        {
+          "kind": "table",
+          "headers": [
+            "Version",
+            "Original train loss",
+            "Original validation loss",
+            "Fresh test macro loss"
+          ],
+          "rows": [
+            [
+              "V1",
+              "1.078",
+              "1.622",
+              "1.917"
+            ],
+            [
+              "V2",
+              "0.942",
+              "1.516",
+              "1.868"
+            ],
+            [
+              "V3",
+              "0.754",
+              "1.427",
+              "1.716"
+            ],
+            [
+              "V4",
+              "0.788",
+              "1.391",
+              "1.581"
+            ],
+            [
+              "V5",
+              "0.740",
+              "1.369",
+              "1.476"
+            ],
+            [
+              "V6",
+              "0.717",
+              "1.360",
+              "1.428"
+            ],
+            [
+              "V7",
+              "0.704",
+              "1.344",
+              "1.399"
+            ]
+          ]
+        }
+      ],
+      "notes": "Train diagnostics use fixed sampled training targets with dropout disabled, not the noisy last minibatch loss. The first and expanded studies use different diagnostic sample sizes, so treat train gaps as qualitative evidence, not a controlled gap benchmark. A small context and repeated book exposure still permit overfitting."
+    },
+    {
+      "section": "Generation / actual code",
+      "title": "Generate by repeatedly predicting the last position",
+      "blocks": [
+        {
+          "kind": "code",
+          "text": "    for _ in range(count):\n        logits, _ = self(tokens[:, -self.config.context:])\n        logits = logits[:, -1].float() / temperature\n        cutoff = logits.topk(top_k).values[:, -1:]\n        logits = logits.masked_fill(logits < cutoff, float(\"-inf\"))\n        # CPU sampling gives a reproducible RNG on CPU and Apple MPS.\n        next_token = torch.multinomial(logits.softmax(-1).cpu(), 1, generator=rng)\n        tokens = torch.cat((tokens, next_token.to(tokens.device)), dim=1)\nfinally:\n    self.train(training)",
+          "source": "model.py:127-136 \u00b7 GPT.generate",
+          "filename": "model.py",
+          "first_line": 127,
+          "last_line": 136
+        },
+        {
+          "kind": "text",
+          "text": "Crop to context; recompute learned positions; sample; append; repeat."
+        }
+      ],
+      "notes": "The model is set to eval; generation uses no_grad and a local CPU sampling generator. After generation it restores the previous train/eval mode. No KV cache is used, so the full cropped window is recomputed for every emitted byte."
+    },
+    {
+      "section": "Generation / decoder choices",
+      "title": "Temperature and top-k do not change learned quality",
+      "blocks": [
+        {
+          "kind": "points",
+          "items": [
+            "Temperature \u03c4 scales logits: probabilities = softmax(logits / \u03c4).",
+            "Lower \u03c4 sharpens probabilities; higher \u03c4 adds randomness.",
+            "Top-k suppresses all but the k highest-scoring byte logits.",
+            "Every recorded sample uses \u03c4=0.8, k=40, 240 generated bytes, fixed seeds."
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "Reported loss/accuracy use raw model logits, not temperature or top-k filtering."
+        }
+      ],
+      "notes": "Decoding can make samples look cleaner while leaving held-out predictive scores unchanged. Fixed seeds make a controlled qualitative comparison; they do not make one sample representative of all outputs. Invalid UTF-8 can be produced."
+    },
+    {
+      "section": "Generation / actual outcomes",
+      "title": "Improved byte prediction is not coherent writing",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "V1 \u00b7 seed 123 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Alice said, \" Sof I could stand way that's got in the was just in surpal so did nothing sordon, in then Sheed me all and of you me with phim sigh it, you may hands ear it had called round his a sighed, went he led was great to to shower, and she was go ",
+              "sample_id": "v1v2:v1:0"
+            },
+            {
+              "label": "V7 \u00b7 seed 123 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Alice said, \" So you see you to drift the window ? \"\n\n\" Well, it's a plan of beautiful Hatta lagoon handked it to herself, \" Do you know her hands all them are not before had called round him, but one come of the night way by a short eyes of the side of",
+              "sample_id": "expanded:v7:0"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "Compare spelling, local syntax, repetition and meaning separately."
+        }
+      ],
+      "notes": "These are unedited outputs for the same prompt, seed and decoding settings. Both can contain recognizable clauses while failing grammar or story continuity. A 100% training-lexicon hit rate can coexist with nonsense. The appendix contains every recorded output so the visible examples are not the only evidence."
+    },
+    {
+      "section": "Correctness / evidence",
+      "title": "What the 16 tests and artifact checks establish",
+      "blocks": [
+        {
+          "kind": "points",
+          "items": [
+            "Future bytes do not change earlier logits; shifted targets stay in the split.",
+            "Loss/backpropagation work; a toy sequence can be learned.",
+            "Old checkpoints still load; dropout/generation modes are restored.",
+            "Document windows cannot cross books; exact-span overlap and checksum changes are detected.",
+            "Added depth preserves inference initially and has learnable output branches."
+          ]
+        }
+      ],
+      "notes": "Test sources: test_model.py and test_expanded.py. report_expanded.py reloaded all seven models, reproduced all 35 expanded samples and both metric suites, and checked parent lineage plus frozen artifacts. These checks establish implementation correctness and reproducibility, not general intelligence."
+    },
+    {
+      "section": "Limits / next experiments",
+      "title": "What the evidence does and does not support",
+      "blocks": [
+        {
+          "kind": "points",
+          "items": [
+            "Supports: learned local language and better held-out next-byte prediction.",
+            "Does not support: a reliable chatbot, factual answers or coherent long stories.",
+            "Limits: one seed, short contexts, within-book holdouts, OCR noise, repeated validation.",
+            "Next: clean/diverse books, byte-level BPE with comparable BPB, multi-seed ablations, fresh document-level tests."
+          ]
+        }
+      ],
+      "notes": "The strided 128-byte audit found no matches in 2,406 checked holdout spans but is not exhaustive semantic deduplication. The original test was published repeatedly. Do not tune further on the fresh expanded test and continue calling it fresh. Future RoPE/cache/fused-attention lessons should distinguish quality from efficiency."
+    },
+    {
+      "section": "Live lab / reproduction",
+      "title": "Run the models and verify the evidence",
+      "blocks": [
+        {
+          "kind": "code",
+          "text": "python3 -m unittest -v\npython3 generate.py --version v1 --device cpu\npython3 generate.py --version v7 --device cpu\npython3 verify_artifacts.py\npython3 report_expanded.py\n\n# Reproduce five warm-started versions (overwrites V3-V7):\npython3 train_expanded.py --device cpu",
+          "source": "README.md \u00b7 run from /Users/michalfu/mini-gpt-classroom"
+        },
+        {
+          "kind": "text",
+          "text": "All seven checkpoints are included; no new training is required to use this lecture."
+        }
+      ],
+      "notes": "The dependency is PyTorch. Presentation export additionally uses python-pptx in an isolated environment. Defaults preserve the original final.pt; select v7 explicitly for the expanded model. Existing reports retain code/data provenance and all curves."
+    },
+    {
+      "section": "Sources / closing",
+      "title": "Source-linked results, not invented examples",
+      "blocks": [
+        {
+          "kind": "points",
+          "items": [
+            "OpenAI GPT-2 model: github.com/openai/gpt-2/blob/master/src/model.py",
+            "Architecture/code: model.py; training: train.py, train_versions.py, train_expanded.py.",
+            "Data provenance: data/provenance.json and data/expanded/manifest.json.",
+            "Results: RESULTS.md, VERSIONS.md, EXPANDED_RESULTS.md and their JSON sources.",
+            "Appendix follows: all recorded generation samples, unchanged."
+          ]
+        }
+      ],
+      "notes": "Original corpus item: throughlookinggl00carruoft. Added items: alicesadventures00carruoft; wonderfulwizardo00baumiala; peterwendy00barr; windinwillows00grah; secretgarden00burn. Each is accessible at https://archive.org/details/ITEM . Model and data hashes are in the lecture manifest. Use the original short deck for an introduction, this deck for the complete walkthrough."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "R0_BASELINE: unedited samples 1/1",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "R0_BASELINE \u00b7 seed 123 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Alice said, \" ! 'The s say the bre an tin we aly s d he \" thanitond f anal t thang w le arid oug s lound ghm I ty werer d  lyouint t selphd thit hind y ou, he wn s \"hinisThan ce thed the ig th thinous ce s The lduid s the thed tous tbed tove the m poug ",
+              "sample_id": "baseline:r0_baseline:0"
+            },
+            {
+              "label": "R0_BASELINE \u00b7 seed 124 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The Queen t talis aikin s tht they t topu shin ashid y hothe Hin f tofis s shicto s he oucang as t wald, we oon o t he thiwhe, t ooul, r wakelis t on hanled und, koling  fth than quguced ad anghed ay t it thawouooullld tid t thius, w wan we tout t st",
+              "sample_id": "baseline:r0_baseline:1"
+            },
+            {
+              "label": "R0_BASELINE \u00b7 seed 125 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The little y hthe wher ay and the ame ke Que ol ooas ce oul thin her hen w thex: \"\n\n\n\" ove \" ca t ceedned t whengut,an here wi, t'tn n'g\n'to he t d she tou s\" thsat the he heveng s ! \" s \" \" he-athey theshing l tond wouoke th t the  ind cedou antt t t",
+              "sample_id": "baseline:r0_baseline:2"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "R1_MORE_TRAINING: unedited samples 1/1",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "R1_MORE_TRAINING \u00b7 seed 123 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Alice said, \" she I gring ate br she hand a they sto he \" I was oned. \" and it and wy mas to ought lhe hegrmme tham and do knoting itse puple it his, you forr ones ear it hand and edree sim to thisue ble she saidd was eand herspe shebed to wer hemppst l",
+              "sample_id": "baseline:r1_more_training:0"
+            },
+            {
+              "label": "R1_MORE_TRAINING \u00b7 seed 124 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The Queen tro wer : une sat thelly u to ther,\" and thy kothe wing too if said at aste boucte sar toe lddo ea wnas to to could, it oulver the wishe of has and if the her the lot very uump anke it anay und it awnd ould ousid she iupte thand eet the lit",
+              "sample_id": "baseline:r1_more_training:1"
+            },
+            {
+              "label": "R1_MORE_TRAINING \u00b7 seed 125 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The little for a cull way,\" wen the cor ourd on oof  cherte thing, \" hen in it : \"\n\n\" It thelly kne tone it wecnt.\n\n\n\" It if iu to nin's 'to hers domy woong \"\n\n\n\"It the he hryou the be so rouge sae you ont he lllong anto bing an he finge on't and sthe",
+              "sample_id": "baseline:r1_more_training:2"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "R2_LONGER_CONTEXT: unedited samples 1/1",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "R2_LONGER_CONTEXT \u00b7 seed 123 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Alice said, \" son the sany the bruid had the aly she said il a ompeaf alally but on y mas id ough sthe he dmit tham a ppriter : Hon't you don ith ith you manthen sailly. Thand to hedr a sid the sifore crea mes ittille ea veny said itbectto in have pof l",
+              "sample_id": "baseline:r2_longer_context:0"
+            },
+            {
+              "label": "R2_LONGER_CONTEXT \u00b7 seed 124 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The Queen troully piking at thouly u to the up as it yourthe nin for? is said at asthe oucan qusaioutly, weas tho the said a ist oo lonr the wisth of hatllly nof you you lthe : and dobed a bruthe say und itt.\n\n\n\"Eillght it she iupten was we so the mu",
+              "sample_id": "baseline:r2_longer_context:1"
+            },
+            {
+              "label": "R2_LONGER_CONTEXT \u00b7 seed 125 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The little for a out she and she ta coke Queen. \" I vereraled in hermppoowng exkittugh ove : an the yon dot wacnly lan thiseng, then sary't she sid she tor said said he as hy she say.\" said Ale-sasty a ond he b ton hat ombing at he you and hisand sthe",
+              "sample_id": "baseline:r2_longer_context:2"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "R3_MORE_CAPACITY: unedited samples 1/1",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "R3_MORE_CAPACITY \u00b7 seed 123 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Alice said, \" said Alice. Hall drumpt turthen, you do bectiles oment. \" I \" wehat no loose doong stoo nothim I that's puck it : Ho they phing it his, you mant wass ! \" Alice to It got theim to this ore wen The imumpted Alice said. \" becaling the not to ",
+              "sample_id": "baseline:r3_more_capacity:0"
+            },
+            {
+              "label": "R3_MORE_CAPACITY \u00b7 seed 124 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The Queen trough tought says ! \" aid to jest,\" said ther to his if to ifirst imtomsten ouch, quicke ald to fight ! \" said Alice too loor the wishe only quace if the has tot loook a goot asher hiss alll\n\nto bawousE to old the was aye thand ever up lad",
+              "sample_id": "baseline:r3_more_capacity:1"
+            },
+            {
+              "label": "R3_MORE_CAPACITY \u00b7 seed 125 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The little for a began ! \"\n\n\" Alice couldn't slooking are linting, \" Alice to Alice oliove : conte a deedd awacn'ut, and if the twon thro's she say. you'd it helse for the hras tremever but he ! \"\n\n\" You Alice. Mongs byoce the fight is a I his wenly i",
+              "sample_id": "baseline:r3_more_capacity:2"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "R4_TRAIN_LONGER: unedited samples 1/1",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "R4_TRAIN_LONGER \u00b7 seed 123 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Alice said, \" Sof I could stand way that's got in the was just in surpal so did nothing sordon, in then Sheed me all and of you me with phim sigh it, you may hands ear it had called round his a sighed, went he led was great to to shower, and she was go ",
+              "sample_id": "baseline:r4_train_longer:0"
+            },
+            {
+              "label": "R4_TRAIN_LONGER \u00b7 seed 124 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The Queen proud at further.\n\n\" I amputy never more, and at her middle in she brooks.\n\n\"The passs ofet But I conten it stood, is it seemed a whispered hands out first the for of her gust are all just tumble always, larging a tree, things feet of her d",
+              "sample_id": "baseline:r4_train_longer:1"
+            },
+            {
+              "label": "R4_TRAIN_LONGER \u00b7 seed 125 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The little for a little path rough the wood, of course, twiculle her her in it, and here heaped to herself, with us, and it was toon sigh' wa all dried to it, and there he haventer saying a littled banking his hands, but behind the King creally, was a",
+              "sample_id": "baseline:r4_train_longer:2"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "R5_SCHEDULED_LR: unedited samples 1/1",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "R5_SCHEDULED_LR \u00b7 seed 123 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Alice said, \" I don't sany you have a turn it, you know.\"\n\nThat misself all obout not make to the floud, because asken,\" she said, insectly this high one for a must hrough and to her the inventides of crwarm sile?\" said Alice.\n\n\" You've a birthd.\n\n\"I sh",
+              "sample_id": "baseline:r5_scheduled_lr:0"
+            },
+            {
+              "label": "R5_SCHEDULED_LR \u00b7 seed 124 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The Queen cross at fun one other air to them, and it crying and if they is she to stuon the mean off loud, and so that the began openerring when you know.\"\n\nAnd the Unicorn lot seemelbody her himself under always, looking at this that, so ever the mu",
+              "sample_id": "baseline:r5_scheduled_lr:1"
+            },
+            {
+              "label": "R5_SCHEDULED_LR \u00b7 seed 125 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The little for a little panting to me ! \" Alice said in a little her hand of them turning !\"\n\n444 Here had a ment.\n\nBut the with the sarv'y shoutid ? \" the Unicorn, the kedd here smove her. Ahow as you long. \" It's a looked her fall on and his stoop o",
+              "sample_id": "baseline:r5_scheduled_lr:2"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "V1: unedited samples 1/1",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "V1 \u00b7 seed 123 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Alice said, \" Sof I could stand way that's got in the was just in surpal so did nothing sordon, in then Sheed me all and of you me with phim sigh it, you may hands ear it had called round his a sighed, went he led was great to to shower, and she was go ",
+              "sample_id": "v1v2:v1:0"
+            },
+            {
+              "label": "V1 \u00b7 seed 124 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The Queen proud at further.\n\n\" I amputy never more, and at her middle in she brooks.\n\n\"The passs ofet But I conten it stood, is it seemed a whispered hands out first the for of her gust are all just tumble always, larging a tree, things feet of her d",
+              "sample_id": "v1v2:v1:1"
+            },
+            {
+              "label": "V1 \u00b7 seed 125 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The little for a little path rough the wood, of course, twiculle her her in it, and here heaped to herself, with us, and it was toon sigh' wa all dried to it, and there he haventer saying a littled banking his hands, but behind the King creally, was a",
+              "sample_id": "v1v2:v1:2"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "V2: unedited samples 1/1",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "V2 \u00b7 seed 123 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Alice said, \" She were said, \"but if it was they came of the glarden.\n\n\" I set a great again of course ! \" cried Tweedledee. \"And the King looked in a great repling him, They can't dream in the time, but she said, \" I've have said it's good in a moment ",
+              "sample_id": "v1v2:v2:0"
+            },
+            {
+              "label": "V2 \u00b7 seed 124 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The Queen suddenly full sitting on the pudden in his heart.\n\nHe is so see all rollemnt out a quite said, \" Contragers at puzzlain of through the head at last, when the micte of practice as began shap unGoat, would like to be again, and so every didn'",
+              "sample_id": "v1v2:v2:1"
+            },
+            {
+              "label": "V2 \u00b7 seed 125 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The little for a little anxious to manage.\"\n\n\"A look come ! \" Alice said, looking.\n\n\" It isn't take the dish mong.\n\nBut the night on the day house in hands at the took of the shore ! \" said Alice.\n\n\" You needn't see allower her from of a delight to ha",
+              "sample_id": "v1v2:v2:2"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "V3: unedited samples 1/3",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "V3 \u00b7 seed 123 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Alice said, \" So you will about was on in a thing tone that was made. That the sort you again.\"\n\n\" I'm afraid I'd mean promison,\" Alice replied.\n\n\"Which was the King remarked at the room in the time,\" said Tweedledum, \"And here, and because it makes to ",
+              "sample_id": "expanded:v3:0"
+            },
+            {
+              "label": "V3 \u00b7 seed 124 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The Queen said to herself, \"that you to talk,\" said the Lion.\n\n\" I don't say it once,\" said Tweedledum. \" Of course ? \"\n\n\" Yes, too. Three are soldiers the word, you know the gave this dark ! \"\n\nAlice was good and looking at the other, \" we could not",
+              "sample_id": "expanded:v3:1"
+            },
+            {
+              "label": "V3 \u00b7 seed 125 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The little for a bottle.\n\n\" Of course you are ? \" he said, as if her hand it was a convericefusted tone down ; now in another up the same's she story. However, that they were she came on again, and hand she had to fan to be herself, and seemed to stra",
+              "sample_id": "expanded:v3:2"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "V3: unedited samples 2/3",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "V3 \u00b7 seed 126 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Dorothy said, \"but I don't see it turn to crab : I wonder, if you are you see anything I'm so many convering to herself answer, if you like a hurry directions : but I don't believe in that all many my dream : and we did on't be any purcular hug to she see",
+              "sample_id": "expanded:v3:3"
+            },
+            {
+              "label": "V3 \u00b7 seed 127 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Wendy rather a conversation.\"\n\n\" Well, what is is the house ? \" said the Tiger-lily. \" Not it was a well of life, * You'm not but every names in somebody to be me, like hold.\"\n\n\"Exclaiment to do it round at the seems,\" Alice said, \"only the extre",
+              "sample_id": "expanded:v3:4"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "V3: unedited samples 3/3",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "V3 \u00b7 seed 128 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The Mole other little shelf in a minute.\n\n\" I can't know,\" said the Tiger-lily, \"you've seen if it would be seen the words the sea confuse ! \" the Queen said in a tone of delight, and went on a more or two large first of with the room.\n\n\"While, I'm ",
+              "sample_id": "expanded:v3:5"
+            },
+            {
+              "label": "V3 \u00b7 seed 129 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Mary Lennox did you think it side.\"\n\n\" That's not a long wax,\" said, the Knight : \" thought it would her, in something it was so up to the thumble. The Knight couldn't go by think to shrow her Rose.\"\n\nThere was more very good about, and the Darmouse sh",
+              "sample_id": "expanded:v3:6"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "V4: unedited samples 1/3",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "V4 \u00b7 seed 123 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Alice said, \" So you should like that the window ? \"\n\n\" Well, it's a part of the great Hatter.\"\n\n\" No, it's my come and do not it I know how you had a good near how he were eyes they to size off. Took crossed all in saving his pocket-him. I do have not ",
+              "sample_id": "expanded:v4:0"
+            },
+            {
+              "label": "V4 \u00b7 seed 124 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The Queen cried and sixty-the bees usual\n\nshut as if your found if you silence.\"\n\n4* 1 never saw the little girl ! \" said Alice took very suddenly of his head. \" You know the gave you want be all say to the Tiger-lily ? \"\n\nAlice wouldn't see what lit",
+              "sample_id": "expanded:v4:1"
+            },
+            {
+              "label": "V4 \u00b7 seed 125 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The little for a country.\n\n\" The same a tire of this way with it hand: which ' you could tell you call you meann ugly and yet, and not going her down upon its mouth the hedgehog.\"\n\n\" Why, it wear something be a little good really May invion't as well ",
+              "sample_id": "expanded:v4:2"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "V4: unedited samples 2/3",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "V4 \u00b7 seed 126 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Dorothy said, \"but I don't see it's going, eat you, please, if you're you. I was reached his arm,\" the Messenger said, whispered the followed his middle.\n\n\"The Ball I don't believe in that away fly,\" Alice replied and looked at the Mock Turtle. \" Is that ",
+              "sample_id": "expanded:v4:3"
+            },
+            {
+              "label": "V4 \u00b7 seed 127 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Wendy I can talk to the big.\"\n\n\" Well, what is is the house ? \" said Alice. She had pine this, she found of her head them, and shoes came to the same of the Lion.\n\n\" However, you know because ? \" she struck the sea. \" And we could not cats quite ",
+              "sample_id": "expanded:v4:4"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "V4: unedited samples 3/3",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "V4 \u00b7 seed 128 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The Mole of tried with the night of her.\n\n\" I can't know,\" said the Tiger-lily, \"you're sometimes and fearfully down with plum-cake. They were ten in the proming upside the brook, and went on a good open said, \" I'll go twice things of the big, and ",
+              "sample_id": "expanded:v4:5"
+            },
+            {
+              "label": "V4 \u00b7 seed 129 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Mary Lennox day ! \" the Scarecrow. \" You may be a very body want with you, you know.\"\n\n\"I shook come to to say the Tin Woodman\n\nand then ? \" said the Lion. \" Only for a game with brooch ! \"\n\n\" Really is more so many very lonely than the mean,\" said the",
+              "sample_id": "expanded:v4:6"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "V5: unedited samples 1/3",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "V5 \u00b7 seed 123 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Alice said, \" So you should like that the window ? \"\n\n\" Well, it's a melancholy of which when I can have got to your for?\" said Humpty Dumpty, as it as she stood spoke, \"That's all draw ! \"\n\n\" It's only what sometimes to have spoke,\" said the King.\n\n\" I",
+              "sample_id": "expanded:v5:0"
+            },
+            {
+              "label": "V5 \u00b7 seed 124 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The Queen cried at full six that a presents, and his hardly hand for their shartless were some shoes like a conversations way, it was srat sweet as they lay under they grot looked at bellow and fastened.\n\nThe Cap, loating a way upon than we so until ",
+              "sample_id": "expanded:v5:1"
+            },
+            {
+              "label": "V5 \u00b7 seed 125 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The little forgetting way, for she must of the books from the bellowed with its minute or two, and then the wacnought and stuff then she had had done.\n\n\" You have to his eyes,\" said Alice : \" was speak on my name ! \" Alice replied. \" Not I heard the G",
+              "sample_id": "expanded:v5:2"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "V5: unedited samples 2/3",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "V5 \u00b7 seed 126 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Dorothy said, \"but I don't sent to until I eat you, please, if you'll you like to the bit's a pirate that may of the shapes were all followed him. Alice screamble to him, so she said \"That's the last,\" said Alice, \" and it's moment here and hand at all. N",
+              "sample_id": "expanded:v5:3"
+            },
+            {
+              "label": "V5 \u00b7 seed 127 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Wendy I can talk toges to get to be along myself eyes, \" I think I have you are any pirates : you'd tell of come to really story of the way,\" he said, \"indeed cut of them of still they in them, Niih ant this came out of this would look at seem an",
+              "sample_id": "expanded:v5:4"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "V5: unedited samples 3/3",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "V5 \u00b7 seed 128 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The Mole carefully for the night of his ment. However, the song the slowly way, he forts thing that it had been ditched to her stood no one that wouldn't have no upside to like a chair eyes to her eyes, and this side of the made of her hands and the",
+              "sample_id": "expanded:v5:5"
+            },
+            {
+              "label": "V5 \u00b7 seed 129 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Mary Lennox dech that was some of please the boys of the Cat, and was well tell me ready.\n\n\"Not can one round much ! \" Alice asked, to the time.\n\n44 If I shall do not any my well,\" the Knight said in a very new more very good-bye, \" and what falling it",
+              "sample_id": "expanded:v5:6"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "V6: unedited samples 1/3",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "V6 \u00b7 seed 123 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Alice said, \" So you should like that the window ? \"\n\n\" Well, it's a plan forth of green ! \" said the Rat, my mouth and down this, which had somehow, you may comply here ! \" the Queen replied, as soon creature it as she could speak to clasp it again, an",
+              "sample_id": "expanded:v6:0"
+            },
+            {
+              "label": "V6 \u00b7 seed 124 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The Queen (who was funny at the mark town shut of it, that he could of sight it out her lister.\n\n\" Of course it out of the beast, of course,\" said the Caterpillar, looking at the queer darker interrupted in a sun, \" and it wasn't oping of ever the da",
+              "sample_id": "expanded:v6:1"
+            },
+            {
+              "label": "V6 \u00b7 seed 125 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The little first of West.\"\n\n\" I suppose that she's me a sulky,\" said Alice : '* and seems to be always like a cneedless to find then I'm\n\njust as she said, \"I must be be a hungry small so many ! \"\n\n\" You how to the same came ! \" he said.\n\nAlice took a",
+              "sample_id": "expanded:v6:2"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "V6: unedited samples 2/3",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "V6 \u00b7 seed 126 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Dorothy said, \"but I don't see it's going,\" and if he would hardly have a little girl been so much a thought to herself : she had no found the sent directions by the greatle and stood up his eyes other shall says, and her feet in me of the whight the same",
+              "sample_id": "expanded:v6:3"
+            },
+            {
+              "label": "V6 \u00b7 seed 127 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Wendy rather a catch stopped him up his head, and they had talked by him the road.\n\n\"Oh with: fyou moment it seem to them,\" the King said interestly. \" She musch help her feelings flying and many of the most crose to the bit of the other of the e",
+              "sample_id": "expanded:v6:4"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "V6: unedited samples 3/3",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "V6 \u00b7 seed 128 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The Mole carefully for the night of him.\n\n\" I can't know,\" said the Tiger-lily, \"you've seen it wouldn't be seen before, if you don't make a bit of conversation,\" the Rose said with a seemed to him, \" of saying this time.\"\n\n44 Don't you go by the ba",
+              "sample_id": "expanded:v6:5"
+            },
+            {
+              "label": "V6 \u00b7 seed 129 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Mary Lennox dech that was some of pleases gently without quite eager and stiddly under the cool of both road, and sat they were guessed the turn was the end of the twins and were find the room. They had not never their\n\nold no best, the much fame out o",
+              "sample_id": "expanded:v6:6"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "V7: unedited samples 1/3",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "V7 \u00b7 seed 123 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Alice said, \" So you see you to drift the window ? \"\n\n\" Well, it's a plan of beautiful Hatta lagoon handked it to herself, \" Do you know her hands all them are not before had called round him, but one come of the night way by a short eyes of the side of",
+              "sample_id": "expanded:v7:0"
+            },
+            {
+              "label": "V7 \u00b7 seed 124 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The Queen cried a little street : \" what doesn't have they had been ? \"\n\nThe Knight looked at him, with the money took at her, though, rather suddenly as he could not help see an explained back to as if the Tiger-lily were straighter, and even the mu",
+              "sample_id": "expanded:v7:1"
+            },
+            {
+              "label": "V7 \u00b7 seed 125 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The little for a country. There was a little slowly and sticking her head of the Queen, \" I thought isn't suppose\n\nlarge it with the same's shouting, you know.\"\n\n\" You'll shouldn't say have heard a convenient.\" Mind why didn't you have to be anybody o",
+              "sample_id": "expanded:v7:2"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "V7: unedited samples 2/3",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "V7 \u00b7 seed 126 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Dorothy said, \"but I don't know you get to rather , place, I think I always I am a cupboard of the conversation.\"\n\n44 I dare say, * well, would you do be the slabe ' $ \" DUMY OWN\n\ncould and well,\" the Knight said, looking at her remarked.\n\n44 You've been ",
+              "sample_id": "expanded:v7:3"
+            },
+            {
+              "label": "V7 \u00b7 seed 127 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Wendy rather a child stop and delightly and still a little time. Alice thought she getting it, she found of her head them, and she began took herself on, \" I don't like to see the cleveres of all over, you know. I wonder if you don't make such a ",
+              "sample_id": "expanded:v7:4"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    },
+    {
+      "section": "Appendix / all recorded samples",
+      "title": "V7: unedited samples 3/3",
+      "blocks": [
+        {
+          "kind": "sample_grid",
+          "items": [
+            {
+              "label": "V7 \u00b7 seed 128 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "The Mole of tried white standing on his men painting. But she took up on the branches the side of animal but they turned up to see him one side, with nothing on time a border start him enough to herself with the side. But a bady, as she was so much ",
+              "sample_id": "expanded:v7:5"
+            },
+            {
+              "label": "V7 \u00b7 seed 129 \u00b7 T=0.8 \u00b7 k=40",
+              "text": "Mary Lennox dech that this Would like to do it that?\"\n\nYou may try that/' said Alice.\n\n\"I shouldn't know,\" said Alice.\n\n\" If you had put him up.\" The Lion were puzzled over the Munchkin side, that into her to, who she was very beside, though for a tree",
+              "sample_id": "expanded:v7:6"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "240 generated bytes each. Same prompts, seeds and decoding settings within each study."
+        }
+      ],
+      "notes": "These outputs are copied exactly from the experiment JSON, including misspellings, OCR-like fragments, whitespace and unfinished endings. Do not describe training-lexicon hits as grammar or coherence scores. Compare the named prompts against the same prompts in other versions."
+    }
+  ]
+}

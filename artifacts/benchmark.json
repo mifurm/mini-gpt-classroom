@@ -1,0 +1,8 @@
+{
+  "description": "40 optimizer steps, batch 32, context 64, width 128, two blocks, four heads; wall time includes initialization of execution and loss.item synchronization",
+  "torch": "2.13.0",
+  "threads": 4,
+  "cpu_seconds_per_step": 0.014111896874999275,
+  "mps_seconds_per_step": 0.06454499792499746,
+  "selected_training_device": "cpu"
+}

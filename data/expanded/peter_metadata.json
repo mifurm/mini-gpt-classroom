@@ -1,0 +1,63 @@
+{
+  "title": "Peter and Wendy",
+  "creator": [
+    "Barrie, J. M. (James Matthew), 1860-1937",
+    "Bedford, F. D., ill"
+  ],
+  "subject": "Fantasy",
+  "description": [
+    "The adventures of Peter Pan, the boy who would not grow up",
+    "The adventures of Peter Pan, the boy who would not grow up"
+  ],
+  "publisher": "New York : Scribner's",
+  "date": "c1911",
+  "language": "eng",
+  "copyright-evidence-operator": "scanner-nicole-deyo",
+  "possible-copyright-status": "NOT_IN_COPYRIGHT",
+  "copyright-region": "US",
+  "copyright-evidence": "Evidence reported by scanner-nicole-deyo for item peterwendy00barr on July 26, 2007: visible notice of copyright; stated date is 1911.",
+  "copyright-evidence-date": "20070726125831",
+  "sponsor": "MSN",
+  "contributor": "New York Public Library",
+  "scanningcenter": "nyc",
+  "mediatype": "texts",
+  "collection": [
+    "newyorkpubliclibrary",
+    "americana"
+  ],
+  "call_number": "165470",
+  "identifier-access": "http://www.archive.org/details/peterwendy00barr",
+  "updatedate": "2007-07-26 08:58:42",
+  "updater": "scanner-nicole-deyo",
+  "identifier": "peterwendy00barr",
+  "uploader": "scanner-nicole-deyo@archive.org",
+  "addeddate": "2007-07-26 12:56:57",
+  "publicdate": "2007-07-26 12:57:08",
+  "imagecount": "394",
+  "ppi": "500",
+  "camera": "Canon 5D",
+  "operator": "scanner-kiersten-newman@archive.org",
+  "scanner": "nycs9",
+  "scandate": "20070803094952",
+  "identifier-ark": "ark:/13960/t4hm5515k",
+  "bookplateleaf": "0007",
+  "curation": "[curator]stacy@archive.org[/curator][date]20070806135748[/date][state]approved[/state][comment]199[/comment]",
+  "sponsordate": "20070831",
+  "filesxml": [
+    "Wed Aug 19 1:30:31 UTC 2009",
+    "Wed Aug 19 3:03:57 UTC 2009",
+    "Fri Dec 25 17:41:48 UTC 2020"
+  ],
+  "foldoutcount": "0",
+  "repub_state": "4",
+  "backup_location": "ia903601_5",
+  "openlibrary_edition": "OL7178810M",
+  "openlibrary_work": "OL462033W",
+  "external-identifier": "urn:oclc:record:1050753557",
+  "lccn": "11026953",
+  "associated-names": "Bedford, F. D., ill",
+  "ocr_module_version": "0.0.21",
+  "ocr_converted": "abbyy-to-hocr 1.1.37",
+  "page_number_confidence": "91",
+  "page_number_module_version": "1.0.3"
+}

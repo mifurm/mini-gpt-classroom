@@ -1,0 +1,1 @@
+{"step": 200, "batch_loss": 2.46787166595459, "validation": {"loss": 2.557994694056106, "bits_per_byte": 3.6904062597350253, "perplexity": 12.90990303590457, "accuracy": 0.2919921875, "targets": 1024}, "lr": 0.001, "elapsed_seconds": 0.6222606250003082}

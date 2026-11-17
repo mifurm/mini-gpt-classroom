@@ -1,0 +1,221 @@
+{
+  "books": [
+    {
+      "name": "alice",
+      "item": "alicesadventures00carruoft",
+      "title": "Alice's adventures in Wonderland",
+      "publication_date": "1872",
+      "copyright_status": "NOT_IN_COPYRIGHT",
+      "copyright_region": "US",
+      "text_url": "https://archive.org/download/alicesadventures00carruoft/alicesadventures00carruoft_djvu.txt",
+      "metadata_url": "https://archive.org/metadata/alicesadventures00carruoft",
+      "raw_sha256": "cb838aa103260a2a941c4afa69482750fcab2dac2601c8b1819bfc05bf41e39c",
+      "clean_sha256": "007d7192d9f988b571fb0a58c357610d8ddf3fe07353c7bcd867085ce2ff814f",
+      "clean_bytes": 147140,
+      "boundaries": [
+        "CHAPTER\\s+I\\.\\s+DOWN\\s+THE\\s+RABBIT-HOLE\\.",
+        "happy\\s+summer\\s+days\\."
+      ],
+      "split_spans": {
+        "train": [
+          0,
+          117712
+        ],
+        "validation": [
+          117840,
+          132426
+        ],
+        "test": [
+          132554,
+          147140
+        ]
+      },
+      "split_bytes": {
+        "train": 117712,
+        "validation": 14586,
+        "test": 14586
+      },
+      "split_sha256": {
+        "train": "f1eb1394fb12ec527a77d9690711274e85c221add9dcf055db7c164b616028c4",
+        "validation": "d6cab48882be2951a7d598385dafa6b5963fb3dacaf04378911ddd29b9a75d2d",
+        "test": "6a0257de77ded6ad18454bff602c3e57f658666f74c84081c0c54f885c01edba"
+      }
+    },
+    {
+      "name": "oz",
+      "item": "wonderfulwizardo00baumiala",
+      "title": "The wonderful wizard of Oz",
+      "publication_date": "1900, c1899",
+      "copyright_status": "NOT_IN_COPYRIGHT",
+      "copyright_region": "US",
+      "text_url": "https://archive.org/download/wonderfulwizardo00baumiala/wonderfulwizardo00baumiala_djvu.txt",
+      "metadata_url": "https://archive.org/metadata/wonderfulwizardo00baumiala",
+      "raw_sha256": "0af79b24d01cccbc1389d34f04ed53495395728772486df59e8c5bf1e2caa5bf",
+      "clean_sha256": "4a7eb4dba85fe11ac91ab8b8139c7632eebb3d9063063db6408e44f5dbe8021c",
+      "clean_bytes": 210057,
+      "boundaries": [
+        "LIVED\\s+IN\\s+the\\s+midst\\s+of\\s+the",
+        "home\\s+again!\\s*[\\\"\u201d]"
+      ],
+      "split_spans": {
+        "train": [
+          0,
+          168045
+        ],
+        "validation": [
+          168173,
+          189051
+        ],
+        "test": [
+          189179,
+          210057
+        ]
+      },
+      "split_bytes": {
+        "train": 168045,
+        "validation": 20878,
+        "test": 20878
+      },
+      "split_sha256": {
+        "train": "e2912ec5a917eb27bc9d4a3a8f55744cde257811ce3bf6ae98f102814f8bf15f",
+        "validation": "c40147bf49ea9d07a605341c07ae57acd14165d3ace68327a3973445190b99c8",
+        "test": "44b278803517b254d934c62fddc17f8ad5bd34412161f284fa6332ae02d22f6b"
+      }
+    },
+    {
+      "name": "peter",
+      "item": "peterwendy00barr",
+      "title": "Peter and Wendy",
+      "publication_date": "c1911",
+      "copyright_status": "NOT_IN_COPYRIGHT",
+      "copyright_region": "US",
+      "text_url": "https://archive.org/download/peterwendy00barr/peterwendy00barr_djvu.txt",
+      "metadata_url": "https://archive.org/metadata/peterwendy00barr",
+      "raw_sha256": "55e61e22fbe28f5ae73882d8e4132a6093aa3faf5e962af7087c0afc034640e8",
+      "clean_sha256": "56aeceb00a1f0446516d990d8acdb0b697bc44be82a4d67b3f8705ac5f56e438",
+      "clean_bytes": 259455,
+      "boundaries": [
+        "CHAPTER\\s+I\\s+PETER\\s+BREAKS\\s+THROUGH",
+        "so\\s+long\\s+as\\s+children\\s+are\\s+gay\\s+and\\s+innocent\\s+and\\s+heartless\\."
+      ],
+      "split_spans": {
+        "train": [
+          0,
+          207564
+        ],
+        "validation": [
+          207692,
+          233509
+        ],
+        "test": [
+          233637,
+          259455
+        ]
+      },
+      "split_bytes": {
+        "train": 207564,
+        "validation": 25817,
+        "test": 25818
+      },
+      "split_sha256": {
+        "train": "08a9ca6919f9dea0ab1ff32860703ee19272ff017d9521233209a0bf4a5e0f1c",
+        "validation": "f58e0237d2234d96594e5b4184158e3864405c3c9c28f806255b8cd23b3e18fc",
+        "test": "f33612a295b49eff85398c7f27804c955664374befd02ae84c533bb4949735fc"
+      }
+    },
+    {
+      "name": "willows",
+      "item": "windinwillows00grah",
+      "title": "The wind in the willows",
+      "publication_date": "c1913",
+      "copyright_status": "NOT_IN_COPYRIGHT",
+      "copyright_region": "US",
+      "text_url": "https://archive.org/download/windinwillows00grah/windinwillows00grah_djvu.txt",
+      "metadata_url": "https://archive.org/metadata/windinwillows00grah",
+      "raw_sha256": "8710a95aeb0d4827f2ace238ebb9e6bc82efa66fcf07ec32304523bf3c5ca1c4",
+      "clean_sha256": "6a294ed8bd3ee54b5f4adab94fc25bfcea20fe9092c397eb6b2de3e9d76b071e",
+      "clean_bytes": 334087,
+      "boundaries": [
+        "THE\\s+Mole\\s+had\\s+been\\s+working",
+        "but\\s+it\\s+never\\s+failed\\s+to\\s+have\\s+its\\s+full\\s+effect\\."
+      ],
+      "split_spans": {
+        "train": [
+          0,
+          267269
+        ],
+        "validation": [
+          267397,
+          300678
+        ],
+        "test": [
+          300806,
+          334087
+        ]
+      },
+      "split_bytes": {
+        "train": 267269,
+        "validation": 33281,
+        "test": 33281
+      },
+      "split_sha256": {
+        "train": "a232cc0f0318c4c21c9f32429d103a300cefeddb06368ef41c3864537151dde6",
+        "validation": "11d8329642d9916edabbfd0f571157adaa3e0cd806691ae3f7964ebecbb2ba43",
+        "test": "647eabb8198772a85412f91d5ce06ea55d96c48df501d8e32096768d4cf7816d"
+      }
+    },
+    {
+      "name": "garden",
+      "item": "secretgarden00burn",
+      "title": "The secret garden",
+      "publication_date": "[1911]",
+      "copyright_status": "NOT_IN_COPYRIGHT",
+      "copyright_region": "US",
+      "text_url": "https://archive.org/download/secretgarden00burn/secretgarden00burn_djvu.txt",
+      "metadata_url": "https://archive.org/metadata/secretgarden00burn",
+      "raw_sha256": "dbe4b24df3f026a561123ff3a2c7497aca73590ddafab6b860d4aee957786fd3",
+      "clean_sha256": "c62fe9812c976f965e2a5039ec48360962fece98321b5a5bbeccdd3146436f04",
+      "clean_bytes": 434608,
+      "boundaries": [
+        "CHAPTER\\s+I\\s+THERE\\s+IS\\s+NO\\s+ONE\\s+LEFT",
+        "Master\\s+Colin!"
+      ],
+      "split_spans": {
+        "train": [
+          0,
+          347686
+        ],
+        "validation": [
+          347814,
+          391147
+        ],
+        "test": [
+          391275,
+          434608
+        ]
+      },
+      "split_bytes": {
+        "train": 347686,
+        "validation": 43333,
+        "test": 43333
+      },
+      "split_sha256": {
+        "train": "31548253fbee32b980ca4ac6914151506a2d9c5c32779ff192a884dd4b3a2ff0",
+        "validation": "d097a018a19426451c3a232fb68c2ba812cde17787eb5f04acf89061768aec07",
+        "test": "91bd573c7403017b9927b7afa1167b97aa6d5f61ee7da5f3f93d0326d9b64347"
+      }
+    }
+  ],
+  "original_train_bytes": 132440,
+  "total_train_bytes": 1240716,
+  "total_new_clean_bytes": 1385347,
+  "boundary_gap_bytes": 128,
+  "overlap_audit": {
+    "span_bytes": 128,
+    "stride_bytes": 128,
+    "checked_spans": 2406,
+    "exact_matches": [],
+    "limitation": "Strided exact-byte audit, not exhaustive semantic deduplication."
+  },
+  "cleaning": "Extract verified story only; normalize spaces/NFC; remove numeric page lines and uppercase running headings with numbers; unwrap lines and join lowercase line-break hyphenation. Remaining OCR errors retained."
+}

@@ -1,0 +1,567 @@
+{
+  "environment": {
+    "python": "3.13.14",
+    "torch": "2.13.0",
+    "device": "cpu",
+    "threads": 4
+  },
+  "versions": [
+    {
+      "name": "v1",
+      "steps": 1800,
+      "context": 64,
+      "width": 128,
+      "layers": 2,
+      "dropout": 0.0,
+      "schedule": false,
+      "change": "Original two-block model, retrained from scratch",
+      "config": {
+        "context": 64,
+        "width": 128,
+        "heads": 4,
+        "layers": 2,
+        "dropout": 0.0
+      },
+      "seed": 42,
+      "batch_size": 32,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01,
+      "parameters": 437760,
+      "training_tokens": 3686400,
+      "training_seconds": 25.41444704099922,
+      "best_step": 1800,
+      "initial_validation": {
+        "loss": 5.57262620748952,
+        "bits_per_byte": 8.039600194273003,
+        "perplexity": 263.12421142946926,
+        "accuracy": 0.0361328125,
+        "targets": 1024
+      },
+      "validation": {
+        "loss": 1.6215154786976882,
+        "bits_per_byte": 2.3393523398418483,
+        "perplexity": 5.060753972883319,
+        "accuracy": 0.5478515625,
+        "targets": 1024
+      },
+      "train": {
+        "loss": 1.0780930690998503,
+        "bits_per_byte": 1.5553595244071166,
+        "perplexity": 2.9390696012318958,
+        "accuracy": 0.662109375,
+        "targets": 512
+      },
+      "curve": [
+        {
+          "step": 200,
+          "batch_loss": 2.20713472366333,
+          "validation": {
+            "loss": 2.3150013679405674,
+            "bits_per_byte": 3.339840993179023,
+            "perplexity": 10.124936769045583,
+            "accuracy": 0.345703125,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 2.8894261660007032
+        },
+        {
+          "step": 400,
+          "batch_loss": 1.8589190244674683,
+          "validation": {
+            "loss": 2.0499697134418966,
+            "bits_per_byte": 2.9574811395551936,
+            "perplexity": 7.767665846881191,
+            "accuracy": 0.4169921875,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 5.6737404159994185
+        },
+        {
+          "step": 600,
+          "batch_loss": 1.7015628814697266,
+          "validation": {
+            "loss": 1.8885707496565374,
+            "bits_per_byte": 2.7246316548974385,
+            "perplexity": 6.609914703741691,
+            "accuracy": 0.4638671875,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 8.538954166000622
+        },
+        {
+          "step": 800,
+          "batch_loss": 1.5352567434310913,
+          "validation": {
+            "loss": 1.7966634713284293,
+            "bits_per_byte": 2.5920374802318755,
+            "perplexity": 6.029496278394287,
+            "accuracy": 0.4599609375,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 11.308790416000193
+        },
+        {
+          "step": 1000,
+          "batch_loss": 1.4823753833770752,
+          "validation": {
+            "loss": 1.769998966382218,
+            "bits_per_byte": 2.553568731178217,
+            "perplexity": 5.870847293167308,
+            "accuracy": 0.4873046875,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 14.074825416000749
+        },
+        {
+          "step": 1200,
+          "batch_loss": 1.3894412517547607,
+          "validation": {
+            "loss": 1.7188122726113306,
+            "bits_per_byte": 2.479721941915456,
+            "perplexity": 5.577899504344152,
+            "accuracy": 0.5,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 16.924491040999783
+        },
+        {
+          "step": 1400,
+          "batch_loss": 1.3795503377914429,
+          "validation": {
+            "loss": 1.717319822892705,
+            "bits_per_byte": 2.4775687921076184,
+            "perplexity": 5.5695809788329615,
+            "accuracy": 0.501953125,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 19.706461125000715
+        },
+        {
+          "step": 1600,
+          "batch_loss": 1.202477216720581,
+          "validation": {
+            "loss": 1.643341506189472,
+            "bits_per_byte": 2.3708406414665513,
+            "perplexity": 5.17242435559539,
+            "accuracy": 0.5361328125,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 22.639494166000077
+        },
+        {
+          "step": 1800,
+          "batch_loss": 1.249099612236023,
+          "validation": {
+            "loss": 1.6215154786976882,
+            "bits_per_byte": 2.3393523398418483,
+            "perplexity": 5.060753972883319,
+            "accuracy": 0.5478515625,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 25.406997583000702
+        }
+      ],
+      "samples": [
+        {
+          "prompt": "Alice said, \"",
+          "continuation": " Sof I could stand way that's got in the was just in surpal so did nothing sordon, in then Sheed me all and of you me with phim sigh it, you may hands ear it had called round his a sighed, went he led was great to to shower, and she was go ",
+          "seed": 123,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.8888888888888888,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "The Queen ",
+          "continuation": "proud at further.\n\n\" I amputy never more, and at her middle in she brooks.\n\n\"The passs ofet But I conten it stood, is it seemed a whispered hands out first the for of her gust are all just tumble always, larging a tree, things feet of her d",
+          "seed": 124,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.8958333333333334,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "The little ",
+          "continuation": "for a little path rough the wood, of course, twiculle her her in it, and here heaped to herself, with us, and it was toon sigh' wa all dried to it, and there he haventer saying a littled banking his hands, but behind the King creally, was a",
+          "seed": 125,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.7916666666666666,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        }
+      ],
+      "checkpoint": "v1.pt",
+      "full_validation": {
+        "loss": 1.572905812408788,
+        "bits_per_byte": 2.2692234153475845,
+        "perplexity": 4.820635724469197,
+        "accuracy": 0.556046383213694,
+        "targets": 16299
+      },
+      "test": {
+        "loss": 1.62804652740108,
+        "bits_per_byte": 2.348774651418036,
+        "perplexity": 5.093914171121466,
+        "accuracy": 0.548282208588957,
+        "targets": 16300
+      }
+    },
+    {
+      "name": "v2",
+      "steps": 3600,
+      "context": 128,
+      "width": 128,
+      "layers": 3,
+      "dropout": 0.1,
+      "schedule": false,
+      "change": "Longer context, another block, and dropout",
+      "config": {
+        "context": 128,
+        "width": 128,
+        "heads": 4,
+        "layers": 3,
+        "dropout": 0.1
+      },
+      "seed": 42,
+      "batch_size": 32,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01,
+      "parameters": 644224,
+      "training_tokens": 14745600,
+      "training_seconds": 198.88233687499996,
+      "best_step": 2600,
+      "initial_validation": {
+        "loss": 5.4938209960237145,
+        "bits_per_byte": 7.925908306495079,
+        "perplexity": 243.1846414155737,
+        "accuracy": 0.037109375,
+        "targets": 1024
+      },
+      "validation": {
+        "loss": 1.516491312542641,
+        "bits_per_byte": 2.187834496156463,
+        "perplexity": 4.556210797135738,
+        "accuracy": 0.583984375,
+        "targets": 1024
+      },
+      "train": {
+        "loss": 0.9417740174980338,
+        "bits_per_byte": 1.3586927046824893,
+        "perplexity": 2.564526900850689,
+        "accuracy": 0.703125,
+        "targets": 512
+      },
+      "curve": [
+        {
+          "step": 200,
+          "batch_loss": 2.3606796264648438,
+          "validation": {
+            "loss": 2.451228512738453,
+            "bits_per_byte": 3.5363752194133955,
+            "perplexity": 11.602591899186468,
+            "accuracy": 0.3095703125,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 11.166019708000022
+        },
+        {
+          "step": 400,
+          "batch_loss": 2.1154980659484863,
+          "validation": {
+            "loss": 2.0888068029571514,
+            "bits_per_byte": 3.0135112160014126,
+            "perplexity": 8.075274020475339,
+            "accuracy": 0.4150390625,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 22.19150824999997
+        },
+        {
+          "step": 600,
+          "batch_loss": 1.9183412790298462,
+          "validation": {
+            "loss": 1.9524562940946453,
+            "bits_per_byte": 2.8167990130427882,
+            "perplexity": 7.045973325131766,
+            "accuracy": 0.423828125,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 33.335815500000535
+        },
+        {
+          "step": 800,
+          "batch_loss": 1.778725028038025,
+          "validation": {
+            "loss": 1.7836203206305754,
+            "bits_per_byte": 2.573220191402514,
+            "perplexity": 5.9513633075462185,
+            "accuracy": 0.4833984375,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 44.42737279100038
+        },
+        {
+          "step": 1000,
+          "batch_loss": 1.6653002500534058,
+          "validation": {
+            "loss": 1.7349082647606338,
+            "bits_per_byte": 2.5029435499674433,
+            "perplexity": 5.668407787208236,
+            "accuracy": 0.51171875,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 55.66137866600002
+        },
+        {
+          "step": 1200,
+          "batch_loss": 1.5477017164230347,
+          "validation": {
+            "loss": 1.683399326227999,
+            "bits_per_byte": 2.4286318597849563,
+            "perplexity": 5.383826282042538,
+            "accuracy": 0.529296875,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 66.84094208299939
+        },
+        {
+          "step": 1400,
+          "batch_loss": 1.456148624420166,
+          "validation": {
+            "loss": 1.6350241944808772,
+            "bits_per_byte": 2.3588412971110335,
+            "perplexity": 5.1295821031019155,
+            "accuracy": 0.5341796875,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 77.83019916599915
+        },
+        {
+          "step": 1600,
+          "batch_loss": 1.4381591081619263,
+          "validation": {
+            "loss": 1.5647099687629407,
+            "bits_per_byte": 2.257399312363819,
+            "perplexity": 4.781288011902521,
+            "accuracy": 0.5576171875,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 88.8130390410006
+        },
+        {
+          "step": 1800,
+          "batch_loss": 1.3396296501159668,
+          "validation": {
+            "loss": 1.5472487184818817,
+            "bits_per_byte": 2.2322080531756145,
+            "perplexity": 4.698525417266514,
+            "accuracy": 0.5517578125,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 99.89891024999997
+        },
+        {
+          "step": 2000,
+          "batch_loss": 1.3172560930252075,
+          "validation": {
+            "loss": 1.5526413560474168,
+            "bits_per_byte": 2.2399879846487236,
+            "perplexity": 4.723931302732419,
+            "accuracy": 0.56640625,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 111.09818504099894
+        },
+        {
+          "step": 2200,
+          "batch_loss": 1.259855031967163,
+          "validation": {
+            "loss": 1.5392671476386681,
+            "bits_per_byte": 2.2206930805016065,
+            "perplexity": 4.661173067299224,
+            "accuracy": 0.5625,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 122.03844066599959
+        },
+        {
+          "step": 2400,
+          "batch_loss": 1.2655467987060547,
+          "validation": {
+            "loss": 1.5536768785556632,
+            "bits_per_byte": 2.2414819278361,
+            "perplexity": 4.728825573550258,
+            "accuracy": 0.578125,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 132.99189129099977
+        },
+        {
+          "step": 2600,
+          "batch_loss": 1.2023594379425049,
+          "validation": {
+            "loss": 1.516491312542641,
+            "bits_per_byte": 2.187834496156463,
+            "perplexity": 4.556210797135738,
+            "accuracy": 0.583984375,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 143.99731633299962
+        },
+        {
+          "step": 2800,
+          "batch_loss": 1.1241406202316284,
+          "validation": {
+            "loss": 1.554725510050325,
+            "bits_per_byte": 2.242994783293168,
+            "perplexity": 4.7337869698630195,
+            "accuracy": 0.56640625,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 155.00977808300013
+        },
+        {
+          "step": 3000,
+          "batch_loss": 1.1681220531463623,
+          "validation": {
+            "loss": 1.5491810446250227,
+            "bits_per_byte": 2.2349958105197043,
+            "perplexity": 4.707613278292481,
+            "accuracy": 0.5810546875,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 165.95776108300015
+        },
+        {
+          "step": 3200,
+          "batch_loss": 1.1781082153320312,
+          "validation": {
+            "loss": 1.5548281676497933,
+            "bits_per_byte": 2.2431428869028305,
+            "perplexity": 4.734272954014296,
+            "accuracy": 0.572265625,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 176.99065145799977
+        },
+        {
+          "step": 3400,
+          "batch_loss": 1.0842770338058472,
+          "validation": {
+            "loss": 1.552818922127618,
+            "bits_per_byte": 2.24024415835206,
+            "perplexity": 4.724770187173491,
+            "accuracy": 0.5673828125,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 187.99943783299932
+        },
+        {
+          "step": 3600,
+          "batch_loss": 1.0678715705871582,
+          "validation": {
+            "loss": 1.575491145382312,
+            "bits_per_byte": 2.2729532624075346,
+            "perplexity": 4.833114797289448,
+            "accuracy": 0.580078125,
+            "targets": 1024
+          },
+          "lr": 0.001,
+          "elapsed_seconds": 198.88214658300058
+        }
+      ],
+      "samples": [
+        {
+          "prompt": "Alice said, \"",
+          "continuation": " She were said, \"but if it was they came of the glarden.\n\n\" I set a great again of course ! \" cried Tweedledee. \"And the King looked in a great repling him, They can't dream in the time, but she said, \" I've have said it's good in a moment ",
+          "seed": 123,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.96,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "The Queen ",
+          "continuation": "suddenly full sitting on the pudden in his heart.\n\nHe is so see all rollemnt out a quite said, \" Contragers at puzzlain of through the head at last, when the micte of practice as began shap unGoat, would like to be again, and so every didn'",
+          "seed": 124,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.8478260869565217,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        },
+        {
+          "prompt": "The little ",
+          "continuation": "for a little anxious to manage.\"\n\n\"A look come ! \" Alice said, looking.\n\n\" It isn't take the dish mong.\n\nBut the night on the day house in hands at the took of the shore ! \" said Alice.\n\n\" You needn't see allower her from of a delight to ha",
+          "seed": 125,
+          "temperature": 0.8,
+          "top_k": 40,
+          "lexicon_hit_rate": 0.9375,
+          "repeated_word_trigram_fraction": 0.0,
+          "utf8_replacements": 0
+        }
+      ],
+      "checkpoint": "v2.pt",
+      "full_validation": {
+        "loss": 1.5047583813418455,
+        "bits_per_byte": 2.1709074544979843,
+        "perplexity": 4.503065474196913,
+        "accuracy": 0.581385361065096,
+        "targets": 16299
+      },
+      "test": {
+        "loss": 1.5599161228375127,
+        "bits_per_byte": 2.2504832546204185,
+        "perplexity": 4.758422105454613,
+        "accuracy": 0.5695705521472393,
+        "targets": 16300
+      }
+    }
+  ],
+  "original_hashes": {
+    "artifacts/final.pt": "250ae8426e4f7bdd6b59ebb8787d207fff53be4af9850eb5d60cf946d1133ed1",
+    "artifacts/results.json": "988376b87d7d5e85067976084791f170920f71cb68c2e919e49ed396df1ae4d7",
+    "RESULTS.md": "c704351108b27386037d3790f3e5b4c19f778878a19edea96ecc6932ff79d1ef",
+    "slides.html": "f6fd0bb6f65111cebe98c67bd39e23683636c8737ddb1d4462f3883669cb42e8",
+    "slides.pdf": "44ea43d40fc5515c1bebc05c01e57c499d65fffb24c6e3c6c9c37986c7a7bb65"
+  },
+  "v1_exact_weight_reproduction": true,
+  "unigram_test": {
+    "loss": 3.164600133895874,
+    "bits_per_byte": 4.565552919568127,
+    "perplexity": 23.67927360062165,
+    "accuracy": 0.18773005902767181,
+    "targets": 16300
+  },
+  "protocol": "Both train from scratch, same seed and optimizer, same frozen Archive splits and target offsets. Checkpoint selection uses sampled validation only. Full validation/test metrics are computed after training. Original test was previously reported: reused holdout, not a fresh test. V2 uses more parameters, twice the bytes per update, and twice the updates."
+}

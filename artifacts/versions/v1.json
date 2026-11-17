@@ -1,0 +1,198 @@
+{
+  "name": "v1",
+  "steps": 1800,
+  "context": 64,
+  "width": 128,
+  "layers": 2,
+  "dropout": 0.0,
+  "schedule": false,
+  "change": "Original two-block model, retrained from scratch",
+  "config": {
+    "context": 64,
+    "width": 128,
+    "heads": 4,
+    "layers": 2,
+    "dropout": 0.0
+  },
+  "seed": 42,
+  "batch_size": 32,
+  "learning_rate": 0.001,
+  "weight_decay": 0.01,
+  "parameters": 437760,
+  "training_tokens": 3686400,
+  "training_seconds": 25.41444704099922,
+  "best_step": 1800,
+  "initial_validation": {
+    "loss": 5.57262620748952,
+    "bits_per_byte": 8.039600194273003,
+    "perplexity": 263.12421142946926,
+    "accuracy": 0.0361328125,
+    "targets": 1024
+  },
+  "validation": {
+    "loss": 1.6215154786976882,
+    "bits_per_byte": 2.3393523398418483,
+    "perplexity": 5.060753972883319,
+    "accuracy": 0.5478515625,
+    "targets": 1024
+  },
+  "train": {
+    "loss": 1.0780930690998503,
+    "bits_per_byte": 1.5553595244071166,
+    "perplexity": 2.9390696012318958,
+    "accuracy": 0.662109375,
+    "targets": 512
+  },
+  "curve": [
+    {
+      "step": 200,
+      "batch_loss": 2.20713472366333,
+      "validation": {
+        "loss": 2.3150013679405674,
+        "bits_per_byte": 3.339840993179023,
+        "perplexity": 10.124936769045583,
+        "accuracy": 0.345703125,
+        "targets": 1024
+      },
+      "lr": 0.001,
+      "elapsed_seconds": 2.8894261660007032
+    },
+    {
+      "step": 400,
+      "batch_loss": 1.8589190244674683,
+      "validation": {
+        "loss": 2.0499697134418966,
+        "bits_per_byte": 2.9574811395551936,
+        "perplexity": 7.767665846881191,
+        "accuracy": 0.4169921875,
+        "targets": 1024
+      },
+      "lr": 0.001,
+      "elapsed_seconds": 5.6737404159994185
+    },
+    {
+      "step": 600,
+      "batch_loss": 1.7015628814697266,
+      "validation": {
+        "loss": 1.8885707496565374,
+        "bits_per_byte": 2.7246316548974385,
+        "perplexity": 6.609914703741691,
+        "accuracy": 0.4638671875,
+        "targets": 1024
+      },
+      "lr": 0.001,
+      "elapsed_seconds": 8.538954166000622
+    },
+    {
+      "step": 800,
+      "batch_loss": 1.5352567434310913,
+      "validation": {
+        "loss": 1.7966634713284293,
+        "bits_per_byte": 2.5920374802318755,
+        "perplexity": 6.029496278394287,
+        "accuracy": 0.4599609375,
+        "targets": 1024
+      },
+      "lr": 0.001,
+      "elapsed_seconds": 11.308790416000193
+    },
+    {
+      "step": 1000,
+      "batch_loss": 1.4823753833770752,
+      "validation": {
+        "loss": 1.769998966382218,
+        "bits_per_byte": 2.553568731178217,
+        "perplexity": 5.870847293167308,
+        "accuracy": 0.4873046875,
+        "targets": 1024
+      },
+      "lr": 0.001,
+      "elapsed_seconds": 14.074825416000749
+    },
+    {
+      "step": 1200,
+      "batch_loss": 1.3894412517547607,
+      "validation": {
+        "loss": 1.7188122726113306,
+        "bits_per_byte": 2.479721941915456,
+        "perplexity": 5.577899504344152,
+        "accuracy": 0.5,
+        "targets": 1024
+      },
+      "lr": 0.001,
+      "elapsed_seconds": 16.924491040999783
+    },
+    {
+      "step": 1400,
+      "batch_loss": 1.3795503377914429,
+      "validation": {
+        "loss": 1.717319822892705,
+        "bits_per_byte": 2.4775687921076184,
+        "perplexity": 5.5695809788329615,
+        "accuracy": 0.501953125,
+        "targets": 1024
+      },
+      "lr": 0.001,
+      "elapsed_seconds": 19.706461125000715
+    },
+    {
+      "step": 1600,
+      "batch_loss": 1.202477216720581,
+      "validation": {
+        "loss": 1.643341506189472,
+        "bits_per_byte": 2.3708406414665513,
+        "perplexity": 5.17242435559539,
+        "accuracy": 0.5361328125,
+        "targets": 1024
+      },
+      "lr": 0.001,
+      "elapsed_seconds": 22.639494166000077
+    },
+    {
+      "step": 1800,
+      "batch_loss": 1.249099612236023,
+      "validation": {
+        "loss": 1.6215154786976882,
+        "bits_per_byte": 2.3393523398418483,
+        "perplexity": 5.060753972883319,
+        "accuracy": 0.5478515625,
+        "targets": 1024
+      },
+      "lr": 0.001,
+      "elapsed_seconds": 25.406997583000702
+    }
+  ],
+  "samples": [
+    {
+      "prompt": "Alice said, \"",
+      "continuation": " Sof I could stand way that's got in the was just in surpal so did nothing sordon, in then Sheed me all and of you me with phim sigh it, you may hands ear it had called round his a sighed, went he led was great to to shower, and she was go ",
+      "seed": 123,
+      "temperature": 0.8,
+      "top_k": 40,
+      "lexicon_hit_rate": 0.8888888888888888,
+      "repeated_word_trigram_fraction": 0.0,
+      "utf8_replacements": 0
+    },
+    {
+      "prompt": "The Queen ",
+      "continuation": "proud at further.\n\n\" I amputy never more, and at her middle in she brooks.\n\n\"The passs ofet But I conten it stood, is it seemed a whispered hands out first the for of her gust are all just tumble always, larging a tree, things feet of her d",
+      "seed": 124,
+      "temperature": 0.8,
+      "top_k": 40,
+      "lexicon_hit_rate": 0.8958333333333334,
+      "repeated_word_trigram_fraction": 0.0,
+      "utf8_replacements": 0
+    },
+    {
+      "prompt": "The little ",
+      "continuation": "for a little path rough the wood, of course, twiculle her her in it, and here heaped to herself, with us, and it was toon sigh' wa all dried to it, and there he haventer saying a littled banking his hands, but behind the King creally, was a",
+      "seed": 125,
+      "temperature": 0.8,
+      "top_k": 40,
+      "lexicon_hit_rate": 0.7916666666666666,
+      "repeated_word_trigram_fraction": 0.0,
+      "utf8_replacements": 0
+    }
+  ],
+  "checkpoint": "v1.pt"
+}

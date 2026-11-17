@@ -1,0 +1,2001 @@
+{
+  "name": "r5_scheduled_lr",
+  "arm": "control",
+  "recipe": {
+    "name": "r5_scheduled_lr",
+    "steps": 1800,
+    "context": 64,
+    "width": 128,
+    "layers": 2,
+    "schedule": true,
+    "change": "Add 100-step warmup and cosine learning-rate decay",
+    "corpus": "v1",
+    "parent": null,
+    "dropout": 0.0,
+    "learning_rate": 0.001
+  },
+  "seed": 42,
+  "batch_size": 32,
+  "config": {
+    "context": 64,
+    "width": 128,
+    "heads": 4,
+    "layers": 2,
+    "dropout": 0.0
+  },
+  "parameters": 437760,
+  "initial_model_sha256": "69f334be0cc00cb669c503d77bcf32fcfddcdee8b112e2a7eaa5dbe4487b1b2a",
+  "corpus_manifest_sha256": "038c50d2a9fe9598b8aa9ec405177800f9411d1d9df91126ff5fd440655a2a3f",
+  "parent_checkpoint": null,
+  "parent_sha256": null,
+  "steps": 1800,
+  "best_step": 1800,
+  "best_validation_loss": 1.9227063412237384,
+  "training_seconds": 37.49660750000112,
+  "checkpoint": "artifacts/fivefold/control/r5_scheduled_lr.pt",
+  "train_documents": [
+    "original"
+  ],
+  "sampling_weights": [
+    1.0
+  ],
+  "document_windows": {
+    "original": 57600
+  },
+  "available_train_bytes": 132440,
+  "old_train_bytes": 132440,
+  "corpus_expansion_factor": 1.0,
+  "presented_bytes": 3686400,
+  "presented_bytes_per_available_byte": 27.834491090305043,
+  "initial_validation": {
+    "per_book": {
+      "original": {
+        "loss": 5.565836199559271,
+        "bits_per_byte": 8.029804283504436,
+        "perplexity": 261.3436478087262,
+        "accuracy": 0.044921875,
+        "targets": 512
+      },
+      "alice": {
+        "loss": 5.588274247944355,
+        "bits_per_byte": 8.062175544636823,
+        "perplexity": 267.27397287612024,
+        "accuracy": 0.0390625,
+        "targets": 128
+      },
+      "oz": {
+        "loss": 5.607952509075403,
+        "bits_per_byte": 8.090565274383904,
+        "perplexity": 272.58554980602304,
+        "accuracy": 0.015625,
+        "targets": 128
+      },
+      "peter": {
+        "loss": 5.596860013902187,
+        "bits_per_byte": 8.074562186606421,
+        "perplexity": 269.57860400840303,
+        "accuracy": 0.015625,
+        "targets": 128
+      },
+      "willows": {
+        "loss": 5.598570808768272,
+        "bits_per_byte": 8.0770303418757,
+        "perplexity": 270.04019242911505,
+        "accuracy": 0.0078125,
+        "targets": 128
+      },
+      "garden": {
+        "loss": 5.593916695564985,
+        "bits_per_byte": 8.070315875837581,
+        "perplexity": 268.7863149113963,
+        "accuracy": 0.0078125,
+        "targets": 128
+      },
+      "fauntleroy_1886": {
+        "loss": 5.565475452691317,
+        "bits_per_byte": 8.029283835787021,
+        "perplexity": 261.249385909684,
+        "accuracy": 0.03125,
+        "targets": 128
+      },
+      "princess": {
+        "loss": 5.606717005372047,
+        "bits_per_byte": 8.088782819318073,
+        "perplexity": 272.24897731085247,
+        "accuracy": 0.015625,
+        "targets": 128
+      },
+      "railway": {
+        "loss": 5.5967573300004005,
+        "bits_per_byte": 8.074414045050533,
+        "perplexity": 269.5509240466728,
+        "accuracy": 0.0,
+        "targets": 128
+      },
+      "treasure_complete": {
+        "loss": 5.589948538690805,
+        "bits_per_byte": 8.064591035593732,
+        "perplexity": 267.7218420426502,
+        "accuracy": 0.03125,
+        "targets": 128
+      },
+      "beauty": {
+        "loss": 5.646881405264139,
+        "bits_per_byte": 8.146727799862674,
+        "perplexity": 283.4062569764128,
+        "accuracy": 0.0078125,
+        "targets": 128
+      },
+      "heidi": {
+        "loss": 5.60006320849061,
+        "bits_per_byte": 8.079183419554141,
+        "perplexity": 270.44350121141764,
+        "accuracy": 0.015625,
+        "targets": 128
+      },
+      "anne_green": {
+        "loss": 5.605769146233797,
+        "bits_per_byte": 8.087415347639858,
+        "perplexity": 271.99104589046726,
+        "accuracy": 0.046875,
+        "targets": 128
+      },
+      "anne_avonlea": {
+        "loss": 5.567407116293907,
+        "bits_per_byte": 8.032070637287145,
+        "perplexity": 261.754519556717,
+        "accuracy": 0.03125,
+        "targets": 128
+      },
+      "tom": {
+        "loss": 5.588304255157709,
+        "bits_per_byte": 8.06221883589472,
+        "perplexity": 267.2819931435807,
+        "accuracy": 0.0234375,
+        "targets": 128
+      },
+      "huck": {
+        "loss": 5.680058278143406,
+        "bits_per_byte": 8.194591909837797,
+        "perplexity": 292.96650296892614,
+        "accuracy": 0.0078125,
+        "targets": 128
+      },
+      "jungle": {
+        "loss": 5.6115780137479305,
+        "bits_per_byte": 8.095795771995679,
+        "perplexity": 273.5756036284256,
+        "accuracy": 0.0078125,
+        "targets": 128
+      },
+      "second_jungle": {
+        "loss": 5.603087641298771,
+        "bits_per_byte": 8.083546753767976,
+        "perplexity": 271.2626775567122,
+        "accuracy": 0.0078125,
+        "targets": 128
+      },
+      "little_women": {
+        "loss": 5.578690275549889,
+        "bits_per_byte": 8.048348795191309,
+        "perplexity": 264.7246622728944,
+        "accuracy": 0.0390625,
+        "targets": 128
+      },
+      "kidnapped": {
+        "loss": 5.620334897190332,
+        "bits_per_byte": 8.108429284311676,
+        "perplexity": 275.98179328713996,
+        "accuracy": 0.0,
+        "targets": 128
+      }
+    },
+    "original": {
+      "loss": 5.565836199559271,
+      "bits_per_byte": 8.029804283504436,
+      "perplexity": 261.3436478087262,
+      "accuracy": 0.044921875,
+      "targets": 512
+    },
+    "legacy_new_macro": {
+      "loss": 5.597114855051041,
+      "bits_per_byte": 8.074929844668086,
+      "perplexity": 269.6473124840565,
+      "accuracy": 0.0171875,
+      "targets": 640
+    },
+    "additional_macro": {
+      "loss": 5.604362326008933,
+      "bits_per_byte": 8.085385735078024,
+      "perplexity": 271.60867241456054,
+      "accuracy": 0.018973214285714284,
+      "targets": 1792
+    },
+    "selection": {
+      "loss": 5.5929189266570445,
+      "bits_per_byte": 8.068876399582143,
+      "perplexity": 268.5182620331497,
+      "accuracy": 0.025013950892857142,
+      "targets": 2944
+    }
+  },
+  "curve": [
+    {
+      "step": 0,
+      "validation": {
+        "per_book": {
+          "original": {
+            "loss": 5.565836199559271,
+            "bits_per_byte": 8.029804283504436,
+            "perplexity": 261.3436478087262,
+            "accuracy": 0.044921875,
+            "targets": 512
+          },
+          "alice": {
+            "loss": 5.588274247944355,
+            "bits_per_byte": 8.062175544636823,
+            "perplexity": 267.27397287612024,
+            "accuracy": 0.0390625,
+            "targets": 128
+          },
+          "oz": {
+            "loss": 5.607952509075403,
+            "bits_per_byte": 8.090565274383904,
+            "perplexity": 272.58554980602304,
+            "accuracy": 0.015625,
+            "targets": 128
+          },
+          "peter": {
+            "loss": 5.596860013902187,
+            "bits_per_byte": 8.074562186606421,
+            "perplexity": 269.57860400840303,
+            "accuracy": 0.015625,
+            "targets": 128
+          },
+          "willows": {
+            "loss": 5.598570808768272,
+            "bits_per_byte": 8.0770303418757,
+            "perplexity": 270.04019242911505,
+            "accuracy": 0.0078125,
+            "targets": 128
+          },
+          "garden": {
+            "loss": 5.593916695564985,
+            "bits_per_byte": 8.070315875837581,
+            "perplexity": 268.7863149113963,
+            "accuracy": 0.0078125,
+            "targets": 128
+          },
+          "fauntleroy_1886": {
+            "loss": 5.565475452691317,
+            "bits_per_byte": 8.029283835787021,
+            "perplexity": 261.249385909684,
+            "accuracy": 0.03125,
+            "targets": 128
+          },
+          "princess": {
+            "loss": 5.606717005372047,
+            "bits_per_byte": 8.088782819318073,
+            "perplexity": 272.24897731085247,
+            "accuracy": 0.015625,
+            "targets": 128
+          },
+          "railway": {
+            "loss": 5.5967573300004005,
+            "bits_per_byte": 8.074414045050533,
+            "perplexity": 269.5509240466728,
+            "accuracy": 0.0,
+            "targets": 128
+          },
+          "treasure_complete": {
+            "loss": 5.589948538690805,
+            "bits_per_byte": 8.064591035593732,
+            "perplexity": 267.7218420426502,
+            "accuracy": 0.03125,
+            "targets": 128
+          },
+          "beauty": {
+            "loss": 5.646881405264139,
+            "bits_per_byte": 8.146727799862674,
+            "perplexity": 283.4062569764128,
+            "accuracy": 0.0078125,
+            "targets": 128
+          },
+          "heidi": {
+            "loss": 5.60006320849061,
+            "bits_per_byte": 8.079183419554141,
+            "perplexity": 270.44350121141764,
+            "accuracy": 0.015625,
+            "targets": 128
+          },
+          "anne_green": {
+            "loss": 5.605769146233797,
+            "bits_per_byte": 8.087415347639858,
+            "perplexity": 271.99104589046726,
+            "accuracy": 0.046875,
+            "targets": 128
+          },
+          "anne_avonlea": {
+            "loss": 5.567407116293907,
+            "bits_per_byte": 8.032070637287145,
+            "perplexity": 261.754519556717,
+            "accuracy": 0.03125,
+            "targets": 128
+          },
+          "tom": {
+            "loss": 5.588304255157709,
+            "bits_per_byte": 8.06221883589472,
+            "perplexity": 267.2819931435807,
+            "accuracy": 0.0234375,
+            "targets": 128
+          },
+          "huck": {
+            "loss": 5.680058278143406,
+            "bits_per_byte": 8.194591909837797,
+            "perplexity": 292.96650296892614,
+            "accuracy": 0.0078125,
+            "targets": 128
+          },
+          "jungle": {
+            "loss": 5.6115780137479305,
+            "bits_per_byte": 8.095795771995679,
+            "perplexity": 273.5756036284256,
+            "accuracy": 0.0078125,
+            "targets": 128
+          },
+          "second_jungle": {
+            "loss": 5.603087641298771,
+            "bits_per_byte": 8.083546753767976,
+            "perplexity": 271.2626775567122,
+            "accuracy": 0.0078125,
+            "targets": 128
+          },
+          "little_women": {
+            "loss": 5.578690275549889,
+            "bits_per_byte": 8.048348795191309,
+            "perplexity": 264.7246622728944,
+            "accuracy": 0.0390625,
+            "targets": 128
+          },
+          "kidnapped": {
+            "loss": 5.620334897190332,
+            "bits_per_byte": 8.108429284311676,
+            "perplexity": 275.98179328713996,
+            "accuracy": 0.0,
+            "targets": 128
+          }
+        },
+        "original": {
+          "loss": 5.565836199559271,
+          "bits_per_byte": 8.029804283504436,
+          "perplexity": 261.3436478087262,
+          "accuracy": 0.044921875,
+          "targets": 512
+        },
+        "legacy_new_macro": {
+          "loss": 5.597114855051041,
+          "bits_per_byte": 8.074929844668086,
+          "perplexity": 269.6473124840565,
+          "accuracy": 0.0171875,
+          "targets": 640
+        },
+        "additional_macro": {
+          "loss": 5.604362326008933,
+          "bits_per_byte": 8.085385735078024,
+          "perplexity": 271.60867241456054,
+          "accuracy": 0.018973214285714284,
+          "targets": 1792
+        },
+        "selection": {
+          "loss": 5.5929189266570445,
+          "bits_per_byte": 8.068876399582143,
+          "perplexity": 268.5182620331497,
+          "accuracy": 0.025013950892857142,
+          "targets": 2944
+        }
+      }
+    },
+    {
+      "step": 200,
+      "batch_loss": 2.27602219581604,
+      "validation": {
+        "per_book": {
+          "original": {
+            "loss": 2.4816156815504655,
+            "bits_per_byte": 3.5802146371651418,
+            "perplexity": 11.960573292754358,
+            "accuracy": 0.302734375,
+            "targets": 512
+          },
+          "alice": {
+            "loss": 2.3134115050488617,
+            "bits_per_byte": 3.337547305869466,
+            "perplexity": 10.108852297236053,
+            "accuracy": 0.328125,
+            "targets": 128
+          },
+          "oz": {
+            "loss": 2.666225700522773,
+            "bits_per_byte": 3.8465505960349073,
+            "perplexity": 14.385571146462768,
+            "accuracy": 0.3203125,
+            "targets": 128
+          },
+          "peter": {
+            "loss": 2.4543023663572967,
+            "bits_per_byte": 3.54080985278572,
+            "perplexity": 11.638311438476409,
+            "accuracy": 0.3046875,
+            "targets": 128
+          },
+          "willows": {
+            "loss": 2.512295003514737,
+            "bits_per_byte": 3.6244755428208317,
+            "perplexity": 12.333202348338569,
+            "accuracy": 0.328125,
+            "targets": 128
+          },
+          "garden": {
+            "loss": 2.7559593389742076,
+            "bits_per_byte": 3.9760088712297152,
+            "perplexity": 15.73612994665345,
+            "accuracy": 0.2265625,
+            "targets": 128
+          },
+          "fauntleroy_1886": {
+            "loss": 2.5181912595871836,
+            "bits_per_byte": 3.632982042216362,
+            "perplexity": 12.406136876602895,
+            "accuracy": 0.2578125,
+            "targets": 128
+          },
+          "princess": {
+            "loss": 2.6415985461790115,
+            "bits_per_byte": 3.8110211225919555,
+            "perplexity": 14.035622274679696,
+            "accuracy": 0.296875,
+            "targets": 128
+          },
+          "railway": {
+            "loss": 2.5058303389232606,
+            "bits_per_byte": 3.6151490032736984,
+            "perplexity": 12.253729491276804,
+            "accuracy": 0.328125,
+            "targets": 128
+          },
+          "treasure_complete": {
+            "loss": 2.6888502880756278,
+            "bits_per_byte": 3.879190976299569,
+            "perplexity": 14.714748469681457,
+            "accuracy": 0.265625,
+            "targets": 128
+          },
+          "beauty": {
+            "loss": 2.530648586252937,
+            "bits_per_byte": 3.650954165619779,
+            "perplexity": 12.561650809150425,
+            "accuracy": 0.2421875,
+            "targets": 128
+          },
+          "heidi": {
+            "loss": 2.2894380936631933,
+            "bits_per_byte": 3.3029609841501713,
+            "perplexity": 9.869390449772755,
+            "accuracy": 0.296875,
+            "targets": 128
+          },
+          "anne_green": {
+            "loss": 2.404334356659092,
+            "bits_per_byte": 3.4687212529910285,
+            "perplexity": 11.071058452618198,
+            "accuracy": 0.3515625,
+            "targets": 128
+          },
+          "anne_avonlea": {
+            "loss": 2.3386950314743444,
+            "bits_per_byte": 3.374023724059695,
+            "perplexity": 10.36769821124264,
+            "accuracy": 0.3671875,
+            "targets": 128
+          },
+          "tom": {
+            "loss": 2.7201394642761443,
+            "bits_per_byte": 3.924331715637555,
+            "perplexity": 15.18243950524508,
+            "accuracy": 0.2734375,
+            "targets": 128
+          },
+          "huck": {
+            "loss": 2.541340662399307,
+            "bits_per_byte": 3.6663795708529534,
+            "perplexity": 12.696681529100122,
+            "accuracy": 0.2734375,
+            "targets": 128
+          },
+          "jungle": {
+            "loss": 2.4058065997669473,
+            "bits_per_byte": 3.4708452508217142,
+            "perplexity": 11.087369746270332,
+            "accuracy": 0.328125,
+            "targets": 128
+          },
+          "second_jungle": {
+            "loss": 2.3303968915715814,
+            "bits_per_byte": 3.362052038773376,
+            "perplexity": 10.282021571023904,
+            "accuracy": 0.3828125,
+            "targets": 128
+          },
+          "little_women": {
+            "loss": 2.345348127419129,
+            "bits_per_byte": 3.3836221125857944,
+            "perplexity": 10.436905468148241,
+            "accuracy": 0.2890625,
+            "targets": 128
+          },
+          "kidnapped": {
+            "loss": 2.3423092218581587,
+            "bits_per_byte": 3.3792378986032525,
+            "perplexity": 10.40523684143618,
+            "accuracy": 0.3203125,
+            "targets": 128
+          }
+        },
+        "original": {
+          "loss": 2.4816156815504655,
+          "bits_per_byte": 3.5802146371651418,
+          "perplexity": 11.960573292754358,
+          "accuracy": 0.302734375,
+          "targets": 512
+        },
+        "legacy_new_macro": {
+          "loss": 2.5404387828835753,
+          "bits_per_byte": 3.6650784337481284,
+          "perplexity": 12.685235814214973,
+          "accuracy": 0.3015625,
+          "targets": 640
+        },
+        "additional_macro": {
+          "loss": 2.47163767629328,
+          "bits_per_byte": 3.565819418462636,
+          "perplexity": 11.841824055046404,
+          "accuracy": 0.3052455357142857,
+          "targets": 1792
+        },
+        "selection": {
+          "loss": 2.49133245425515,
+          "bits_per_byte": 3.594232976959635,
+          "perplexity": 12.077357930892973,
+          "accuracy": 0.30369698660714284,
+          "targets": 2944
+        }
+      },
+      "learning_rate": 0.0009923378948577559,
+      "elapsed_seconds": 4.210201125002641
+    },
+    {
+      "step": 400,
+      "batch_loss": 1.8837990760803223,
+      "validation": {
+        "per_book": {
+          "original": {
+            "loss": 2.0701667769171763,
+            "bits_per_byte": 2.9866193428714993,
+            "perplexity": 7.926144905637033,
+            "accuracy": 0.404296875,
+            "targets": 512
+          },
+          "alice": {
+            "loss": 1.8829784144181758,
+            "bits_per_byte": 2.7165636205820656,
+            "perplexity": 6.573053012357546,
+            "accuracy": 0.4609375,
+            "targets": 128
+          },
+          "oz": {
+            "loss": 2.354324309155345,
+            "bits_per_byte": 3.396572005462751,
+            "perplexity": 10.531010749596241,
+            "accuracy": 0.375,
+            "targets": 128
+          },
+          "peter": {
+            "loss": 2.195369032182498,
+            "bits_per_byte": 3.167248015650893,
+            "perplexity": 8.983315577753034,
+            "accuracy": 0.3828125,
+            "targets": 128
+          },
+          "willows": {
+            "loss": 2.3976761692319997,
+            "bits_per_byte": 3.459115519008653,
+            "perplexity": 10.997590124785688,
+            "accuracy": 0.3671875,
+            "targets": 128
+          },
+          "garden": {
+            "loss": 2.394126692437567,
+            "bits_per_byte": 3.453994706439574,
+            "perplexity": 10.958623630088288,
+            "accuracy": 0.3828125,
+            "targets": 128
+          },
+          "fauntleroy_1886": {
+            "loss": 2.2719563270220533,
+            "bits_per_byte": 3.2777401261110204,
+            "perplexity": 9.698355422103358,
+            "accuracy": 0.3203125,
+            "targets": 128
+          },
+          "princess": {
+            "loss": 2.299739230365958,
+            "bits_per_byte": 3.317822382986769,
+            "perplexity": 9.971581830002838,
+            "accuracy": 0.3359375,
+            "targets": 128
+          },
+          "railway": {
+            "loss": 2.2703757609124295,
+            "bits_per_byte": 3.275459851222869,
+            "perplexity": 9.683038637987721,
+            "accuracy": 0.3828125,
+            "targets": 128
+          },
+          "treasure_complete": {
+            "loss": 2.451524735079147,
+            "bits_per_byte": 3.5368025779153154,
+            "perplexity": 11.60602935521746,
+            "accuracy": 0.3359375,
+            "targets": 128
+          },
+          "beauty": {
+            "loss": 2.1025283247581683,
+            "bits_per_byte": 3.0333071874571895,
+            "perplexity": 8.186842764966803,
+            "accuracy": 0.4375,
+            "targets": 128
+          },
+          "heidi": {
+            "loss": 2.1015864201181103,
+            "bits_per_byte": 3.0319483063039874,
+            "perplexity": 8.179135170258503,
+            "accuracy": 0.3671875,
+            "targets": 128
+          },
+          "anne_green": {
+            "loss": 2.111259825003799,
+            "bits_per_byte": 3.045904079561082,
+            "perplexity": 8.258639173619413,
+            "accuracy": 0.4296875,
+            "targets": 128
+          },
+          "anne_avonlea": {
+            "loss": 2.087864141431055,
+            "bits_per_byte": 3.0121512428924766,
+            "perplexity": 8.067665357104094,
+            "accuracy": 0.4375,
+            "targets": 128
+          },
+          "tom": {
+            "loss": 2.6145254733855836,
+            "bits_per_byte": 3.771962934731251,
+            "perplexity": 13.660732458495314,
+            "accuracy": 0.3203125,
+            "targets": 128
+          },
+          "huck": {
+            "loss": 2.3064764853334054,
+            "bits_per_byte": 3.32754218731751,
+            "perplexity": 10.038989736372743,
+            "accuracy": 0.375,
+            "targets": 128
+          },
+          "jungle": {
+            "loss": 2.1730553464149125,
+            "bits_per_byte": 3.1350561718500427,
+            "perplexity": 8.785084554062767,
+            "accuracy": 0.40625,
+            "targets": 128
+          },
+          "second_jungle": {
+            "loss": 1.9283504980849102,
+            "bits_per_byte": 2.7820217006828627,
+            "perplexity": 6.8781553487770735,
+            "accuracy": 0.5234375,
+            "targets": 128
+          },
+          "little_women": {
+            "loss": 2.0470530444581527,
+            "bits_per_byte": 2.9532732756764317,
+            "perplexity": 7.745043144334459,
+            "accuracy": 0.4296875,
+            "targets": 128
+          },
+          "kidnapped": {
+            "loss": 2.118480479111895,
+            "bits_per_byte": 3.056321281434806,
+            "perplexity": 8.31848776344754,
+            "accuracy": 0.3671875,
+            "targets": 128
+          }
+        },
+        "original": {
+          "loss": 2.0701667769171763,
+          "bits_per_byte": 2.9866193428714993,
+          "perplexity": 7.926144905637033,
+          "accuracy": 0.404296875,
+          "targets": 512
+        },
+        "legacy_new_macro": {
+          "loss": 2.244894923485117,
+          "bits_per_byte": 3.2386987734287875,
+          "perplexity": 9.439423642608974,
+          "accuracy": 0.39375000000000004,
+          "targets": 640
+        },
+        "additional_macro": {
+          "loss": 2.206055435105684,
+          "bits_per_byte": 3.182665236153115,
+          "perplexity": 9.0798296834291,
+          "accuracy": 0.390625,
+          "targets": 1792
+        },
+        "selection": {
+          "loss": 2.181793142653415,
+          "bits_per_byte": 3.147662147151629,
+          "perplexity": 8.862183178335282,
+          "accuracy": 0.39482421875,
+          "targets": 2944
+        }
+      },
+      "learning_rate": 0.0009325977110783264,
+      "elapsed_seconds": 8.433128500000748
+    },
+    {
+      "step": 600,
+      "batch_loss": 1.696556568145752,
+      "validation": {
+        "per_book": {
+          "original": {
+            "loss": 1.9551905318330682,
+            "bits_per_byte": 2.8207436842686224,
+            "perplexity": 7.06526505336812,
+            "accuracy": 0.455078125,
+            "targets": 512
+          },
+          "alice": {
+            "loss": 1.774571253641625,
+            "bits_per_byte": 2.5601651473328833,
+            "perplexity": 5.897751954495922,
+            "accuracy": 0.5,
+            "targets": 128
+          },
+          "oz": {
+            "loss": 2.3430692425754387,
+            "bits_per_byte": 3.380334376723045,
+            "perplexity": 10.413148042961593,
+            "accuracy": 0.390625,
+            "targets": 128
+          },
+          "peter": {
+            "loss": 2.0853456883633044,
+            "bits_per_byte": 3.008517883140921,
+            "perplexity": 8.047372884081971,
+            "accuracy": 0.4453125,
+            "targets": 128
+          },
+          "willows": {
+            "loss": 2.199256588733988,
+            "bits_per_byte": 3.172856574208903,
+            "perplexity": 9.018306695988233,
+            "accuracy": 0.390625,
+            "targets": 128
+          },
+          "garden": {
+            "loss": 2.264989513118053,
+            "bits_per_byte": 3.2676891382409226,
+            "perplexity": 9.631023601173164,
+            "accuracy": 0.359375,
+            "targets": 128
+          },
+          "fauntleroy_1886": {
+            "loss": 2.248419869792997,
+            "bits_per_byte": 3.2437841959865654,
+            "perplexity": 9.472755816675088,
+            "accuracy": 0.40625,
+            "targets": 128
+          },
+          "princess": {
+            "loss": 2.1908449826587457,
+            "bits_per_byte": 3.1607211918382396,
+            "perplexity": 8.942766405583356,
+            "accuracy": 0.390625,
+            "targets": 128
+          },
+          "railway": {
+            "loss": 2.2773097486497136,
+            "bits_per_byte": 3.2854634809450336,
+            "perplexity": 9.75041402928012,
+            "accuracy": 0.421875,
+            "targets": 128
+          },
+          "treasure_complete": {
+            "loss": 2.4269681816804223,
+            "bits_per_byte": 3.5013749601056503,
+            "perplexity": 11.324496165483554,
+            "accuracy": 0.3515625,
+            "targets": 128
+          },
+          "beauty": {
+            "loss": 2.1495783705613576,
+            "bits_per_byte": 3.1011860552110493,
+            "perplexity": 8.581239531114912,
+            "accuracy": 0.4609375,
+            "targets": 128
+          },
+          "heidi": {
+            "loss": 2.027637963707093,
+            "bits_per_byte": 2.9252632349584196,
+            "perplexity": 7.5961228340637375,
+            "accuracy": 0.4140625,
+            "targets": 128
+          },
+          "anne_green": {
+            "loss": 2.068985645440989,
+            "bits_per_byte": 2.984915330348166,
+            "perplexity": 7.916788612997758,
+            "accuracy": 0.4375,
+            "targets": 128
+          },
+          "anne_avonlea": {
+            "loss": 1.9708005710999714,
+            "bits_per_byte": 2.843264210507066,
+            "perplexity": 7.176419423217544,
+            "accuracy": 0.4453125,
+            "targets": 128
+          },
+          "tom": {
+            "loss": 2.501550721557578,
+            "bits_per_byte": 3.608974820523326,
+            "perplexity": 12.201400272137032,
+            "accuracy": 0.34375,
+            "targets": 128
+          },
+          "huck": {
+            "loss": 2.318357685726369,
+            "bits_per_byte": 3.3446831362042464,
+            "perplexity": 10.158976366302197,
+            "accuracy": 0.390625,
+            "targets": 128
+          },
+          "jungle": {
+            "loss": 2.0211558151931968,
+            "bits_per_byte": 2.915911471443115,
+            "perplexity": 7.5470428813491655,
+            "accuracy": 0.3984375,
+            "targets": 128
+          },
+          "second_jungle": {
+            "loss": 1.8663050132454373,
+            "bits_per_byte": 2.692508987395404,
+            "perplexity": 6.464366467648019,
+            "accuracy": 0.4609375,
+            "targets": 128
+          },
+          "little_women": {
+            "loss": 1.9027989649039228,
+            "bits_per_byte": 2.745158630475542,
+            "perplexity": 6.704634239958264,
+            "accuracy": 0.46875,
+            "targets": 128
+          },
+          "kidnapped": {
+            "loss": 2.2175891634542495,
+            "bits_per_byte": 3.1993048888445506,
+            "perplexity": 9.18516023176767,
+            "accuracy": 0.40625,
+            "targets": 128
+          }
+        },
+        "original": {
+          "loss": 1.9551905318330682,
+          "bits_per_byte": 2.8207436842686224,
+          "perplexity": 7.06526505336812,
+          "accuracy": 0.455078125,
+          "targets": 512
+        },
+        "legacy_new_macro": {
+          "loss": 2.1334464572864817,
+          "bits_per_byte": 3.077912623929335,
+          "perplexity": 8.443918324119656,
+          "accuracy": 0.41718750000000004,
+          "targets": 640
+        },
+        "additional_macro": {
+          "loss": 2.156307335548003,
+          "bits_per_byte": 3.110893899627598,
+          "perplexity": 8.639177102794793,
+          "accuracy": 0.4140625,
+          "targets": 1792
+        },
+        "selection": {
+          "loss": 2.1003129150538893,
+          "bits_per_byte": 3.0301110268632887,
+          "perplexity": 8.168725629906271,
+          "accuracy": 0.42509765625,
+          "targets": 2944
+        }
+      },
+      "learning_rate": 0.0008211855863706654,
+      "elapsed_seconds": 12.655971792002674
+    },
+    {
+      "step": 800,
+      "batch_loss": 1.5430734157562256,
+      "validation": {
+        "per_book": {
+          "original": {
+            "loss": 1.87945670811132,
+            "bits_per_byte": 2.7114828723576974,
+            "perplexity": 6.549945363168122,
+            "accuracy": 0.45703125,
+            "targets": 512
+          },
+          "alice": {
+            "loss": 1.6650875967025058,
+            "bits_per_byte": 2.4022136184084277,
+            "perplexity": 5.2861362775875245,
+            "accuracy": 0.515625,
+            "targets": 128
+          },
+          "oz": {
+            "loss": 2.170218438928714,
+            "bits_per_byte": 3.1309633794882434,
+            "perplexity": 8.76019739989252,
+            "accuracy": 0.4140625,
+            "targets": 128
+          },
+          "peter": {
+            "loss": 1.9905991919295047,
+            "bits_per_byte": 2.8718275825942743,
+            "perplexity": 7.319918484613884,
+            "accuracy": 0.453125,
+            "targets": 128
+          },
+          "willows": {
+            "loss": 2.1364058182080043,
+            "bits_per_byte": 3.0821820792550163,
+            "perplexity": 8.468943937679844,
+            "accuracy": 0.40625,
+            "targets": 128
+          },
+          "garden": {
+            "loss": 2.2687773044453934,
+            "bits_per_byte": 3.273153766004799,
+            "perplexity": 9.667573086054976,
+            "accuracy": 0.3828125,
+            "targets": 128
+          },
+          "fauntleroy_1886": {
+            "loss": 1.9691543149674544,
+            "bits_per_byte": 2.8408891649486505,
+            "perplexity": 7.164614918018104,
+            "accuracy": 0.453125,
+            "targets": 128
+          },
+          "princess": {
+            "loss": 2.1089490810554707,
+            "bits_per_byte": 3.0425703807260644,
+            "perplexity": 8.239577604811592,
+            "accuracy": 0.390625,
+            "targets": 128
+          },
+          "railway": {
+            "loss": 2.290394786410616,
+            "bits_per_byte": 3.304341200032532,
+            "perplexity": 9.87883694201234,
+            "accuracy": 0.421875,
+            "targets": 128
+          },
+          "treasure_complete": {
+            "loss": 2.410800347541226,
+            "bits_per_byte": 3.4780497059711166,
+            "perplexity": 11.142875750407239,
+            "accuracy": 0.3203125,
+            "targets": 128
+          },
+          "beauty": {
+            "loss": 2.0266385016293498,
+            "bits_per_byte": 2.9238213159753026,
+            "perplexity": 7.588534590065939,
+            "accuracy": 0.4921875,
+            "targets": 128
+          },
+          "heidi": {
+            "loss": 1.882889778498793,
+            "bits_per_byte": 2.7164357459807276,
+            "perplexity": 6.572470429579905,
+            "accuracy": 0.515625,
+            "targets": 128
+          },
+          "anne_green": {
+            "loss": 2.079916307313397,
+            "bits_per_byte": 3.000684942025123,
+            "perplexity": 8.003799026820817,
+            "accuracy": 0.453125,
+            "targets": 128
+          },
+          "anne_avonlea": {
+            "loss": 1.9741170870984206,
+            "bits_per_byte": 2.8480489316910576,
+            "perplexity": 7.20025964443166,
+            "accuracy": 0.453125,
+            "targets": 128
+          },
+          "tom": {
+            "loss": 2.47573398100576,
+            "bits_per_byte": 3.5717291369573014,
+            "perplexity": 11.890431261724448,
+            "accuracy": 0.3203125,
+            "targets": 128
+          },
+          "huck": {
+            "loss": 2.1140951994166244,
+            "bits_per_byte": 3.0499946601655283,
+            "perplexity": 8.28208873625206,
+            "accuracy": 0.4609375,
+            "targets": 128
+          },
+          "jungle": {
+            "loss": 1.8962181611277629,
+            "bits_per_byte": 2.735664537502613,
+            "perplexity": 6.660657218418096,
+            "accuracy": 0.46875,
+            "targets": 128
+          },
+          "second_jungle": {
+            "loss": 1.7787165446206927,
+            "bits_per_byte": 2.566145538071426,
+            "perplexity": 5.922250594384244,
+            "accuracy": 0.4921875,
+            "targets": 128
+          },
+          "little_women": {
+            "loss": 1.8862385647080373,
+            "bits_per_byte": 2.7212670232378016,
+            "perplexity": 6.594517122141845,
+            "accuracy": 0.484375,
+            "targets": 128
+          },
+          "kidnapped": {
+            "loss": 2.12055300459906,
+            "bits_per_byte": 3.059311303677255,
+            "perplexity": 8.335745919158239,
+            "accuracy": 0.4296875,
+            "targets": 128
+          }
+        },
+        "original": {
+          "loss": 1.87945670811132,
+          "bits_per_byte": 2.7114828723576974,
+          "perplexity": 6.549945363168122,
+          "accuracy": 0.45703125,
+          "targets": 512
+        },
+        "legacy_new_macro": {
+          "loss": 2.0462176700428247,
+          "bits_per_byte": 2.9520680851501524,
+          "perplexity": 7.738575835134492,
+          "accuracy": 0.43437500000000007,
+          "targets": 640
+        },
+        "additional_macro": {
+          "loss": 2.0724582614280473,
+          "bits_per_byte": 2.989925256211607,
+          "perplexity": 7.944328369525516,
+          "accuracy": 0.43973214285714285,
+          "targets": 1792
+        },
+        "selection": {
+          "loss": 2.01764772525256,
+          "bits_per_byte": 2.910850367482766,
+          "perplexity": 7.520613561455971,
+          "accuracy": 0.44271763392857144,
+          "targets": 2944
+        }
+      },
+      "learning_rate": 0.0006731483455324374,
+      "elapsed_seconds": 16.79688562500087
+    },
+    {
+      "step": 1000,
+      "batch_loss": 1.4719396829605103,
+      "validation": {
+        "per_book": {
+          "original": {
+            "loss": 1.8236970321577246,
+            "bits_per_byte": 2.63103866437787,
+            "perplexity": 6.194718239697344,
+            "accuracy": 0.494140625,
+            "targets": 512
+          },
+          "alice": {
+            "loss": 1.596779979805433,
+            "bits_per_byte": 2.303666558256077,
+            "perplexity": 4.937109210258117,
+            "accuracy": 0.5546875,
+            "targets": 128
+          },
+          "oz": {
+            "loss": 2.2057279464934254,
+            "bits_per_byte": 3.1821927699562615,
+            "perplexity": 9.07685662945376,
+            "accuracy": 0.4296875,
+            "targets": 128
+          },
+          "peter": {
+            "loss": 1.9438501720433123,
+            "bits_per_byte": 2.804383003438045,
+            "perplexity": 6.985595002991314,
+            "accuracy": 0.5078125,
+            "targets": 128
+          },
+          "willows": {
+            "loss": 2.1046416859608144,
+            "bits_per_byte": 3.036356123183854,
+            "perplexity": 8.204162816154179,
+            "accuracy": 0.3984375,
+            "targets": 128
+          },
+          "garden": {
+            "loss": 2.2266516252129804,
+            "bits_per_byte": 3.2123792574821177,
+            "perplexity": 9.268778717494875,
+            "accuracy": 0.390625,
+            "targets": 128
+          },
+          "fauntleroy_1886": {
+            "loss": 2.030963272889494,
+            "bits_per_byte": 2.9300606420252917,
+            "perplexity": 7.621424335417227,
+            "accuracy": 0.4765625,
+            "targets": 128
+          },
+          "princess": {
+            "loss": 2.107312814114266,
+            "bits_per_byte": 3.0402097465244178,
+            "perplexity": 8.226106480550591,
+            "accuracy": 0.421875,
+            "targets": 128
+          },
+          "railway": {
+            "loss": 2.266684961025021,
+            "bits_per_byte": 3.270135152528391,
+            "perplexity": 9.647366350204724,
+            "accuracy": 0.4296875,
+            "targets": 128
+          },
+          "treasure_complete": {
+            "loss": 2.406166535234661,
+            "bits_per_byte": 3.4713645279360246,
+            "perplexity": 11.09136120217585,
+            "accuracy": 0.3203125,
+            "targets": 128
+          },
+          "beauty": {
+            "loss": 2.038157710368978,
+            "bits_per_byte": 2.9404400212989286,
+            "perplexity": 7.676453912368065,
+            "accuracy": 0.453125,
+            "targets": 128
+          },
+          "heidi": {
+            "loss": 1.9321442690124968,
+            "bits_per_byte": 2.7874949551863604,
+            "perplexity": 6.904299054834146,
+            "accuracy": 0.4140625,
+            "targets": 128
+          },
+          "anne_green": {
+            "loss": 2.045997465538676,
+            "bits_per_byte": 2.9517503972040355,
+            "perplexity": 7.736871953487991,
+            "accuracy": 0.4375,
+            "targets": 128
+          },
+          "anne_avonlea": {
+            "loss": 1.8841084435698576,
+            "bits_per_byte": 2.718193908035257,
+            "perplexity": 6.5804849522405595,
+            "accuracy": 0.484375,
+            "targets": 128
+          },
+          "tom": {
+            "loss": 2.5361934312568337,
+            "bits_per_byte": 3.658953686009398,
+            "perplexity": 12.631496679189372,
+            "accuracy": 0.3671875,
+            "targets": 128
+          },
+          "huck": {
+            "loss": 2.1300539006479084,
+            "bits_per_byte": 3.0730181992909302,
+            "perplexity": 8.415320390437321,
+            "accuracy": 0.4375,
+            "targets": 128
+          },
+          "jungle": {
+            "loss": 1.8596557027922245,
+            "bits_per_byte": 2.6829160601792226,
+            "perplexity": 6.421525477488255,
+            "accuracy": 0.46875,
+            "targets": 128
+          },
+          "second_jungle": {
+            "loss": 1.7240379351133015,
+            "bits_per_byte": 2.4872609792924085,
+            "perplexity": 5.607124016839188,
+            "accuracy": 0.4921875,
+            "targets": 128
+          },
+          "little_women": {
+            "loss": 1.8506717567361193,
+            "bits_per_byte": 2.6699549657564656,
+            "perplexity": 6.364093209484907,
+            "accuracy": 0.484375,
+            "targets": 128
+          },
+          "kidnapped": {
+            "loss": 2.230745757507975,
+            "bits_per_byte": 3.21828584184085,
+            "perplexity": 9.306804111158579,
+            "accuracy": 0.4296875,
+            "targets": 128
+          }
+        },
+        "original": {
+          "loss": 1.8236970321577246,
+          "bits_per_byte": 2.63103866437787,
+          "perplexity": 6.194718239697344,
+          "accuracy": 0.494140625,
+          "targets": 512
+        },
+        "legacy_new_macro": {
+          "loss": 2.0155302819031933,
+          "bits_per_byte": 2.9077955424632713,
+          "perplexity": 7.504705935978569,
+          "accuracy": 0.45625000000000004,
+          "targets": 640
+        },
+        "additional_macro": {
+          "loss": 2.0744924254148436,
+          "bits_per_byte": 2.9928599345077127,
+          "perplexity": 7.960504883457162,
+          "accuracy": 0.43694196428571425,
+          "targets": 1792
+        },
+        "selection": {
+          "loss": 1.9970530412226513,
+          "bits_per_byte": 2.881138518964142,
+          "perplexity": 7.367312909081516,
+          "accuracy": 0.45606863839285716,
+          "targets": 2944
+        }
+      },
+      "learning_rate": 0.0005084792382415141,
+      "elapsed_seconds": 20.885593250000966
+    },
+    {
+      "step": 1200,
+      "batch_loss": 1.3719031810760498,
+      "validation": {
+        "per_book": {
+          "original": {
+            "loss": 1.7693339875522724,
+            "bits_per_byte": 2.5526093695179584,
+            "perplexity": 5.866944601750907,
+            "accuracy": 0.509765625,
+            "targets": 512
+          },
+          "alice": {
+            "loss": 1.56751436876948,
+            "bits_per_byte": 2.2614452063459227,
+            "perplexity": 4.794715475223278,
+            "accuracy": 0.546875,
+            "targets": 128
+          },
+          "oz": {
+            "loss": 2.159303031716263,
+            "bits_per_byte": 3.1152157756335566,
+            "perplexity": 8.665096256109061,
+            "accuracy": 0.40625,
+            "targets": 128
+          },
+          "peter": {
+            "loss": 1.9755095332220662,
+            "bits_per_byte": 2.850057806808346,
+            "perplexity": 7.210292601617882,
+            "accuracy": 0.484375,
+            "targets": 128
+          },
+          "willows": {
+            "loss": 2.136319392506266,
+            "bits_per_byte": 3.082057393323713,
+            "perplexity": 8.46821203488511,
+            "accuracy": 0.40625,
+            "targets": 128
+          },
+          "garden": {
+            "loss": 2.076653231662931,
+            "bits_per_byte": 2.9959773189661503,
+            "perplexity": 7.9777245896716344,
+            "accuracy": 0.40625,
+            "targets": 128
+          },
+          "fauntleroy_1886": {
+            "loss": 2.0598239776300034,
+            "bits_per_byte": 2.971697837630985,
+            "perplexity": 7.844588865659656,
+            "accuracy": 0.421875,
+            "targets": 128
+          },
+          "princess": {
+            "loss": 1.99948509184469,
+            "bits_per_byte": 2.884647226335748,
+            "perplexity": 7.385252393048897,
+            "accuracy": 0.4765625,
+            "targets": 128
+          },
+          "railway": {
+            "loss": 2.2370034865525668,
+            "bits_per_byte": 3.2273138365007092,
+            "perplexity": 9.365226173629372,
+            "accuracy": 0.4375,
+            "targets": 128
+          },
+          "treasure_complete": {
+            "loss": 2.361619445386168,
+            "bits_per_byte": 3.4070966623255687,
+            "perplexity": 10.608116815330932,
+            "accuracy": 0.34375,
+            "targets": 128
+          },
+          "beauty": {
+            "loss": 2.021256606472889,
+            "bits_per_byte": 2.916056882522492,
+            "perplexity": 7.547803595795116,
+            "accuracy": 0.484375,
+            "targets": 128
+          },
+          "heidi": {
+            "loss": 1.8697802796959877,
+            "bits_per_byte": 2.6975227370693804,
+            "perplexity": 6.4868709454356495,
+            "accuracy": 0.5,
+            "targets": 128
+          },
+          "anne_green": {
+            "loss": 1.985202869571367,
+            "bits_per_byte": 2.864042335089151,
+            "perplexity": 7.280524232475056,
+            "accuracy": 0.515625,
+            "targets": 128
+          },
+          "anne_avonlea": {
+            "loss": 1.8869782540095912,
+            "bits_per_byte": 2.722334169324952,
+            "perplexity": 6.599396820413821,
+            "accuracy": 0.46875,
+            "targets": 128
+          },
+          "tom": {
+            "loss": 2.5391369808676245,
+            "bits_per_byte": 3.663200330435497,
+            "perplexity": 12.668732892758038,
+            "accuracy": 0.390625,
+            "targets": 128
+          },
+          "huck": {
+            "loss": 2.079821302831988,
+            "bits_per_byte": 3.000547879530932,
+            "perplexity": 8.003038666164377,
+            "accuracy": 0.4140625,
+            "targets": 128
+          },
+          "jungle": {
+            "loss": 1.924712953477865,
+            "bits_per_byte": 2.776773833117266,
+            "perplexity": 6.8531812017063,
+            "accuracy": 0.453125,
+            "targets": 128
+          },
+          "second_jungle": {
+            "loss": 1.8476956988597522,
+            "bits_per_byte": 2.665661421816832,
+            "perplexity": 6.3451814549592145,
+            "accuracy": 0.484375,
+            "targets": 128
+          },
+          "little_women": {
+            "loss": 1.791819065780146,
+            "bits_per_byte": 2.585048480371312,
+            "perplexity": 6.000357589968005,
+            "accuracy": 0.515625,
+            "targets": 128
+          },
+          "kidnapped": {
+            "loss": 2.227117666931008,
+            "bits_per_byte": 3.2130516135575635,
+            "perplexity": 9.273099361774433,
+            "accuracy": 0.4140625,
+            "targets": 128
+          }
+        },
+        "original": {
+          "loss": 1.7693339875522724,
+          "bits_per_byte": 2.5526093695179584,
+          "perplexity": 5.866944601750907,
+          "accuracy": 0.509765625,
+          "targets": 512
+        },
+        "legacy_new_macro": {
+          "loss": 1.9830599115754013,
+          "bits_per_byte": 2.860950700215538,
+          "perplexity": 7.264939079984092,
+          "accuracy": 0.45,
+          "targets": 640
+        },
+        "additional_macro": {
+          "loss": 2.0593895485651177,
+          "bits_per_byte": 2.9710710889734564,
+          "perplexity": 7.841181688396337,
+          "accuracy": 0.45145089285714285,
+          "targets": 1792
+        },
+        "selection": {
+          "loss": 1.9677932490644774,
+          "bits_per_byte": 2.8389255619201026,
+          "perplexity": 7.154870038161445,
+          "accuracy": 0.46566685267857144,
+          "targets": 2944
+        }
+      },
+      "learning_rate": 0.0003494177399005578,
+      "elapsed_seconds": 25.01662708400181
+    },
+    {
+      "step": 1400,
+      "batch_loss": 1.3474162817001343,
+      "validation": {
+        "per_book": {
+          "original": {
+            "loss": 1.7692418824453853,
+            "bits_per_byte": 2.552476489937012,
+            "perplexity": 5.866404251076172,
+            "accuracy": 0.5,
+            "targets": 512
+          },
+          "alice": {
+            "loss": 1.5135924902861007,
+            "bits_per_byte": 2.1836523796625342,
+            "perplexity": 4.543022276695251,
+            "accuracy": 0.515625,
+            "targets": 128
+          },
+          "oz": {
+            "loss": 2.1343362665502355,
+            "bits_per_byte": 3.0791963473414894,
+            "perplexity": 8.451435144639143,
+            "accuracy": 0.4609375,
+            "targets": 128
+          },
+          "peter": {
+            "loss": 1.9055951587106392,
+            "bits_per_byte": 2.7491926854138566,
+            "perplexity": 6.723407931904756,
+            "accuracy": 0.5078125,
+            "targets": 128
+          },
+          "willows": {
+            "loss": 2.119834430355695,
+            "bits_per_byte": 3.058274620179842,
+            "perplexity": 8.329758218402914,
+            "accuracy": 0.4296875,
+            "targets": 128
+          },
+          "garden": {
+            "loss": 2.115006642867229,
+            "bits_per_byte": 3.0513095951117664,
+            "perplexity": 8.289640832919753,
+            "accuracy": 0.4609375,
+            "targets": 128
+          },
+          "fauntleroy_1886": {
+            "loss": 2.031989521929063,
+            "bits_per_byte": 2.9315412064253947,
+            "perplexity": 7.629249829587725,
+            "accuracy": 0.46875,
+            "targets": 128
+          },
+          "princess": {
+            "loss": 1.9857218116012518,
+            "bits_per_byte": 2.8647910101821745,
+            "perplexity": 7.284303382994092,
+            "accuracy": 0.4453125,
+            "targets": 128
+          },
+          "railway": {
+            "loss": 2.277868365359609,
+            "bits_per_byte": 3.2862693945021575,
+            "perplexity": 9.755862295089758,
+            "accuracy": 0.46875,
+            "targets": 128
+          },
+          "treasure_complete": {
+            "loss": 2.37008811000851,
+            "bits_per_byte": 3.4193143627791733,
+            "perplexity": 10.698334872961384,
+            "accuracy": 0.328125,
+            "targets": 128
+          },
+          "beauty": {
+            "loss": 2.062754270154983,
+            "bits_per_byte": 2.975925356125127,
+            "perplexity": 7.867609517924408,
+            "accuracy": 0.4921875,
+            "targets": 128
+          },
+          "heidi": {
+            "loss": 1.8947637091259821,
+            "bits_per_byte": 2.7335662068124327,
+            "perplexity": 6.6509766538583905,
+            "accuracy": 0.484375,
+            "targets": 128
+          },
+          "anne_green": {
+            "loss": 1.974144996756877,
+            "bits_per_byte": 2.8480891968169053,
+            "perplexity": 7.200460604023476,
+            "accuracy": 0.4296875,
+            "targets": 128
+          },
+          "anne_avonlea": {
+            "loss": 1.9037836955794774,
+            "bits_per_byte": 2.746579296537776,
+            "perplexity": 6.711239750753501,
+            "accuracy": 0.4921875,
+            "targets": 128
+          },
+          "tom": {
+            "loss": 2.518177203499363,
+            "bits_per_byte": 3.632961763568169,
+            "perplexity": 12.405962496078997,
+            "accuracy": 0.359375,
+            "targets": 128
+          },
+          "huck": {
+            "loss": 2.1113290082357707,
+            "bits_per_byte": 3.04600388986676,
+            "perplexity": 8.25921055273383,
+            "accuracy": 0.453125,
+            "targets": 128
+          },
+          "jungle": {
+            "loss": 1.8953904637673986,
+            "bits_per_byte": 2.7344704226254586,
+            "perplexity": 6.6551464909420215,
+            "accuracy": 0.4453125,
+            "targets": 128
+          },
+          "second_jungle": {
+            "loss": 1.760676223122573,
+            "bits_per_byte": 2.540118855710046,
+            "perplexity": 5.816369228215833,
+            "accuracy": 0.4921875,
+            "targets": 128
+          },
+          "little_women": {
+            "loss": 1.8012511043198174,
+            "bits_per_byte": 2.5986560355979695,
+            "perplexity": 6.057220941105876,
+            "accuracy": 0.5,
+            "targets": 128
+          },
+          "kidnapped": {
+            "loss": 2.216257842730556,
+            "bits_per_byte": 3.1973841990386456,
+            "perplexity": 9.172939973946864,
+            "accuracy": 0.4140625,
+            "targets": 128
+          }
+        },
+        "original": {
+          "loss": 1.7692418824453853,
+          "bits_per_byte": 2.552476489937012,
+          "perplexity": 5.866404251076172,
+          "accuracy": 0.5,
+          "targets": 512
+        },
+        "legacy_new_macro": {
+          "loss": 1.95767299775398,
+          "bits_per_byte": 2.8243251255418977,
+          "perplexity": 7.082826121443291,
+          "accuracy": 0.47500000000000003,
+          "targets": 640
+        },
+        "additional_macro": {
+          "loss": 2.057442594727945,
+          "bits_per_byte": 2.968262228327728,
+          "perplexity": 7.825930121486258,
+          "accuracy": 0.44810267857142855,
+          "targets": 1792
+        },
+        "selection": {
+          "loss": 1.9604500174138138,
+          "bits_per_byte": 2.828331518033591,
+          "perplexity": 7.102522604932656,
+          "accuracy": 0.4678013392857143,
+          "targets": 2944
+        }
+      },
+      "learning_rate": 0.00021744598725070347,
+      "elapsed_seconds": 29.170177792002505
+    },
+    {
+      "step": 1600,
+      "batch_loss": 1.2097269296646118,
+      "validation": {
+        "per_book": {
+          "original": {
+            "loss": 1.764286457817434,
+            "bits_per_byte": 2.5453273234007674,
+            "perplexity": 5.83740563653857,
+            "accuracy": 0.5078125,
+            "targets": 512
+          },
+          "alice": {
+            "loss": 1.5280474255341687,
+            "bits_per_byte": 2.204506443061293,
+            "perplexity": 4.609168285939023,
+            "accuracy": 0.546875,
+            "targets": 128
+          },
+          "oz": {
+            "loss": 2.154604173050757,
+            "bits_per_byte": 3.108436755538993,
+            "perplexity": 8.624475703336124,
+            "accuracy": 0.4453125,
+            "targets": 128
+          },
+          "peter": {
+            "loss": 1.8994240843949228,
+            "bits_per_byte": 2.7402897071016152,
+            "perplexity": 6.682045039907907,
+            "accuracy": 0.515625,
+            "targets": 128
+          },
+          "willows": {
+            "loss": 2.126989237531234,
+            "bits_per_byte": 3.0685968250105087,
+            "perplexity": 8.38956974709969,
+            "accuracy": 0.4375,
+            "targets": 128
+          },
+          "garden": {
+            "loss": 2.153014725623507,
+            "bits_per_byte": 3.1061436676179457,
+            "perplexity": 8.6107784410409,
+            "accuracy": 0.4296875,
+            "targets": 128
+          },
+          "fauntleroy_1886": {
+            "loss": 1.9906875648157438,
+            "bits_per_byte": 2.871955077719001,
+            "perplexity": 7.320565395521674,
+            "accuracy": 0.46875,
+            "targets": 128
+          },
+          "princess": {
+            "loss": 1.896649423528288,
+            "bits_per_byte": 2.7362867176291723,
+            "perplexity": 6.663530328926924,
+            "accuracy": 0.453125,
+            "targets": 128
+          },
+          "railway": {
+            "loss": 2.3077335494963336,
+            "bits_per_byte": 3.3293557475514457,
+            "perplexity": 10.051617325784543,
+            "accuracy": 0.46875,
+            "targets": 128
+          },
+          "treasure_complete": {
+            "loss": 2.4102485775620153,
+            "bits_per_byte": 3.477253670158398,
+            "perplexity": 11.13672914199903,
+            "accuracy": 0.359375,
+            "targets": 128
+          },
+          "beauty": {
+            "loss": 2.1091084365252755,
+            "bits_per_byte": 3.04280028207209,
+            "perplexity": 8.240890731195956,
+            "accuracy": 0.46875,
+            "targets": 128
+          },
+          "heidi": {
+            "loss": 1.909224126051413,
+            "bits_per_byte": 2.7544281785999387,
+            "perplexity": 6.747851284947923,
+            "accuracy": 0.46875,
+            "targets": 128
+          },
+          "anne_green": {
+            "loss": 1.9528468233984313,
+            "bits_per_byte": 2.8173624277326823,
+            "perplexity": 7.048725521560624,
+            "accuracy": 0.4140625,
+            "targets": 128
+          },
+          "anne_avonlea": {
+            "loss": 1.8968346999245114,
+            "bits_per_byte": 2.7365540149671976,
+            "perplexity": 6.664765038190101,
+            "accuracy": 0.453125,
+            "targets": 128
+          },
+          "tom": {
+            "loss": 2.509603568709281,
+            "bits_per_byte": 3.6205926231741246,
+            "perplexity": 12.300052967984229,
+            "accuracy": 0.359375,
+            "targets": 128
+          },
+          "huck": {
+            "loss": 2.1538897999125766,
+            "bits_per_byte": 3.107406132955196,
+            "perplexity": 8.618316809698781,
+            "accuracy": 0.4296875,
+            "targets": 128
+          },
+          "jungle": {
+            "loss": 1.9204263784668,
+            "bits_per_byte": 2.770589612606404,
+            "perplexity": 6.823867399213463,
+            "accuracy": 0.421875,
+            "targets": 128
+          },
+          "second_jungle": {
+            "loss": 1.6929817427844682,
+            "bits_per_byte": 2.442456364630707,
+            "perplexity": 5.435664318314791,
+            "accuracy": 0.484375,
+            "targets": 128
+          },
+          "little_women": {
+            "loss": 1.7863930961175356,
+            "bits_per_byte": 2.57722046084705,
+            "perplexity": 5.967888000884476,
+            "accuracy": 0.5,
+            "targets": 128
+          },
+          "kidnapped": {
+            "loss": 2.1755752945682616,
+            "bits_per_byte": 3.138691688554177,
+            "perplexity": 8.807250428359096,
+            "accuracy": 0.4375,
+            "targets": 128
+          }
+        },
+        "original": {
+          "loss": 1.764286457817434,
+          "bits_per_byte": 2.5453273234007674,
+          "perplexity": 5.83740563653857,
+          "accuracy": 0.5078125,
+          "targets": 512
+        },
+        "legacy_new_macro": {
+          "loss": 1.9724159292269179,
+          "bits_per_byte": 2.845594679666071,
+          "perplexity": 7.188021278708186,
+          "accuracy": 0.47500000000000003,
+          "targets": 640
+        },
+        "additional_macro": {
+          "loss": 2.0508716487043523,
+          "bits_per_byte": 2.9587823570855414,
+          "perplexity": 7.774674939013992,
+          "accuracy": 0.4419642857142857,
+          "targets": 1792
+        },
+        "selection": {
+          "loss": 1.959611421113264,
+          "bits_per_byte": 2.82712167930948,
+          "perplexity": 7.096568952455966,
+          "accuracy": 0.46668526785714287,
+          "targets": 2944
+        }
+      },
+      "learning_rate": 0.00013038749676803994,
+      "elapsed_seconds": 33.33402987500085
+    },
+    {
+      "step": 1800,
+      "batch_loss": 1.2336912155151367,
+      "validation": {
+        "per_book": {
+          "original": {
+            "loss": 1.6939320984456572,
+            "bits_per_byte": 2.443827438030185,
+            "perplexity": 5.440832588130275,
+            "accuracy": 0.521484375,
+            "targets": 512
+          },
+          "alice": {
+            "loss": 1.4926594241769635,
+            "bits_per_byte": 2.153452348996281,
+            "perplexity": 4.448911342782126,
+            "accuracy": 0.5703125,
+            "targets": 128
+          },
+          "oz": {
+            "loss": 2.076645947778161,
+            "bits_per_byte": 2.9959668105417143,
+            "perplexity": 7.977666481056625,
+            "accuracy": 0.4921875,
+            "targets": 128
+          },
+          "peter": {
+            "loss": 1.8932199777254937,
+            "bits_per_byte": 2.7313390731764837,
+            "perplexity": 6.640717253270769,
+            "accuracy": 0.5234375,
+            "targets": 128
+          },
+          "willows": {
+            "loss": 2.0870171397655213,
+            "bits_per_byte": 3.010929277789986,
+            "perplexity": 8.060834924212028,
+            "accuracy": 0.46875,
+            "targets": 128
+          },
+          "garden": {
+            "loss": 2.1581742552443757,
+            "bits_per_byte": 3.113587295415293,
+            "perplexity": 8.655320817509011,
+            "accuracy": 0.421875,
+            "targets": 128
+          },
+          "fauntleroy_1886": {
+            "loss": 1.9845657411970024,
+            "bits_per_byte": 2.863123153143045,
+            "perplexity": 7.275887081293457,
+            "accuracy": 0.515625,
+            "targets": 128
+          },
+          "princess": {
+            "loss": 1.8394609119859524,
+            "bits_per_byte": 2.6537811356312235,
+            "perplexity": 6.293144787492783,
+            "accuracy": 0.4375,
+            "targets": 128
+          },
+          "railway": {
+            "loss": 2.2566327787390037,
+            "bits_per_byte": 3.2556329189942423,
+            "perplexity": 9.550875051640146,
+            "accuracy": 0.4609375,
+            "targets": 128
+          },
+          "treasure_complete": {
+            "loss": 2.409994020672457,
+            "bits_per_byte": 3.4768864221962077,
+            "perplexity": 11.133894571663797,
+            "accuracy": 0.34375,
+            "targets": 128
+          },
+          "beauty": {
+            "loss": 2.0208773164486047,
+            "bits_per_byte": 2.9155096826853986,
+            "perplexity": 7.544941332034334,
+            "accuracy": 0.484375,
+            "targets": 128
+          },
+          "heidi": {
+            "loss": 1.8999591748142848,
+            "bits_per_byte": 2.741061679396056,
+            "perplexity": 6.685621494968591,
+            "accuracy": 0.46875,
+            "targets": 128
+          },
+          "anne_green": {
+            "loss": 1.9089934351231932,
+            "bits_per_byte": 2.754095361941818,
+            "perplexity": 6.746294796412306,
+            "accuracy": 0.4609375,
+            "targets": 128
+          },
+          "anne_avonlea": {
+            "loss": 1.9428375734223664,
+            "bits_per_byte": 2.8029221324291953,
+            "perplexity": 6.978524979277037,
+            "accuracy": 0.4921875,
+            "targets": 128
+          },
+          "tom": {
+            "loss": 2.489072160078649,
+            "bits_per_byte": 3.5909720617602474,
+            "perplexity": 12.050090377049841,
+            "accuracy": 0.4140625,
+            "targets": 128
+          },
+          "huck": {
+            "loss": 2.1108763610682217,
+            "bits_per_byte": 3.0453508580428648,
+            "perplexity": 8.255472890455884,
+            "accuracy": 0.46875,
+            "targets": 128
+          },
+          "jungle": {
+            "loss": 1.859494255444588,
+            "bits_per_byte": 2.6826831408914225,
+            "perplexity": 6.420488822916951,
+            "accuracy": 0.4609375,
+            "targets": 128
+          },
+          "second_jungle": {
+            "loss": 1.7279278971327585,
+            "bits_per_byte": 2.4928730082071255,
+            "perplexity": 5.628977994316756,
+            "accuracy": 0.4921875,
+            "targets": 128
+          },
+          "little_women": {
+            "loss": 1.7576803330666735,
+            "bits_per_byte": 2.535796699983351,
+            "perplexity": 5.79897010143265,
+            "accuracy": 0.5234375,
+            "targets": 128
+          },
+          "kidnapped": {
+            "loss": 2.1790774633846013,
+            "bits_per_byte": 3.1437442501378663,
+            "perplexity": 8.838148980558612,
+            "accuracy": 0.4375,
+            "targets": 128
+          }
+        },
+        "original": {
+          "loss": 1.6939320984456572,
+          "bits_per_byte": 2.443827438030185,
+          "perplexity": 5.440832588130275,
+          "accuracy": 0.521484375,
+          "targets": 512
+        },
+        "legacy_new_macro": {
+          "loss": 1.941543348938103,
+          "bits_per_byte": 2.8010549611839517,
+          "perplexity": 6.969499043438275,
+          "accuracy": 0.49531250000000004,
+          "targets": 640
+        },
+        "additional_macro": {
+          "loss": 2.027674958755597,
+          "bits_per_byte": 2.925316607531433,
+          "perplexity": 7.596403858194642,
+          "accuracy": 0.4614955357142857,
+          "targets": 1792
+        },
+        "selection": {
+          "loss": 1.9227063412237384,
+          "bits_per_byte": 2.7738789035692504,
+          "perplexity": 6.8394433122455,
+          "accuracy": 0.48494698660714286,
+          "targets": 2944
+        }
+      },
+      "learning_rate": 0.0001,
+      "elapsed_seconds": 37.49176654199982
+    }
+  ]
+}

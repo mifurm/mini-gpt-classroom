@@ -1,0 +1,769 @@
+{
+  "books": [
+    {
+      "name": "fauntleroy_1886",
+      "item": "littlelordfauntl00burn_1",
+      "title": "Little Lord Fauntleroy",
+      "publication_date": "1886",
+      "copyright_status": "PUBLIC_DOMAIN_US_PRE1926",
+      "copyright_region": "US",
+      "archive_copyright_statement": null,
+      "rights_source": "https://guides.library.cornell.edu/copyright/publicdomain",
+      "rights_basis": "Pre-1926 published narrative/text edition; later reprinting does not renew the underlying copyright. Non-narrative editorial matter excluded.",
+      "metadata_url": "https://archive.org/metadata/littlelordfauntl00burn_1",
+      "text_url": "https://archive.org/download/littlelordfauntl00burn_1/littlelordfauntl00burn_1_djvu.txt?download=1",
+      "raw_sha256": "dd579b2cdf2b8f6632e924748509cbdf89cef881a3478c4926364b241d952a94",
+      "clean_sha256": "8ec3c77e9f8f765d26391ce3e084a3317ba4753843669d46bd2a185ecc6b3140",
+      "clean_bytes": 323774,
+      "boundaries": [
+        "(?m)^\\s*edric\\s+himself\\s+knew",
+        "(?m)^\\s*THE\\s+END\\.\\s*$"
+      ],
+      "split_spans": {
+        "train": [
+          0,
+          259019
+        ],
+        "validation": [
+          259147,
+          291396
+        ],
+        "test": [
+          291524,
+          323774
+        ]
+      },
+      "split_bytes": {
+        "train": 259019,
+        "validation": 32249,
+        "test": 32250
+      },
+      "split_sha256": {
+        "train": "d41f79209b3b49bd51cbb6b6285a89868180d789f1112cf54b12193fb7ec12ec",
+        "validation": "12ac3bf7fdfb16cc0954d08a760b04d1f6550770d54e461441902242121827b9",
+        "test": "819d26f7d9f6cc9bb315e007254234a47f241b44c85e3a70b8d8954051ad1874"
+      }
+    },
+    {
+      "name": "princess",
+      "item": "littleprincessbe00burn",
+      "scan_note": "1917 reprint of the 1905 narrative; title page inspected.",
+      "title": "A little princess; being the whole story of Sara Crewe, now told for the first time",
+      "publication_date": "1905",
+      "copyright_status": "PUBLIC_DOMAIN_US_PRE1926",
+      "copyright_region": "US",
+      "archive_copyright_statement": "NOT_IN_COPYRIGHT",
+      "rights_source": "https://guides.library.cornell.edu/copyright/publicdomain",
+      "rights_basis": "Pre-1926 published narrative/text edition; later reprinting does not renew the underlying copyright. Non-narrative editorial matter excluded.",
+      "metadata_url": "https://archive.org/metadata/littleprincessbe00burn",
+      "text_url": "https://archive.org/download/littleprincessbe00burn/littleprincessbe00burn_djvu.txt?download=1",
+      "raw_sha256": "f042e3592d4e9c59a94f1529ae2ae0010756c2ed5a5dbd29221478deccd54353",
+      "clean_sha256": "ba7f9ca604885d288cab7795d674b0a7cee51d7e5d681a371211c4e07a37621c",
+      "clean_bytes": 367222,
+      "boundaries": [
+        "CHAPTER\\s+I\\s+SARA\\s+ONCE",
+        "Indian\\s+gentleman,\\s+and\\s+they\\s+got\\s+into\\s+the\\s+carriage\\s+and\\s+drove\\s+away\\."
+      ],
+      "split_spans": {
+        "train": [
+          0,
+          293777
+        ],
+        "validation": [
+          293905,
+          330499
+        ],
+        "test": [
+          330627,
+          367222
+        ]
+      },
+      "split_bytes": {
+        "train": 293777,
+        "validation": 36594,
+        "test": 36595
+      },
+      "split_sha256": {
+        "train": "6b8e88979d88140ae35e5df61336a675835e957557befafe476f36f0fabc3301",
+        "validation": "94bf5728545b29532c28c1695782d626420cfe951827ac14857d370066ca5622",
+        "test": "43a6863033160633b63589ce30cf1d616a3614435e681c63917f707a3db262d5"
+      }
+    },
+    {
+      "name": "railway",
+      "item": "railwaychildren00nesb_1",
+      "scan_note": "Metadata says 1906; title/copyright page says 1905.",
+      "title": "The railway children",
+      "publication_date": "1906",
+      "copyright_status": "PUBLIC_DOMAIN_US_PRE1926",
+      "copyright_region": "US",
+      "archive_copyright_statement": "The Library of Congress is unaware of any copyright restrictions on this item.",
+      "rights_source": "https://guides.library.cornell.edu/copyright/publicdomain",
+      "rights_basis": "Pre-1926 published narrative/text edition; later reprinting does not renew the underlying copyright. Non-narrative editorial matter excluded.",
+      "metadata_url": "https://archive.org/metadata/railwaychildren00nesb_1",
+      "text_url": "https://archive.org/download/railwaychildren00nesb_1/railwaychildren00nesb_1_djvu.txt?download=1",
+      "raw_sha256": "8f4a7c289bb3e5d640ede736b0b2e195b3d4edabc82950c128aa0c98cc427c04",
+      "clean_sha256": "5baa79c60560f45d90d76392709b74d003487a00dee396a73754100e4ee51248",
+      "clean_bytes": 350157,
+      "boundaries": [
+        "CHAPTER\\s+I\\s+THE\\s+BEGINNING\\s+OF\\s+THINGS\\s+They\\s+were",
+        "neither\\s+we\\s+nor\\s+any\\s+one\\s+else\\s+is\\s+wanted\\s+now\\."
+      ],
+      "split_spans": {
+        "train": [
+          0,
+          280125
+        ],
+        "validation": [
+          280253,
+          315141
+        ],
+        "test": [
+          315269,
+          350157
+        ]
+      },
+      "split_bytes": {
+        "train": 280125,
+        "validation": 34888,
+        "test": 34888
+      },
+      "split_sha256": {
+        "train": "e016b0d9babcccfe74c8f7a64348dde37e63faa0aa719de30c4da41c6408a9d6",
+        "validation": "61348fda942615dc5b6d9a3a3035806421144a6d6b81a35bd0a09928dbba4645",
+        "test": "696e06187430c631b0eebbcd4d3abc24f90528b65b44fe34807a4f29775e0bbd"
+      }
+    },
+    {
+      "name": "treasure_complete",
+      "item": "treasureisl00stev",
+      "title": "Treasure Island",
+      "publication_date": "1900",
+      "copyright_status": "PUBLIC_DOMAIN_US_PRE1926",
+      "copyright_region": "US",
+      "archive_copyright_statement": null,
+      "rights_source": "https://guides.library.cornell.edu/copyright/publicdomain",
+      "rights_basis": "Pre-1926 published narrative/text edition; later reprinting does not renew the underlying copyright. Non-narrative editorial matter excluded.",
+      "metadata_url": "https://archive.org/metadata/treasureisl00stev",
+      "text_url": "https://archive.org/download/treasureisl00stev/treasureisl00stev_djvu.txt?download=1",
+      "raw_sha256": "a4c57a1e05d4f0703c3e2a7ec47819b3a86e3015cc44e93a3614bbb85b9732d5",
+      "clean_sha256": "67fa4b400839a7ec5e3761712047efcd8501520416fa87bde12e12079330bf2a",
+      "clean_bytes": 367740,
+      "boundaries": [
+        "CHAPTER\\s+I\\s+The\\s+Old\\s+Sea\\s+Dog\\s+at\\s+the\\s+Admiral\\s+Benbow\\s+SQUIRE",
+        "(?m)^\\s*THE\\s+END\\s*$"
+      ],
+      "split_spans": {
+        "train": [
+          0,
+          294192
+        ],
+        "validation": [
+          294320,
+          330966
+        ],
+        "test": [
+          331094,
+          367740
+        ]
+      },
+      "split_bytes": {
+        "train": 294192,
+        "validation": 36646,
+        "test": 36646
+      },
+      "split_sha256": {
+        "train": "6d62bbad901eb4cda5181eda499810b83d1d107a0b96f7066a45b43961a66e05",
+        "validation": "34f1f7be3343122e47bd60de087cffd7d16918d2cbaa65fb5715f75bf7469185",
+        "test": "3fd1b25dd6fe9f13089c7a15ac28b0c759e98e85107332fe98bcb4fe32ed75f5"
+      }
+    },
+    {
+      "name": "beauty",
+      "item": "blackbeauty00sewe_10",
+      "title": "Black Beauty",
+      "publication_date": "1905",
+      "copyright_status": "PUBLIC_DOMAIN_US_PRE1926",
+      "copyright_region": "US",
+      "archive_copyright_statement": null,
+      "rights_source": "https://guides.library.cornell.edu/copyright/publicdomain",
+      "rights_basis": "Pre-1926 published narrative/text edition; later reprinting does not renew the underlying copyright. Non-narrative editorial matter excluded.",
+      "metadata_url": "https://archive.org/metadata/blackbeauty00sewe_10",
+      "text_url": "https://archive.org/download/blackbeauty00sewe_10/blackbeauty00sewe_10_djvu.txt?download=1",
+      "raw_sha256": "d97b18f59cdf6e039081d7e919aae9d8873b5650e55bd56936bbb9445dfe292e",
+      "clean_sha256": "5c99892c497a8eee88317f1beae68d5af1e952dcbd516654fd536db18d0ca52e",
+      "clean_bytes": 310049,
+      "boundaries": [
+        "CHAPTER\\s+I\\.\\s+MY\\s+EARLY\\s+HOME\\.",
+        "(?m)^\\s*THE\\s+END\\.\\s*$"
+      ],
+      "split_spans": {
+        "train": [
+          0,
+          248039
+        ],
+        "validation": [
+          248167,
+          279044
+        ],
+        "test": [
+          279172,
+          310049
+        ]
+      },
+      "split_bytes": {
+        "train": 248039,
+        "validation": 30877,
+        "test": 30877
+      },
+      "split_sha256": {
+        "train": "1268228dac07422af7a3612cc79814049e3caca3b422161f86136090acbd7cb0",
+        "validation": "c04396b2e76adfe62dd87566d7c13a21133f45af4e71685fa8afc885964d3a74",
+        "test": "c3578a2c0417c0a547cc44bf96c89ab6be87f8c05d29870a14a9c5fb8a8784bb"
+      }
+    },
+    {
+      "name": "heidi",
+      "item": "heidispyr00spyruoft",
+      "scan_note": "English text edition first published 1910, reprinted 1944. Only that public-domain narrative is extracted; front editorial matter excluded.",
+      "title": "Heidi",
+      "publication_date": "[1910]",
+      "copyright_status": "PUBLIC_DOMAIN_US_PRE1926",
+      "copyright_region": "US",
+      "archive_copyright_statement": "NOT_IN_COPYRIGHT",
+      "rights_source": "https://guides.library.cornell.edu/copyright/publicdomain",
+      "rights_basis": "Pre-1926 published narrative/text edition; later reprinting does not renew the underlying copyright. Non-narrative editorial matter excluded.",
+      "metadata_url": "https://archive.org/metadata/heidispyr00spyruoft",
+      "text_url": "https://archive.org/download/heidispyr00spyruoft/heidispyr00spyruoft_djvu.txt?download=1",
+      "raw_sha256": "c64d3aae3f569fe273736755265d9c810c580f6e35cc90b5acd9be88bb11384f",
+      "clean_sha256": "da52528a39b86bf7dfe916e06b6a98ba339c5d51cb8a3b34ed493f56ae2e4700",
+      "clean_bytes": 494788,
+      "boundaries": [
+        "CHAPTER\\s+I\\s+UP\\s+THE\\s+MOUNTAIN\\s+TO\\s+ALM.UNCLB\\s+From\\s+the\\s+old",
+        "the\\s+mercies\\s+He\\s+has\\s+shown\\s+us\\s+I\\s+['*]+"
+      ],
+      "split_spans": {
+        "train": [
+          0,
+          395830
+        ],
+        "validation": [
+          395958,
+          445309
+        ],
+        "test": [
+          445437,
+          494788
+        ]
+      },
+      "split_bytes": {
+        "train": 395830,
+        "validation": 49351,
+        "test": 49351
+      },
+      "split_sha256": {
+        "train": "746070567f095039f64ec35ea2cbfd6f1a657bfe7c3ff5145a891aa1295749a8",
+        "validation": "80b95593f02010c7d47f00306bd72448aa2a939a1a09ba17a70ad3b6545b7a2d",
+        "test": "b41adea7c6de448e0ad5ffb72521096f624a1e5c5aea6b0598647faeb3541aa4"
+      }
+    },
+    {
+      "name": "anne_green",
+      "item": "anneofgreengable00mont_11",
+      "title": "Anne of Green Gables",
+      "publication_date": "1908",
+      "copyright_status": "PUBLIC_DOMAIN_US_PRE1926",
+      "copyright_region": "US",
+      "archive_copyright_statement": null,
+      "rights_source": "https://guides.library.cornell.edu/copyright/publicdomain",
+      "rights_basis": "Pre-1926 published narrative/text edition; later reprinting does not renew the underlying copyright. Non-narrative editorial matter excluded.",
+      "metadata_url": "https://archive.org/metadata/anneofgreengable00mont_11",
+      "text_url": "https://archive.org/download/anneofgreengable00mont_11/anneofgreengable00mont_11_djvu.txt?download=1",
+      "raw_sha256": "f859bc212b051ec043208c95873647a787b91542b6b85cfc599c46ba01876773",
+      "clean_sha256": "8b6143eae8704421a09b55254e04d3b8ddbb378d52c4a49c9e4dc0c7ff7e73db",
+      "clean_bytes": 573679,
+      "boundaries": [
+        "CHAPTER\\s+I\\s+MRS\\.\\s+RACHEL\\s+LYNDE\\s+IS\\s+SURPRISED\\s+Mrs\\.",
+        "(?m)^\\s*THE\\s+END\\.\\s*$"
+      ],
+      "split_spans": {
+        "train": [
+          0,
+          458943
+        ],
+        "validation": [
+          459071,
+          516311
+        ],
+        "test": [
+          516439,
+          573679
+        ]
+      },
+      "split_bytes": {
+        "train": 458943,
+        "validation": 57240,
+        "test": 57240
+      },
+      "split_sha256": {
+        "train": "9263722df3dba8d1dac3c5b0e0bd4096128cfea0df95d652dc441cd3bfa8b077",
+        "validation": "50b221189269f579d5d683ee17cd16daa2f675c7241f43611b39cf17b9228852",
+        "test": "1b76cc15cfb12827ba718a8c6b4ad5f45006670f2076865bafd51b4f880ccc1a"
+      }
+    },
+    {
+      "name": "anne_avonlea",
+      "item": "anneofavonlea00mont_5",
+      "title": "Anne of Avonlea",
+      "publication_date": "1909",
+      "copyright_status": "PUBLIC_DOMAIN_US_PRE1926",
+      "copyright_region": "US",
+      "archive_copyright_statement": null,
+      "rights_source": "https://guides.library.cornell.edu/copyright/publicdomain",
+      "rights_basis": "Pre-1926 published narrative/text edition; later reprinting does not renew the underlying copyright. Non-narrative editorial matter excluded.",
+      "metadata_url": "https://archive.org/metadata/anneofavonlea00mont_5",
+      "text_url": "https://archive.org/download/anneofavonlea00mont_5/anneofavonlea00mont_5_djvu.txt?download=1",
+      "raw_sha256": "a1defad591eae0585e0edc29eab14bcba4583717c6373a9c40ac8ef675e6ce92",
+      "clean_sha256": "1c90571c6ef489c56b5dcd02dc78b440d00f7c1fda9930e3e53038a384d9baab",
+      "clean_bytes": 495632,
+      "boundaries": [
+        "CHAPTER\\s+I\\s+AN\\s+IRATE\\s+NEIGHBOUR\\s+A\\s+TALL",
+        "(?m)^\\s*THE\\s+END\\.\\s*$"
+      ],
+      "split_spans": {
+        "train": [
+          0,
+          396505
+        ],
+        "validation": [
+          396633,
+          446068
+        ],
+        "test": [
+          446196,
+          495632
+        ]
+      },
+      "split_bytes": {
+        "train": 396505,
+        "validation": 49435,
+        "test": 49436
+      },
+      "split_sha256": {
+        "train": "0b05dbbd52ae606277f99de0d3ae31023a852e7be10a0154f2f3b49ec0eec8ed",
+        "validation": "f3c0b336a63d31c5be55869a3e7c68031f00f973a7cb91efa8b8d67b59aed0b9",
+        "test": "742d874cb645ea13eafe6492b33a3b4e1f07f5d7cb4c94771ad1c87a92220e1f"
+      }
+    },
+    {
+      "name": "tom",
+      "item": "adventuresoftoms00twaiuoft",
+      "title": "The adventures of Tom Sawyer",
+      "publication_date": "[pref. 1876]",
+      "copyright_status": "PUBLIC_DOMAIN_US_PRE1926",
+      "copyright_region": "US",
+      "archive_copyright_statement": "NOT_IN_COPYRIGHT",
+      "rights_source": "https://guides.library.cornell.edu/copyright/publicdomain",
+      "rights_basis": "Pre-1926 published narrative/text edition; later reprinting does not renew the underlying copyright. Non-narrative editorial matter excluded.",
+      "metadata_url": "https://archive.org/metadata/adventuresoftoms00twaiuoft",
+      "text_url": "https://archive.org/download/adventuresoftoms00twaiuoft/adventuresoftoms00twaiuoft_djvu.txt?download=1",
+      "raw_sha256": "35b8c97f0481a9d7864b2acdfeedc0fb90df61da5daa8449ba3d7e92f6ef4a4f",
+      "clean_sha256": "e59a160626374ad9dd9b4a2d96dbf028ade506f35398da9ba9615741d5776307",
+      "clean_bytes": 394905,
+      "boundaries": [
+        "CHAPTER\\s+I\\s+TOM\\s+PLAYS,\\s+FIGHTS,\\s+AND\\s+HIDES\\s+'OM!",
+        "(?m)^\\s*THE\\s+END\\s*$"
+      ],
+      "split_spans": {
+        "train": [
+          0,
+          315924
+        ],
+        "validation": [
+          316052,
+          355414
+        ],
+        "test": [
+          355542,
+          394905
+        ]
+      },
+      "split_bytes": {
+        "train": 315924,
+        "validation": 39362,
+        "test": 39363
+      },
+      "split_sha256": {
+        "train": "535d5cd2ce4f3a777bb8f85321721664ee831ac836dafeb954e45af15ede0dbf",
+        "validation": "a0c5fcae6dd9f9241c883d1b9be6d9a1a2e1bd62058f0857442a8bcdedad652c",
+        "test": "94e3087336419a24bd8cb0ae7363b58776252f980812dc388dd7c184ed0e6551"
+      }
+    },
+    {
+      "name": "huck",
+      "item": "adventuresofhuck00twaiuoft",
+      "title": "The Adventures of Huckleberry Finn : (Tom Sawyer's comrade)",
+      "publication_date": "1912",
+      "copyright_status": "PUBLIC_DOMAIN_US_PRE1926",
+      "copyright_region": "US",
+      "archive_copyright_statement": null,
+      "rights_source": "https://guides.library.cornell.edu/copyright/publicdomain",
+      "rights_basis": "Pre-1926 published narrative/text edition; later reprinting does not renew the underlying copyright. Non-narrative editorial matter excluded.",
+      "metadata_url": "https://archive.org/metadata/adventuresofhuck00twaiuoft",
+      "text_url": "https://archive.org/download/adventuresofhuck00twaiuoft/adventuresofhuck00twaiuoft_djvu.txt?download=1",
+      "raw_sha256": "792e12d46dd2cf0bc62826d7ff7f1653b346cbd2817fd7e09dacf48013c76f17",
+      "clean_sha256": "3a4ae8c56a1608052b724d2d74fcba0e9cef907c76b227a5d4703d4fd8d4f457",
+      "clean_bytes": 571517,
+      "boundaries": [
+        "CHAPTER\\s+I\\s+YOU\\s+don.t\\s+know\\s+about\\s+me",
+        "(?m)^\\s*THE\\s+END\\s*$"
+      ],
+      "split_spans": {
+        "train": [
+          0,
+          457213
+        ],
+        "validation": [
+          457341,
+          514365
+        ],
+        "test": [
+          514493,
+          571517
+        ]
+      },
+      "split_bytes": {
+        "train": 457213,
+        "validation": 57024,
+        "test": 57024
+      },
+      "split_sha256": {
+        "train": "01bc1e33a531a166ced5e8d8be5a2250f6de74535cb65f2c55060e8465c54ec3",
+        "validation": "0e2b7a77fef5ae9ae1af3342ff0bd4ae3ccde86b1a24c58904eaecdfc94fbe19",
+        "test": "da914950ae2049608363919f3c924f3b6dd96553cde23b7612b973e0b17727c8"
+      }
+    },
+    {
+      "name": "jungle",
+      "item": "junglebook00kipluoft",
+      "scan_note": "1899 uniform text edition; reprint list ends 1915.",
+      "title": "The jungle book",
+      "publication_date": "1899",
+      "copyright_status": "PUBLIC_DOMAIN_US_PRE1926",
+      "copyright_region": "US",
+      "archive_copyright_statement": "NOT_IN_COPYRIGHT",
+      "rights_source": "https://guides.library.cornell.edu/copyright/publicdomain",
+      "rights_basis": "Pre-1926 published narrative/text edition; later reprinting does not renew the underlying copyright. Non-narrative editorial matter excluded.",
+      "metadata_url": "https://archive.org/metadata/junglebook00kipluoft",
+      "text_url": "https://archive.org/download/junglebook00kipluoft/junglebook00kipluoft_djvu.txt?download=1",
+      "raw_sha256": "8c04f81fa311eaae1c86f83beaf7053205f31b375e572b1dcfba3e3eeeddc182",
+      "clean_sha256": "8b13dfe4ad8804a1411ee9eea1701760762b68a4bc6a71889e36a45305bab8c7",
+      "clean_bytes": 277365,
+      "boundaries": [
+        "Now\\s+Rann\\s+the\\s+Kite\\s+brings\\s+home\\s+the\\s+night",
+        "(?m)^\\s*THE\\s+END\\s*$"
+      ],
+      "split_spans": {
+        "train": [
+          0,
+          221892
+        ],
+        "validation": [
+          222020,
+          249628
+        ],
+        "test": [
+          249756,
+          277365
+        ]
+      },
+      "split_bytes": {
+        "train": 221892,
+        "validation": 27608,
+        "test": 27609
+      },
+      "split_sha256": {
+        "train": "c5a96caed09b721703f43440ca928f99350fe72a1628b76e01d745b60cc70503",
+        "validation": "1f725d93809acb9610fe77d41241f1f6d7c9858004059ceee62d3a557262a62b",
+        "test": "415973d4015398f7c65a60ae9cb37be1bde56df6e44cf4463e9713523289be46"
+      }
+    },
+    {
+      "name": "second_jungle",
+      "item": "secondjunglebook00kipluoft",
+      "title": "The second jungle book",
+      "publication_date": "1915, c1895",
+      "copyright_status": "PUBLIC_DOMAIN_US_PRE1926",
+      "copyright_region": "US",
+      "archive_copyright_statement": "NOT_IN_COPYRIGHT",
+      "rights_source": "https://guides.library.cornell.edu/copyright/publicdomain",
+      "rights_basis": "Pre-1926 published narrative/text edition; later reprinting does not renew the underlying copyright. Non-narrative editorial matter excluded.",
+      "metadata_url": "https://archive.org/metadata/secondjunglebook00kipluoft",
+      "text_url": "https://archive.org/download/secondjunglebook00kipluoft/secondjunglebook00kipluoft_djvu.txt?download=1",
+      "raw_sha256": "0f02cf2a8b9e848e976620be527f3c720babef0c55e7e9bd30599eb0f7abd8b4",
+      "clean_sha256": "39f5218bfc9709b68c60f35cda7c93f877b17f695a43b754fa97310f6354c5ea",
+      "clean_bytes": 349544,
+      "boundaries": [
+        "The\\s+stream\\s+is\\s+shrunk",
+        "Wisdom,\\s+Strength,\\s+and\\s+Courtesy,\\s+Jungle-\\s*Favor\\s+go\\s+with\\s+thee\\s+J"
+      ],
+      "split_spans": {
+        "train": [
+          0,
+          279635
+        ],
+        "validation": [
+          279763,
+          314589
+        ],
+        "test": [
+          314717,
+          349544
+        ]
+      },
+      "split_bytes": {
+        "train": 279635,
+        "validation": 34826,
+        "test": 34827
+      },
+      "split_sha256": {
+        "train": "7cd6c24c088e0bb706837acebf133d55d2bbf8c38dd8cae0d55eb5cab3837f28",
+        "validation": "c366421349e8ff3431f75f369402a615ded6bcc8ae817f8b3431ca6de3b800d9",
+        "test": "9ba9c083e3947e284aeca98f93a8453b130fde43e0ac3af0169258f1ab367e65"
+      }
+    },
+    {
+      "name": "little_women",
+      "item": "littlewomenormeg00alcouoft",
+      "title": "Little women, or, Meg, Jo, Beth, and Amy",
+      "publication_date": "1915",
+      "copyright_status": "PUBLIC_DOMAIN_US_PRE1926",
+      "copyright_region": "US",
+      "archive_copyright_statement": "NOT_IN_COPYRIGHT",
+      "rights_source": "https://guides.library.cornell.edu/copyright/publicdomain",
+      "rights_basis": "Pre-1926 published narrative/text edition; later reprinting does not renew the underlying copyright. Non-narrative editorial matter excluded.",
+      "metadata_url": "https://archive.org/metadata/littlewomenormeg00alcouoft",
+      "text_url": "https://archive.org/download/littlewomenormeg00alcouoft/littlewomenormeg00alcouoft_djvu.txt?download=1",
+      "raw_sha256": "d28282fbb2723382dd667eeaee31775ec1407c737424606d6bb644558d4f08fd",
+      "clean_sha256": "461bb7eefdb53bfbdeee0081f3b8ed0e23f4bed14828899779c81c4fe041c642",
+      "clean_bytes": 1025620,
+      "boundaries": [
+        "Christmas\\s+won.t\\s+be\\s+Christmas\\s+without\\s+any\\s+presents",
+        "greater\\s+happiness\\s+than\\s+this\\s*!\\s*\\\""
+      ],
+      "split_spans": {
+        "train": [
+          0,
+          820496
+        ],
+        "validation": [
+          820624,
+          923058
+        ],
+        "test": [
+          923186,
+          1025620
+        ]
+      },
+      "split_bytes": {
+        "train": 820496,
+        "validation": 102434,
+        "test": 102434
+      },
+      "split_sha256": {
+        "train": "86ae43e24dffaab66cb341433826f283143fa44b1d1ab4b1f592286eaef36941",
+        "validation": "99b55f5687e56745eda588259e13f1ba0447ce453ad9a4721f47034c70819ee3",
+        "test": "bd334e980094d082e76caf75b33710c9282e70b2c2a503ba4ed8a70fdcdafdb6"
+      }
+    },
+    {
+      "name": "kidnapped",
+      "item": "kidnappedbeingme00stevuoft",
+      "title": "Kidnapped : being memoirs of the adventures of David Balfour in the year 1751 ... / written by himself and now set forth",
+      "publication_date": "1907, c1905",
+      "copyright_status": "PUBLIC_DOMAIN_US_PRE1926",
+      "copyright_region": "US",
+      "archive_copyright_statement": "NOT_IN_COPYRIGHT",
+      "rights_source": "https://guides.library.cornell.edu/copyright/publicdomain",
+      "rights_basis": "Pre-1926 published narrative/text edition; later reprinting does not renew the underlying copyright. Non-narrative editorial matter excluded.",
+      "metadata_url": "https://archive.org/metadata/kidnappedbeingme00stevuoft",
+      "text_url": "https://archive.org/download/kidnappedbeingme00stevuoft/kidnappedbeingme00stevuoft_djvu.txt?download=1",
+      "raw_sha256": "4929c73a2f8182eee708f20a908f0da90142601284b976e2bf620d1cc53b4af0",
+      "clean_sha256": "c18805e1b55f722b3a38d08ba2e910441fe8c43ce36f84c58db61a7b91cd038d",
+      "clean_bytes": 416213,
+      "boundaries": [
+        "CHAPTER\\s+I\\s+I\\s+SET\\s+OFF\\s+UPON\\s+MY\\s+JOURNEY\\s+TO\\s+THE\\s+HOUSE\\s+OF\\s+SHAWS\\s+I\\s+WILL\\s+begin",
+        "very\\s+doors\\s+of\\s+the\\s+British\\s+Linen\\s+Com-\\s*pany.s\\s+bank\\."
+      ],
+      "split_spans": {
+        "train": [
+          0,
+          332970
+        ],
+        "validation": [
+          333098,
+          374591
+        ],
+        "test": [
+          374719,
+          416213
+        ]
+      },
+      "split_bytes": {
+        "train": 332970,
+        "validation": 41493,
+        "test": 41494
+      },
+      "split_sha256": {
+        "train": "2f667925c4b0a8cbdfc013b28970a4f007180198368892421c7ddfa160618220",
+        "validation": "36e6482c0ef9cfe120e28e2b5fce2d1d849f6d67b49e464dbe73c56a552d0b9c",
+        "test": "ca5a4554642fbf9cfbafa9427ba796a42f3319c954486b59d1f924e70a3141e4"
+      }
+    }
+  ],
+  "versions": {
+    "v1": {
+      "legacy_documents": [
+        "original"
+      ],
+      "additional_documents": [
+        "fauntleroy_1886",
+        "princess"
+      ],
+      "old_train_bytes": 132440,
+      "train_bytes": 685236,
+      "expansion_factor": 5.173935366958623
+    },
+    "v2": {
+      "legacy_documents": [
+        "original"
+      ],
+      "additional_documents": [
+        "fauntleroy_1886",
+        "princess"
+      ],
+      "old_train_bytes": 132440,
+      "train_bytes": 685236,
+      "expansion_factor": 5.173935366958623
+    },
+    "v3": {
+      "legacy_documents": [
+        "original",
+        "alice"
+      ],
+      "additional_documents": [
+        "fauntleroy_1886",
+        "princess",
+        "railway",
+        "treasure_complete"
+      ],
+      "old_train_bytes": 250152,
+      "train_bytes": 1377265,
+      "expansion_factor": 5.505712526783715
+    },
+    "v4": {
+      "legacy_documents": [
+        "original",
+        "alice",
+        "oz"
+      ],
+      "additional_documents": [
+        "fauntleroy_1886",
+        "princess",
+        "railway",
+        "treasure_complete",
+        "beauty",
+        "heidi"
+      ],
+      "old_train_bytes": 418197,
+      "train_bytes": 2189179,
+      "expansion_factor": 5.234803214752856
+    },
+    "v5": {
+      "legacy_documents": [
+        "original",
+        "alice",
+        "oz",
+        "peter"
+      ],
+      "additional_documents": [
+        "fauntleroy_1886",
+        "princess",
+        "railway",
+        "treasure_complete",
+        "beauty",
+        "heidi",
+        "anne_green",
+        "anne_avonlea"
+      ],
+      "old_train_bytes": 625761,
+      "train_bytes": 3252191,
+      "expansion_factor": 5.19717751665572
+    },
+    "v6": {
+      "legacy_documents": [
+        "original",
+        "alice",
+        "oz",
+        "peter",
+        "willows"
+      ],
+      "additional_documents": [
+        "fauntleroy_1886",
+        "princess",
+        "railway",
+        "treasure_complete",
+        "beauty",
+        "heidi",
+        "anne_green",
+        "anne_avonlea",
+        "tom",
+        "huck",
+        "jungle"
+      ],
+      "old_train_bytes": 893030,
+      "train_bytes": 4514489,
+      "expansion_factor": 5.055248983796737
+    },
+    "v7": {
+      "legacy_documents": [
+        "original",
+        "alice",
+        "oz",
+        "peter",
+        "willows",
+        "garden"
+      ],
+      "additional_documents": [
+        "fauntleroy_1886",
+        "princess",
+        "railway",
+        "treasure_complete",
+        "beauty",
+        "heidi",
+        "anne_green",
+        "anne_avonlea",
+        "tom",
+        "huck",
+        "jungle",
+        "second_jungle",
+        "little_women",
+        "kidnapped"
+      ],
+      "old_train_bytes": 1240716,
+      "train_bytes": 6295276,
+      "expansion_factor": 5.073905712507939
+    }
+  },
+  "boundary_gap_bytes": 128,
+  "overlap_audit": {
+    "span_bytes": 128,
+    "heldout_stride": 128,
+    "checked_spans": 12238,
+    "training_windows": 6292736,
+    "exact_matches": [],
+    "limitation": "Exact-byte, strided heldout audit; not exhaustive semantic deduplication."
+  },
+  "total_train_bytes": 6295276,
+  "cleaning": "Verified story only; existing NFC/page/line cleaning; OCR errors retained."
+}
